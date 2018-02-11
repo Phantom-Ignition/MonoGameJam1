@@ -121,9 +121,10 @@ namespace MonoGameJam1.Components.Battle
             var xKnockback = _playerComponent.CurrentStateHorizontalKnockback();
             var yKnockback = _playerComponent.CurrentStateVerticalKnockback();
 
-            _knockbackTick = new Vector2(0.03f, yKnockback);
+            _knockbackTick = new Vector2(0.05f, yKnockback);
             _knockbackVelocity = new Vector2(knockback.X * 2, -1000);
-            if (xKnockback != 0)
+
+            if (Math.Abs(xKnockback) > 0.01)
             {
                 var diff = Math.Sign((entity.position - _playerComponent.entity.position).X);
 

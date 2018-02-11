@@ -49,6 +49,11 @@ namespace MonoGameJam1.Components.Player
             Quarterstaff3,
             Quarterstaff4,
 
+            Pistol1,
+            Pistol2,
+            Pistol3,
+            Pistol4,
+
             Shot,
             Dying
         }
@@ -153,6 +158,11 @@ namespace MonoGameJam1.Components.Player
                 {Animations.Quarterstaff2, "quarterstaff2"},
                 {Animations.Quarterstaff3, "quarterstaff3"},
                 {Animations.Quarterstaff4, "quarterstaff4"},
+
+                {Animations.Pistol1, "pistol1"},
+                {Animations.Pistol2, "pistol2"},
+                {Animations.Pistol3, "pistol3"},
+                {Animations.Pistol4, "pistol4"},
 
                 {Animations.Shot, "shot"},
                 {Animations.Dying, "dying"},
@@ -339,6 +349,67 @@ namespace MonoGameJam1.Components.Player
             sprite.AddFramesToAttack(am[Animations.Quarterstaff4], 1);
 
             #endregion
+
+            
+            // == PISTOL ATTACKS ==
+
+            #region Pistol Animations
+
+            sprite.CreateAnimation(am[Animations.Pistol1], 0.1f);
+            sprite.AddFrames(am[Animations.Pistol1], new List<Rectangle>()
+            {
+                new Rectangle(0, 128, 32, 32),
+                new Rectangle(0, 128, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Pistol1], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 128, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Pistol1], 1);
+
+            sprite.CreateAnimation(am[Animations.Pistol2], 0.1f);
+            sprite.AddFrames(am[Animations.Pistol2], new List<Rectangle>()
+            {
+                new Rectangle(32, 128, 32, 32),
+                new Rectangle(32, 128, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Pistol2], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 128, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Pistol2], 1);
+
+            sprite.CreateAnimation(am[Animations.Pistol3], 0.1f);
+            sprite.AddFrames(am[Animations.Pistol3], new List<Rectangle>()
+            {
+                new Rectangle(64, 128, 32, 32),
+                new Rectangle(64, 128, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Pistol3], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 128, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Pistol3], 1);
+
+            sprite.CreateAnimation(am[Animations.Pistol4], 0.1f);
+            sprite.AddFrames(am[Animations.Pistol4], new List<Rectangle>()
+            {
+                new Rectangle(96, 128, 32, 32),
+                new Rectangle(96, 128, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Pistol4], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 128, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Pistol4], 1);
+
+            #endregion
+
+            // == MISC ANIMATIONS ==
 
             sprite.CreateAnimation(am[Animations.Shot], 0.1f);
             sprite.AddFrames(am[Animations.Shot], new List<Rectangle>()
@@ -543,6 +614,11 @@ namespace MonoGameJam1.Components.Player
         public float GetDeltaTimeFunc()
         {
             return Time.deltaTime;
+        }
+
+        public int GetIntDirection()
+        {
+            return sprite.spriteEffects == SpriteEffects.FlipHorizontally ? -1 : 1;
         }
 
         private bool canMove()

@@ -55,7 +55,7 @@ namespace MonoGameJam1.Managers
 
             _weaponSelectionButton = new VirtualButton();
             _weaponSelectionButton
-                .addKeyboardKey(Keys.A)
+                .addKeyboardKey(Keys.X)
                 .addGamePadButton(0, Buttons.B);
 
             _attackButton = new VirtualButton();
@@ -65,7 +65,7 @@ namespace MonoGameJam1.Managers
 
             _jumpButton = new VirtualButton();
             _jumpButton
-                .addKeyboardKey(Keys.X)
+                .addKeyboardKey(Keys.Up)
                 .addGamePadButton(0, Buttons.A);    
 
             _upButton = new VirtualButton();

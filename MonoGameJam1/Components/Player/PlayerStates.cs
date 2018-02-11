@@ -1,4 +1,5 @@
-﻿using MonoGameJam1.FSM;
+﻿using Microsoft.Xna.Framework;
+using MonoGameJam1.FSM;
 using MonoGameJam1.Managers;
 using Nez;
 
@@ -32,6 +33,9 @@ namespace MonoGameJam1.Components.Player
                             break;
                         case Weapon.Quarterstaff:
                             fsm.pushState(new QuarterstaffAttack1());
+                            break;
+                        case Weapon.Pistol:
+                            fsm.pushState(new PistolAttack1());
                             break;
                     }
                 }
@@ -142,18 +146,26 @@ namespace MonoGameJam1.Components.Player
     public class BaseAttackComboState : PlayerState
     {
         private bool _changeToAttack;
+        private ITimer _timer;
 
         public PlayerComponent.Animations Animation;
         public PlayerState NextState;
         public bool IsFinal;
         public float VerticalKnockback;
         public float HorizontalKnockback;
+        public float AttackPushDuration = 0.05f;
 
         public override void begin()
         {
             _input.IsLocked = true;
             entity.SetAnimation(Animation);
             entity.platformerObject.lockVerticalMovement = true;
+
+            entity.forceMovement(entity.GetIntDirection() * Vector2.UnitX);
+            _timer = Core.schedule(AttackPushDuration, entity, t =>
+            {
+                entity.forceMovement(Vector2.Zero);
+            });
         }
 
         public override void update()
@@ -178,6 +190,8 @@ namespace MonoGameJam1.Components.Player
 
         public override void end()
         {
+            _timer?.stop();
+            entity.forceMovement(Vector2.Zero);
             _input.IsLocked = false;
             entity.platformerObject.lockVerticalMovement = false;
         }
@@ -217,6 +231,7 @@ namespace MonoGameJam1.Components.Player
         public FistAttack4()
         {
             Animation = PlayerComponent.Animations.Fist4;
+            AttackPushDuration = 0.5f;
             IsFinal = true;
         }
     }
@@ -290,6 +305,46 @@ namespace MonoGameJam1.Components.Player
         {
             Animation = PlayerComponent.Animations.Quarterstaff4;
             HorizontalKnockback = 0.09f;
+            IsFinal = true;
+        }
+    }
+
+    #endregion
+
+    #region Pistol States
+
+    public class PistolAttack1 : BaseAttackComboState
+    {
+        public PistolAttack1()
+        {
+            Animation = PlayerComponent.Animations.Pistol1;
+            NextState = new PistolAttack2();
+        }
+    }
+
+    public class PistolAttack2 : BaseAttackComboState
+    {
+        public PistolAttack2()
+        {
+            Animation = PlayerComponent.Animations.Pistol2;
+            NextState = new PistolAttack3();
+        }
+    }
+
+    public class PistolAttack3 : BaseAttackComboState
+    {
+        public PistolAttack3()
+        {
+            Animation = PlayerComponent.Animations.Pistol3;
+            NextState = new PistolAttack4();
+        }
+    }
+
+    public class PistolAttack4 : BaseAttackComboState
+    {
+        public PistolAttack4()
+        {
+            Animation = PlayerComponent.Animations.Pistol4;
             IsFinal = true;
         }
     }
