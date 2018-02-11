@@ -118,10 +118,22 @@ namespace MonoGameJam1.Components.Battle
 
         public virtual void onHit(Vector2 knockback)
         {
-            var yKnockback = _playerComponent.CurrentStateKnockback();
+            var xKnockback = _playerComponent.CurrentStateHorizontalKnockback();
+            var yKnockback = _playerComponent.CurrentStateVerticalKnockback();
 
             _knockbackTick = new Vector2(0.03f, yKnockback);
             _knockbackVelocity = new Vector2(knockback.X * 2, -1000);
+            if (xKnockback != 0)
+            {
+                var diff = Math.Sign((entity.position - _playerComponent.entity.position).X);
+
+                _knockbackTick = new Vector2(xKnockback, yKnockback);
+                _knockbackVelocity = new Vector2(diff * 60, -1000);
+            }
+
+            if (Math.Abs(yKnockback) < 0.001)
+                platformerObject.velocity.Y = platformerObject.collisionState.below ? -100 : - 130;
+
         } 
 
         public virtual void onDeath() { }

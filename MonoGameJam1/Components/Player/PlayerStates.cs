@@ -30,12 +30,15 @@ namespace MonoGameJam1.Components.Player
                         case Weapon.Sword:
                             fsm.pushState(new SwordAttack1());
                             break;
+                        case Weapon.Quarterstaff:
+                            fsm.pushState(new QuarterstaffAttack1());
+                            break;
                     }
                 }
-                if (_input.WeaponSelectionButton.isPressed)
-                {
-                    entity.OpenWeaponSelection();
-                }
+            }
+            if (_input.WeaponSelectionButton.isPressed)
+            {
+                entity.OpenWeaponSelection();
             }
         }
 
@@ -144,11 +147,13 @@ namespace MonoGameJam1.Components.Player
         public PlayerState NextState;
         public bool IsFinal;
         public float VerticalKnockback;
+        public float HorizontalKnockback;
 
         public override void begin()
         {
             _input.IsLocked = true;
             entity.SetAnimation(Animation);
+            entity.platformerObject.lockVerticalMovement = true;
         }
 
         public override void update()
@@ -174,6 +179,7 @@ namespace MonoGameJam1.Components.Player
         public override void end()
         {
             _input.IsLocked = false;
+            entity.platformerObject.lockVerticalMovement = false;
         }
     }
 
@@ -224,7 +230,6 @@ namespace MonoGameJam1.Components.Player
         public SwordAttack1()
         {
             Animation = PlayerComponent.Animations.Sword1;
-            VerticalKnockback = 0.03f;
             NextState = new SwordAttack2();
         }
     }
@@ -243,16 +248,48 @@ namespace MonoGameJam1.Components.Player
         public SwordAttack3()
         {
             Animation = PlayerComponent.Animations.Sword3;
-            NextState = new SwordAttack4();
+            VerticalKnockback = 0.03f;
+            IsFinal = true;
         }
     }
 
-    public class SwordAttack4 : BaseAttackComboState
+    #endregion
+
+    #region Quarterstaff States
+
+    public class QuarterstaffAttack1 : BaseAttackComboState
     {
-        public SwordAttack4()
+        public QuarterstaffAttack1()
         {
-            Animation = PlayerComponent.Animations.Sword4;
-            VerticalKnockback = 0.03f;
+            Animation = PlayerComponent.Animations.Quarterstaff1;
+            NextState = new QuarterstaffAttack2();
+        }
+    }
+
+    public class QuarterstaffAttack2 : BaseAttackComboState
+    {
+        public QuarterstaffAttack2()
+        {
+            Animation = PlayerComponent.Animations.Quarterstaff2;
+            NextState = new QuarterstaffAttack3();
+        }
+    }
+
+    public class QuarterstaffAttack3 : BaseAttackComboState
+    {
+        public QuarterstaffAttack3()
+        {
+            Animation = PlayerComponent.Animations.Quarterstaff3;
+            NextState = new QuarterstaffAttack4();
+        }
+    }
+
+    public class QuarterstaffAttack4 : BaseAttackComboState
+    {
+        public QuarterstaffAttack4()
+        {
+            Animation = PlayerComponent.Animations.Quarterstaff4;
+            HorizontalKnockback = 0.09f;
             IsFinal = true;
         }
     }

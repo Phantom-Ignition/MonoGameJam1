@@ -16,6 +16,8 @@ namespace MonoGameJam1.Components
         public float jumpHeight = 17 * 3;
         public float wallGravity = 100;
 
+        public bool lockVerticalMovement = false;
+
         //--------------------------------------------------
         // Walljump
 
@@ -82,8 +84,15 @@ namespace MonoGameJam1.Components
             var deltaTime = _getDeltaTimeFunc?.Invoke() ?? 0.0f;
 
             // apply gravity
-            velocity.Y += (grabbingWall && velocity.Y > 0 ? wallGravity : gravity) * deltaTime;
-            velocity.Y = MathHelper.Clamp(velocity.Y, -maxMoveSpeed * 3, maxMoveSpeed * 3);
+            if (lockVerticalMovement)
+            {
+                velocity.Y = 300 * deltaTime;
+            }
+            else
+            {
+                velocity.Y += (grabbingWall && velocity.Y > 0 ? wallGravity : gravity) * deltaTime;
+                velocity.Y = MathHelper.Clamp(velocity.Y, -maxMoveSpeed * 3, maxMoveSpeed * 3);
+            }
 
             // apply movement
             _mover.move(velocity * deltaTime, _boxCollider, collisionState);
