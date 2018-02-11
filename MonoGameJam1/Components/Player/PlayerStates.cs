@@ -27,6 +27,9 @@ namespace MonoGameJam1.Components.Player
                         case Weapon.Fist:
                             fsm.pushState(new FistAttack1());
                             break;
+                        case Weapon.Sword:
+                            fsm.pushState(new SwordAttack1());
+                            break;
                     }
                 }
                 if (_input.WeaponSelectionButton.isPressed)
@@ -136,8 +139,11 @@ namespace MonoGameJam1.Components.Player
     public class BaseAttackComboState : PlayerState
     {
         private bool _changeToAttack;
+
         public PlayerComponent.Animations Animation;
         public PlayerState NextState;
+        public bool IsFinal;
+        public float VerticalKnockback;
 
         public override void begin()
         {
@@ -154,7 +160,7 @@ namespace MonoGameJam1.Components.Player
             }
             if (entity.sprite.Looped)
             {
-                if (_changeToAttack)
+                if (!IsFinal && _changeToAttack)
                 {
                     fsm.changeState(NextState);
                 }
@@ -171,7 +177,7 @@ namespace MonoGameJam1.Components.Player
         }
     }
 
-#region Fist States
+    #region Fist States
 
     public class FistAttack1 : BaseAttackComboState
     {
@@ -200,11 +206,54 @@ namespace MonoGameJam1.Components.Player
         }
     }
 
-    public class FistAttack4 : BaseLoopedState
+    public class FistAttack4 : BaseAttackComboState
     {
         public FistAttack4()
         {
             Animation = PlayerComponent.Animations.Fist4;
+            IsFinal = true;
+        }
+    }
+
+    #endregion
+
+    #region Sword States
+
+    public class SwordAttack1 : BaseAttackComboState
+    {
+        public SwordAttack1()
+        {
+            Animation = PlayerComponent.Animations.Sword1;
+            VerticalKnockback = 0.03f;
+            NextState = new SwordAttack2();
+        }
+    }
+
+    public class SwordAttack2 : BaseAttackComboState
+    {
+        public SwordAttack2()
+        {
+            Animation = PlayerComponent.Animations.Sword2;
+            NextState = new SwordAttack3();
+        }
+    }
+
+    public class SwordAttack3 : BaseAttackComboState
+    {
+        public SwordAttack3()
+        {
+            Animation = PlayerComponent.Animations.Sword3;
+            NextState = new SwordAttack4();
+        }
+    }
+
+    public class SwordAttack4 : BaseAttackComboState
+    {
+        public SwordAttack4()
+        {
+            Animation = PlayerComponent.Animations.Sword4;
+            VerticalKnockback = 0.03f;
+            IsFinal = true;
         }
     }
 

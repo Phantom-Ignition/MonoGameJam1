@@ -39,7 +39,7 @@ namespace MonoGameJam1.Components.Battle
         //--------------------------------------------------
         // Immunity Duration
 
-        public float ImmunityDuration = 0.3f;
+        public float ImmunityDuration = 0.1f;
         public float ImmunityTime { get; set; }
         public bool ForceImmunity { get; set; }
 

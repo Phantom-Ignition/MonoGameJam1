@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" nextobjectid="6">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" nextobjectid="9">
  <properties>
   <property name="collisionLayer" value="collision"/>
   <property name="defaultLayers" value="collision, details"/>
@@ -56,7 +56,7 @@
 </data>
  </layer>
  <objectgroup name="objects">
-  <object id="1" name="playerSpawn" x="256" y="240"/>
+  <object id="1" name="playerSpawn" x="208" y="240"/>
  </objectgroup>
  <objectgroup name="transfers">
   <object id="5" name="Transfer" type="onTouch" x="464" y="0" width="4" height="96">
@@ -68,5 +68,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemies"/>
+ <objectgroup name="enemies">
+  <object id="6" name="dasdsa" type="EnemyTargetDummy" x="223" y="221" width="32" height="32"/>
+ </objectgroup>
 </map>

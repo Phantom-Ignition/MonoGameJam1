@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Components\Battle\BattleComponent.cs" />
     <Compile Include="Components\Battle\Enemies\EnemyPlaceholderComponent.cs" />
+    <Compile Include="Components\Battle\Enemies\EnemyTargetDummyComponent.cs" />
     <Compile Include="Components\Battle\EnemyComponent.cs" />
     <Compile Include="Components\Battle\ProjectileComponent.cs" />
     <Compile Include="Components\Colliders\AreaOfSightCollider.cs" />

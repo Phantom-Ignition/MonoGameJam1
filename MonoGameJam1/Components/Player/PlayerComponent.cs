@@ -40,6 +40,11 @@ namespace MonoGameJam1.Components.Player
             Fist3,
             Fist4,
 
+            Sword1,
+            Sword2,
+            Sword3,
+            Sword4,
+
             Shot,
             Dying
         }
@@ -136,6 +141,11 @@ namespace MonoGameJam1.Components.Player
                 {Animations.Fist3, "fist3"},
                 {Animations.Fist4, "fist4"},
 
+                {Animations.Sword1, "sword1"},
+                {Animations.Sword2, "sword2"},
+                {Animations.Sword3, "sword3"},
+                {Animations.Sword4, "sword4"},
+
                 {Animations.Shot, "shot"},
                 {Animations.Dying, "dying"},
             };
@@ -162,6 +172,9 @@ namespace MonoGameJam1.Components.Player
             });
 
             // == FIRST ATTACKS ==
+
+            #region Fist Animations
+            
             sprite.CreateAnimation(am[Animations.Fist1], 0.1f);
             sprite.AddFrames(am[Animations.Fist1], new List<Rectangle>()
             {
@@ -170,8 +183,8 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddAttackCollider(am[Animations.Fist1], new List<List<Rectangle>>
             {
-                new List<Rectangle>() { },
-                new List<Rectangle>() { new Rectangle(0, -10, 34, 29) },
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
             });
             sprite.AddFramesToAttack(am[Animations.Fist1], 1);
 
@@ -181,6 +194,12 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(32, 32, 32, 32),
                 new Rectangle(32, 32, 32, 32),
             });
+            sprite.AddAttackCollider(am[Animations.Fist2], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Fist2], 1);
 
             sprite.CreateAnimation(am[Animations.Fist3], 0.1f);
             sprite.AddFrames(am[Animations.Fist3], new List<Rectangle>()
@@ -188,6 +207,12 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(64, 32, 32, 32),
                 new Rectangle(64, 32, 32, 32),
             });
+            sprite.AddAttackCollider(am[Animations.Fist3], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Fist3], 1);
 
             sprite.CreateAnimation(am[Animations.Fist4], 0.1f);
             sprite.AddFrames(am[Animations.Fist4], new List<Rectangle>()
@@ -195,6 +220,72 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(96, 32, 32, 32),
                 new Rectangle(96, 32, 32, 32),
             });
+            sprite.AddAttackCollider(am[Animations.Fist4], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Fist4], 1);
+
+            #endregion
+
+            // == SWORD ATTACKS ==
+
+            #region Sword Animations
+
+            sprite.CreateAnimation(am[Animations.Sword1], 0.1f);
+            sprite.AddFrames(am[Animations.Sword1], new List<Rectangle>()
+            {
+                new Rectangle(0, 64, 32, 32),
+                new Rectangle(0, 64, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Sword1], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Sword1], 1);
+
+            sprite.CreateAnimation(am[Animations.Sword2], 0.1f);
+            sprite.AddFrames(am[Animations.Sword2], new List<Rectangle>()
+            {
+                new Rectangle(32, 64, 32, 32),
+                new Rectangle(32, 64, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Sword2], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Sword2], 1);
+
+            sprite.CreateAnimation(am[Animations.Sword3], 0.1f);
+            sprite.AddFrames(am[Animations.Sword3], new List<Rectangle>()
+            {
+                new Rectangle(64, 64, 32, 32),
+                new Rectangle(64, 64, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Sword3], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Sword3], 1);
+
+            sprite.CreateAnimation(am[Animations.Sword4], 0.1f);
+            sprite.AddFrames(am[Animations.Sword4], new List<Rectangle>()
+            {
+                new Rectangle(96, 64, 32, 32),
+                new Rectangle(96, 64, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Sword4], new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Sword4], 1);
+
+            #endregion
 
             sprite.CreateAnimation(am[Animations.Shot], 0.1f);
             sprite.AddFrames(am[Animations.Shot], new List<Rectangle>()
@@ -371,6 +462,12 @@ namespace MonoGameJam1.Components.Player
         public Entity createEntityOnMap()
         {
             return entity.scene.createEntity();
+        }
+
+        public float CurrentStateKnockback()
+        {
+            var comboState = _fsm.CurrentState as BaseAttackComboState;
+            return comboState?.VerticalKnockback ?? 0.0f;
         }
 
         public void Jump()

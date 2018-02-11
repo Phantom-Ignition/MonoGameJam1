@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Components.Colliders;
 using MonoGameJam1.Components.Player;
 using MonoGameJam1.Components.Sprites;
+using MonoGameJam1.Managers;
 using MonoGameJam1.Structs;
 using Nez;
 
@@ -43,6 +44,11 @@ namespace MonoGameJam1.Components.Battle
         // Battle Component
 
         protected BattleComponent _battleComponent;
+
+        //--------------------------------------------------
+        // Player Component
+
+        protected PlayerComponent _playerComponent;
 
         //--------------------------------------------------
         // Area of Sight
@@ -87,6 +93,9 @@ namespace MonoGameJam1.Components.Battle
             _battleComponent = entity.getComponent<BattleComponent>();
             _battleComponent.setHp(1);
             _battleComponent.battleEntity = this;
+
+            var player = Core.getGlobalManager<SystemManager>().playerEntity;
+            _playerComponent = player.getComponent<PlayerComponent>();
         }
 
         public void increaseDangerousStage()
@@ -109,10 +118,11 @@ namespace MonoGameJam1.Components.Battle
 
         public virtual void onHit(Vector2 knockback)
         {
-            Console.WriteLine("on hit");
-            _knockbackTick = new Vector2(0.06f, 0.1f);
-            _knockbackVelocity = new Vector2(knockback.X * 100, -5);
-        }
+            var yKnockback = _playerComponent.CurrentStateKnockback();
+
+            _knockbackTick = new Vector2(0.03f, yKnockback);
+            _knockbackVelocity = new Vector2(knockback.X * 2, -1000);
+        } 
 
         public virtual void onDeath() { }
 
@@ -161,18 +171,18 @@ namespace MonoGameJam1.Components.Battle
                 _knockbackTick.Y -= Time.deltaTime;
             }
 
-            var mms = _platformerObject.maxMoveSpeed;
+            var mms = _platformerObject.maxMoveSpeed * 5;
             var velx = _platformerObject.velocity.X;
             var vely = _platformerObject.velocity.Y;
-            bool appliedKb = false;
+            var appliedKb = false;
             if (_knockbackTick.X > 0)
             {
-                _platformerObject.velocity.X = MathHelper.Clamp(velx + 1000 * _knockbackVelocity.X * Time.deltaTime, -mms, mms);
+                _platformerObject.velocity.X = MathHelper.Clamp(velx + _platformerObject.moveSpeed * _knockbackVelocity.X * Time.deltaTime, -mms, mms);
                 appliedKb = true;
             }
             if (_knockbackTick.Y > 0)
             {
-                _platformerObject.velocity.Y = MathHelper.Clamp(vely + 1000 * _knockbackVelocity.Y * Time.deltaTime, -mms, mms);
+                _platformerObject.velocity.Y = MathHelper.Clamp(vely + _platformerObject.moveSpeed * _knockbackVelocity.Y * Time.deltaTime, -mms, mms);
                 appliedKb = true;
             }
             return appliedKb;

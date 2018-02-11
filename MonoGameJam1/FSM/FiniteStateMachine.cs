@@ -20,6 +20,8 @@ namespace MonoGameJam1.FSM
         private bool _requestingChange;
         private bool _requestingReset;
 
+        public State<T, E> CurrentState => _stateStack.Peek();
+
         public FiniteStateMachine(E entity, State<T, E> initialState)
         {
             _stateStack = new Stack<State<T, E>>();
