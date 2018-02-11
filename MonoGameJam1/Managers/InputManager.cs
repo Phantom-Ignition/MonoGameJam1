@@ -8,6 +8,9 @@ namespace MonoGameJam1.Managers
         private VirtualButton _interactionButton;
         public VirtualButton InteractionButton => _interactionButton;
 
+        private VirtualButton _attackButton;
+        public VirtualButton AttackButton => _attackButton;
+
         private VirtualButton _jumpButton;
         public VirtualButton JumpButton => _jumpButton;
 
@@ -40,6 +43,11 @@ namespace MonoGameJam1.Managers
                 .addKeyboardKey(Keys.Enter)
                 .addGamePadButton(0, Buttons.A)
                 .addGamePadButton(0, Buttons.X);
+
+            _attackButton = new VirtualButton();
+            _attackButton
+                .addKeyboardKey(Keys.Z)
+                .addGamePadButton(0, Buttons.B);
 
             _jumpButton = new VirtualButton();
             _jumpButton

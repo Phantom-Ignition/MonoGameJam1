@@ -13,6 +13,17 @@ using System.Collections.Generic;
 
 namespace MonoGameJam1.Components.Player
 {
+    //--------------------------------------------------
+    // Weapons
+
+    public enum Weapon
+    {
+        Fist,
+        Sword,
+        Quarterstaff,
+        Pistol
+    }
+
     public class PlayerComponent : Component, IUpdatable, IBattleEntity
     {
         //--------------------------------------------------
@@ -23,6 +34,12 @@ namespace MonoGameJam1.Components.Player
             Stand,
             Walking,
             Jumping,
+            
+            Fist1,
+            Fist2,
+            Fist3,
+            Fist4,
+
             Shot,
             Dying
         }
@@ -99,21 +116,27 @@ namespace MonoGameJam1.Components.Player
         private float _footstepCooldown;
 
         //--------------------------------------------------
-        // Distortion cursor
+        // Current Weapon
 
-        private Sprite _distortionCursorSprite;
+        public Weapon CurrentWeapon;
 
         //----------------------//------------------------//
 
         public override void initialize()
         {
-            var texture = entity.scene.content.Load<Texture2D>(Content.Characters.placeholder);
+            var texture = entity.scene.content.Load<Texture2D>(Content.Characters.player);
 
             _animationMap = new Dictionary<Animations, string>
             {
                 {Animations.Stand, "stand"},
                 {Animations.Walking, "walking"},
                 {Animations.Jumping, "jumping"},
+
+                {Animations.Fist1, "fist1"},
+                {Animations.Fist2, "fist2"},
+                {Animations.Fist3, "fist3"},
+                {Animations.Fist4, "fist4"},
+
                 {Animations.Shot, "shot"},
                 {Animations.Dying, "dying"},
             };
@@ -136,7 +159,42 @@ namespace MonoGameJam1.Components.Player
             sprite.CreateAnimation(am[Animations.Jumping], 0.1f);
             sprite.AddFrames(am[Animations.Jumping], new List<Rectangle>()
             {
+                new Rectangle(32, 0, 32, 32),
+            });
+
+            // == FIRST ATTACKS ==
+            sprite.CreateAnimation(am[Animations.Fist1], 0.1f);
+            sprite.AddFrames(am[Animations.Fist1], new List<Rectangle>()
+            {
                 new Rectangle(0, 32, 32, 32),
+                new Rectangle(0, 32, 32, 32),
+            });
+            sprite.AddAttackCollider(am[Animations.Fist1], new List<List<Rectangle>>
+            {
+                new List<Rectangle>() { },
+                new List<Rectangle>() { new Rectangle(0, -10, 34, 29) },
+            });
+            sprite.AddFramesToAttack(am[Animations.Fist1], 1);
+
+            sprite.CreateAnimation(am[Animations.Fist2], 0.1f);
+            sprite.AddFrames(am[Animations.Fist2], new List<Rectangle>()
+            {
+                new Rectangle(32, 32, 32, 32),
+                new Rectangle(32, 32, 32, 32),
+            });
+
+            sprite.CreateAnimation(am[Animations.Fist3], 0.1f);
+            sprite.AddFrames(am[Animations.Fist3], new List<Rectangle>()
+            {
+                new Rectangle(64, 32, 32, 32),
+                new Rectangle(64, 32, 32, 32),
+            });
+
+            sprite.CreateAnimation(am[Animations.Fist4], 0.1f);
+            sprite.AddFrames(am[Animations.Fist4], new List<Rectangle>()
+            {
+                new Rectangle(96, 32, 32, 32),
+                new Rectangle(96, 32, 32, 32),
             });
 
             sprite.CreateAnimation(am[Animations.Shot], 0.1f);
