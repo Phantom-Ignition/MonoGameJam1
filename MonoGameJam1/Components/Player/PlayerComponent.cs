@@ -133,6 +133,11 @@ namespace MonoGameJam1.Components.Player
 
         private WeaponSelectionComponent _weaponSelectionComponent;
 
+        //--------------------------------------------------
+        // Damage scaling
+
+        private float _damageScalingStreak;
+
         //----------------------//------------------------//
 
         public override void initialize()
@@ -349,7 +354,6 @@ namespace MonoGameJam1.Components.Player
             sprite.AddFramesToAttack(am[Animations.Quarterstaff4], 1);
 
             #endregion
-
             
             // == PISTOL ATTACKS ==
 
@@ -428,6 +432,8 @@ namespace MonoGameJam1.Components.Player
             // init fsm
             _fsm = new FiniteStateMachine<PlayerState, PlayerComponent>(this, new StandState());
             
+            // init damage scaling
+            _damageScalingStreak = 10;
         }
 
         public override void onAddedToEntity()
@@ -585,6 +591,14 @@ namespace MonoGameJam1.Components.Player
         {
             CurrentWeapon = newWeapon;
             _fsm.resetStackTo(new StandState());
+            _damageScalingStreak = 10;
+        }
+
+        public void ReduceDamageScale()
+        {
+            _damageScalingStreak -= 0.5f;
+            if (_damageScalingStreak < 3)
+                _damageScalingStreak = 3;
         }
 
         #region Helpers
@@ -592,6 +606,13 @@ namespace MonoGameJam1.Components.Player
         public Entity createEntityOnMap()
         {
             return entity.scene.createEntity();
+        }
+
+        public float CurrentDamageScale()
+        {
+            // Max: 1   (100%)
+            // Min: 0.3 (30%)
+            return Math.Max(Math.Max(0, Math.Min(10, _damageScalingStreak)), 3) / 10;
         }
 
         public float CurrentStateVerticalKnockback()

@@ -166,6 +166,8 @@ namespace MonoGameJam1.Components.Player
             {
                 entity.forceMovement(Vector2.Zero);
             });
+
+            entity.ReduceDamageScale();
         }
 
         public override void update()

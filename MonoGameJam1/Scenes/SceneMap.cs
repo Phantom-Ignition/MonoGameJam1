@@ -57,6 +57,11 @@ namespace MonoGameJam1.Scenes
         private TiledMap _tiledMap;
 
         //--------------------------------------------------
+        // Camera
+
+        private CameraSystem _camera;
+
+        //--------------------------------------------------
         // Map Extensions
 
         private List<ISceneMapExtensionable> _mapExtensions;
@@ -71,6 +76,11 @@ namespace MonoGameJam1.Scenes
 
         private PlayerComponent _playerComponent;
 
+        //--------------------------------------------------
+        // HUD
+
+        private Entity _hudEntity;
+
         //----------------------//------------------------//
 
         public override void initialize()
@@ -82,6 +92,7 @@ namespace MonoGameJam1.Scenes
             setupPaths();
             setupEnemies();
             setupNpcs();
+            setupHud();
             setupMapExtensions();
             setupPostProcessors();
             setupTransfers();
@@ -222,14 +233,16 @@ namespace MonoGameJam1.Scenes
         {
             var player = findEntity("player");
             var playerComponent = player.getComponent<PlayerComponent>();
-
-            addEntityProcessor(new CameraSystem(player)
+            
+            var mapSize = new Vector2(_tiledMap.widthInPixels, _tiledMap.heightInPixels);
+            _camera = new CameraSystem(player)
             {
                 mapLockEnabled = true,
-                mapSize = new Vector2(_tiledMap.widthInPixels, _tiledMap.heightInPixels),
+                mapSize = mapSize,
                 followLerp = 0.08f,
                 deadzoneSize = new Vector2(20, 10)
-            });
+            };
+            addEntityProcessor(_camera);
 
             addEntityProcessor(new BattleSystem());
             addEntityProcessor(new ProjectilesSystem(player));
@@ -273,6 +286,12 @@ namespace MonoGameJam1.Scenes
                     getEntityProcessor<NpcInteractionSystem>().addAutorun(npcComponent);
                 }
             }
+        }
+
+        private void setupHud()
+        {
+            _hudEntity = createEntity("hud");
+            _hudEntity.addComponent<MapHudComponent>().renderLayer = HUD_BACK_RENDER_LAYER;
         }
 
         private void setupMapExtensions()
@@ -346,8 +365,16 @@ namespace MonoGameJam1.Scenes
         {
             base.update();
 
+            updateHud();
+
             // Update extensions
             _mapExtensions.ForEach(extension => extension.update());
+        }
+
+        private void updateHud()
+        {
+            var camerapos = _camera.camera.position - virtualSize.ToVector2() / 2;
+            _hudEntity.position = new Vector2((int)camerapos.X, (int)camerapos.Y);
         }
     }
 }
