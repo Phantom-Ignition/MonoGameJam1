@@ -25,6 +25,11 @@ namespace Nez
 			public const string tileset = @"maps\tileset";
 		}
 
+		public static class Misc
+		{
+			public const string weaponCircle = @"misc\weaponCircle";
+		}
+
 		public static class System
 		{
 			public const string windowskin = @"system\windowskin";

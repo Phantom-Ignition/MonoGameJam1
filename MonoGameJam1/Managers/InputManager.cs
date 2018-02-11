@@ -8,6 +8,9 @@ namespace MonoGameJam1.Managers
         private VirtualButton _interactionButton;
         public VirtualButton InteractionButton => _interactionButton;
 
+        private VirtualButton _weaponSelectionButton;
+        public VirtualButton WeaponSelectionButton => _weaponSelectionButton;
+
         private VirtualButton _attackButton;
         public VirtualButton AttackButton => _attackButton;
 
@@ -16,6 +19,12 @@ namespace MonoGameJam1.Managers
 
         private VirtualButton _upButton;
         public VirtualButton UpButton => _upButton;
+
+        private VirtualButton _leftButton;
+        public VirtualButton LeftButton => _leftButton;
+
+        private VirtualButton _rightButton;
+        public VirtualButton RightButton => _rightButton;
 
         private VirtualButton _downButton;
         public VirtualButton DownButton => _downButton;
@@ -44,6 +53,11 @@ namespace MonoGameJam1.Managers
                 .addGamePadButton(0, Buttons.A)
                 .addGamePadButton(0, Buttons.X);
 
+            _weaponSelectionButton = new VirtualButton();
+            _weaponSelectionButton
+                .addKeyboardKey(Keys.A)
+                .addGamePadButton(0, Buttons.B);
+
             _attackButton = new VirtualButton();
             _attackButton
                 .addKeyboardKey(Keys.Z)
@@ -58,6 +72,16 @@ namespace MonoGameJam1.Managers
             _upButton
                 .addKeyboardKey(Keys.Up)
                 .addGamePadButton(0, Buttons.DPadUp);
+
+            _leftButton = new VirtualButton();
+            _leftButton
+                .addKeyboardKey(Keys.Left)
+                .addGamePadButton(0, Buttons.DPadLeft);
+
+            _rightButton = new VirtualButton();
+            _rightButton
+                .addKeyboardKey(Keys.Right)
+                .addGamePadButton(0, Buttons.DPadRight);
 
             _downButton = new VirtualButton();
             _downButton

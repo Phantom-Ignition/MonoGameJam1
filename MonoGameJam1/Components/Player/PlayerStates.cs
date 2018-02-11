@@ -29,6 +29,10 @@ namespace MonoGameJam1.Components.Player
                             break;
                     }
                 }
+                if (_input.WeaponSelectionButton.isPressed)
+                {
+                    entity.OpenWeaponSelection();
+                }
             }
         }
 

@@ -100,12 +100,6 @@ namespace MonoGameJam1.Components.Player
         private BattleComponent _battleComponent;
 
         //--------------------------------------------------
-        // Is on bush
-
-        public bool isOnBush;
-        public bool isInsideBush;
-
-        //--------------------------------------------------
         // Can take damage
 
         public virtual bool canTakeDamage => true;
@@ -119,6 +113,11 @@ namespace MonoGameJam1.Components.Player
         // Current Weapon
 
         public Weapon CurrentWeapon;
+
+        //--------------------------------------------------
+        // Weapon selection
+
+        private WeaponSelectionComponent _weaponSelectionComponent;
 
         //----------------------//------------------------//
 
@@ -225,6 +224,8 @@ namespace MonoGameJam1.Components.Player
             _battleComponent.battleEntity = this;
             _battleComponent.ImmunityDuration = 0.5f;
             _battleComponent.destroyEntityAction = destroyEntity;
+
+            _weaponSelectionComponent = entity.addComponent<WeaponSelectionComponent>();
         }
 
         public void destroyEntity()
@@ -355,6 +356,18 @@ namespace MonoGameJam1.Components.Player
             }
         }
 
+        public void OpenWeaponSelection()
+        {
+            _weaponSelectionComponent.Open();
+        }
+
+        public void ChangeWeapon(Weapon newWeapon)
+        {
+            CurrentWeapon = newWeapon;
+        }
+
+        #region Helpers
+
         public Entity createEntityOnMap()
         {
             return entity.scene.createEntity();
@@ -367,7 +380,7 @@ namespace MonoGameJam1.Components.Player
 
         public float GetDeltaTimeFunc()
         {
-            return Time.unscaledDeltaTime;
+            return Time.deltaTime;
         }
 
         private bool canMove()
@@ -380,5 +393,7 @@ namespace MonoGameJam1.Components.Player
         {
             return ForcedGround || _platformerObject.collisionState.below;
         }
+
+        #endregion
     }
 }

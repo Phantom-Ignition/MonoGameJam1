@@ -187,11 +187,6 @@ namespace MonoGameJam1.Components.Battle
             return areaOfSight.collidesWith(playerCollider, out collisionResult);
         }
 
-        public bool playerIsOnBush()
-        {
-            return playerCollider.entity.getComponent<PlayerComponent>().isInsideBush;
-        }
-
         public float distanceToPlayer()
         {
             return playerCollider.entity.position.X - entity.position.X;
@@ -213,13 +208,6 @@ namespace MonoGameJam1.Components.Battle
             var side = distanceToPlayer();
             _currentPatrolSide = Math.Sign(side);
             sprite.spriteEffects = side > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-        }
-
-        public bool sawThePlayer()
-        {
-            if (playerIsOnBush())
-                _sawThePlayer = false;
-            return _sawThePlayer;
         }
 
         public void unseeThePlayer()
