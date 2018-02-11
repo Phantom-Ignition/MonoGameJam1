@@ -42,9 +42,48 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\Battle\BattleComponent.cs" />
+    <Compile Include="Components\Battle\Enemies\EnemyPlaceholderComponent.cs" />
+    <Compile Include="Components\Battle\EnemyComponent.cs" />
+    <Compile Include="Components\Battle\ProjectileComponent.cs" />
+    <Compile Include="Components\Colliders\AreaOfSightCollider.cs" />
+    <Compile Include="Components\Colliders\AttackCollider.cs" />
+    <Compile Include="Components\Colliders\HurtCollider.cs" />
+    <Compile Include="Components\InteractionCollider.cs" />
+    <Compile Include="Components\Map\TransferComponent.cs" />
+    <Compile Include="Components\PlatformerObject.cs" />
+    <Compile Include="Components\Player\PlayerComponent.cs" />
+    <Compile Include="Components\Player\PlayerStates.cs" />
+    <Compile Include="Components\Sprites\AnimatedSprite.cs" />
+    <Compile Include="Components\Sprites\FrameInfo.cs" />
+    <Compile Include="Components\Sprites\FramesList.cs" />
+    <Compile Include="Components\Windows\TextWindowComponent.cs" />
+    <Compile Include="Components\Windows\Windowskin.cs" />
+    <Compile Include="Components\Windows\WindowSprite.cs" />
+    <Compile Include="ContentPathGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContentPathGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\SoundEffectExtensions.cs" />
+    <Compile Include="FSM\FiniteStateMachine.cs" />
     <Compile Include="GameMain.cs" />
+    <Compile Include="Managers\AudioManager.cs" />
+    <Compile Include="Managers\InputManager.cs" />
+    <Compile Include="Managers\SystemManager.cs" />
+    <Compile Include="NPCs\NpcBase.cs" />
+    <Compile Include="NPCs\NpcCommands.cs" />
+    <Compile Include="NPCs\NpcTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\SceneMap.cs" />
+    <Compile Include="Scenes\SceneMapExtensions\ISceneMapExtensionable.cs" />
+    <Compile Include="Structs\MapPath.cs" />
+    <Compile Include="Systems\BattleSystem.cs" />
+    <Compile Include="Systems\CameraSystem.cs" />
+    <Compile Include="Systems\NpcInteractionSystem.cs" />
+    <Compile Include="Systems\ProjectilesSystem.cs" />
+    <Compile Include="Systems\TransferSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -110,6 +149,18 @@
       <Project>{60b7197d-d0d5-405c-90a2-a56903e9b039}</Project>
       <Name>Nez</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NPCs\Map NPCs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContentPathGenerator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ContentPathGenerator.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

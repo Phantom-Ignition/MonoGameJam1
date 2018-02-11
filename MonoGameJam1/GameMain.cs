@@ -1,4 +1,8 @@
-﻿using Nez;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
+using MonoGameJam1.Managers;
+using MonoGameJam1.Scenes;
+using Nez;
 using Nez.BitmapFonts;
 
 namespace MonoGameJam1
@@ -16,6 +20,38 @@ namespace MonoGameJam1
             Window.AllowUserResizing = true;
             IsMouseVisible = true;
             IsFixedTimeStep = true;
+            debugRenderEnabled = true;
+
+            // Register Global Managers
+            registerGlobalManager(new InputManager());
+            registerGlobalManager(new SystemManager());
+        }
+
+        protected override void LoadContent()
+        {
+            bigBitmapFont = content.Load<BitmapFont>(Nez.Content.Fonts.titleFont);
+            smallBitmapFont = content.Load<BitmapFont>(Nez.Content.Fonts.smallFont);
+            AudioManager.loadAllSounds();
+
+            // MediaPlayer.Play(AudioManager.BGM);
+            // MediaPlayer.Volume = 0.8f;
+            // MediaPlayer.IsRepeating = true;
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            Scene.setDefaultDesignResolution(427, 240, Scene.SceneResolutionPolicy.FixedHeight);
+
+            // PP Fix
+            scene = Scene.createWithDefaultRenderer();
+            base.Update(new GameTime());
+            base.Draw(new GameTime());
+
+            getGlobalManager<SystemManager>().setMapId(0);
+
+            // Set first scene
+            scene = new SceneMap();
         }
     }
 }
