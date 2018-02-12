@@ -149,11 +149,12 @@ namespace MonoGameJam1.Components.Player
         private ITimer _timer;
 
         public PlayerComponent.Animations Animation;
-        public PlayerState NextState;
+        public PlayerState NextComboState;
         public bool IsFinal;
         public float VerticalKnockback;
         public float HorizontalKnockback;
         public float AttackPushDuration = 0.05f;
+        public float VelocityMultiplier = 1.0f;
 
         public override void begin()
         {
@@ -166,32 +167,28 @@ namespace MonoGameJam1.Components.Player
             {
                 entity.forceMovement(Vector2.Zero);
             });
-
+            entity.velocityMultiplier = VelocityMultiplier;
             entity.ReduceDamageScale();
         }
 
         public override void update()
         {
             base.update();
-            if (entity.sprite.isOnCombableFrame() && _input.AttackButton.isPressed)
+            if (!IsFinal && entity.CanLinkCombo(Animation) && _input.AttackButton.isPressed)
             {
                 _changeToAttack = true;
+                fsm.changeState(NextComboState);
+                return;
             }
-            if (entity.sprite.Looped)
+            if (!_changeToAttack && entity.sprite.Looped)
             {
-                if (!IsFinal && _changeToAttack)
-                {
-                    fsm.changeState(NextState);
-                }
-                else
-                {
-                    fsm.resetStackTo(new StandState());
-                }
+                fsm.resetStackTo(new StandState());
             }
         }
 
         public override void end()
         {
+            entity.velocityMultiplier = 1.0f;
             _timer?.stop();
             entity.forceMovement(Vector2.Zero);
             _input.IsLocked = false;
@@ -206,7 +203,7 @@ namespace MonoGameJam1.Components.Player
         public FistAttack1()
         {
             Animation = PlayerComponent.Animations.Fist1;
-            NextState = new FistAttack2();
+            NextComboState = new FistAttack2();
         }
     }
 
@@ -215,7 +212,7 @@ namespace MonoGameJam1.Components.Player
         public FistAttack2()
         {
             Animation = PlayerComponent.Animations.Fist2;
-            NextState = new FistAttack3();
+            NextComboState = new FistAttack3();
         }
     }
 
@@ -224,20 +221,13 @@ namespace MonoGameJam1.Components.Player
         public FistAttack3()
         {
             Animation = PlayerComponent.Animations.Fist3;
-            NextState = new FistAttack4();
-        }
-    }
-
-    public class FistAttack4 : BaseAttackComboState
-    {
-        public FistAttack4()
-        {
-            Animation = PlayerComponent.Animations.Fist4;
-            AttackPushDuration = 0.5f;
+            VelocityMultiplier = 2;
+            HorizontalKnockback = 0.04f;
+            AttackPushDuration = 0.1f;
             IsFinal = true;
         }
     }
-
+    
     #endregion
 
     #region Sword States
@@ -247,7 +237,7 @@ namespace MonoGameJam1.Components.Player
         public SwordAttack1()
         {
             Animation = PlayerComponent.Animations.Sword1;
-            NextState = new SwordAttack2();
+            NextComboState = new SwordAttack2();
         }
     }
 
@@ -256,7 +246,7 @@ namespace MonoGameJam1.Components.Player
         public SwordAttack2()
         {
             Animation = PlayerComponent.Animations.Sword2;
-            NextState = new SwordAttack3();
+            NextComboState = new SwordAttack3();
         }
     }
 
@@ -279,7 +269,7 @@ namespace MonoGameJam1.Components.Player
         public QuarterstaffAttack1()
         {
             Animation = PlayerComponent.Animations.Quarterstaff1;
-            NextState = new QuarterstaffAttack2();
+            NextComboState = new QuarterstaffAttack2();
         }
     }
 
@@ -288,7 +278,7 @@ namespace MonoGameJam1.Components.Player
         public QuarterstaffAttack2()
         {
             Animation = PlayerComponent.Animations.Quarterstaff2;
-            NextState = new QuarterstaffAttack3();
+            NextComboState = new QuarterstaffAttack3();
         }
     }
 
@@ -297,7 +287,7 @@ namespace MonoGameJam1.Components.Player
         public QuarterstaffAttack3()
         {
             Animation = PlayerComponent.Animations.Quarterstaff3;
-            NextState = new QuarterstaffAttack4();
+            NextComboState = new QuarterstaffAttack4();
         }
     }
 
@@ -320,7 +310,7 @@ namespace MonoGameJam1.Components.Player
         public PistolAttack1()
         {
             Animation = PlayerComponent.Animations.Pistol1;
-            NextState = new PistolAttack2();
+            NextComboState = new PistolAttack2();
         }
     }
 
@@ -329,7 +319,7 @@ namespace MonoGameJam1.Components.Player
         public PistolAttack2()
         {
             Animation = PlayerComponent.Animations.Pistol2;
-            NextState = new PistolAttack3();
+            NextComboState = new PistolAttack3();
         }
     }
 
@@ -338,7 +328,7 @@ namespace MonoGameJam1.Components.Player
         public PistolAttack3()
         {
             Animation = PlayerComponent.Animations.Pistol3;
-            NextState = new PistolAttack4();
+            NextComboState = new PistolAttack4();
         }
     }
 

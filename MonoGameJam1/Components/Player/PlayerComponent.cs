@@ -38,7 +38,6 @@ namespace MonoGameJam1.Components.Player
             Fist1,
             Fist2,
             Fist3,
-            Fist4,
 
             Sword1,
             Sword2,
@@ -96,6 +95,11 @@ namespace MonoGameJam1.Components.Player
         private bool _walljumpForcedMovement;
 
         //--------------------------------------------------
+        // Velocity multiplier
+
+        public float velocityMultiplier;
+
+        //--------------------------------------------------
         // Knockback
 
         private Vector2 _knockbackVelocity;
@@ -138,6 +142,11 @@ namespace MonoGameJam1.Components.Player
 
         private float _damageScalingStreak;
 
+        //--------------------------------------------------
+        // Linkable frames
+
+        public Dictionary<Animations, int[]> LinkableFrames { get; private set; }
+
         //----------------------//------------------------//
 
         public override void initialize()
@@ -153,7 +162,6 @@ namespace MonoGameJam1.Components.Player
                 {Animations.Fist1, "fist1"},
                 {Animations.Fist2, "fist2"},
                 {Animations.Fist3, "fist3"},
-                {Animations.Fist4, "fist4"},
 
                 {Animations.Sword1, "sword1"},
                 {Animations.Sword2, "sword2"},
@@ -173,19 +181,28 @@ namespace MonoGameJam1.Components.Player
                 {Animations.Dying, "dying"},
             };
 
+            LinkableFrames = new Dictionary<Animations, int[]>();
+
             var am = _animationMap;
 
             sprite = entity.addComponent(new AnimatedSprite(texture, am[Animations.Stand]));
-            sprite.CreateAnimation(am[Animations.Stand], 0.2f);
+            sprite.CreateAnimation(am[Animations.Stand], 0.1f);
             sprite.AddFrames(am[Animations.Stand], new List<Rectangle>()
             {
-                new Rectangle(0, 0, 32, 32),
+                new Rectangle(0, 0, 100, 100),
+                new Rectangle(100, 0, 100, 100),
+                new Rectangle(200, 0, 100, 100),
+                new Rectangle(300, 0, 100, 100),
+                new Rectangle(400, 0, 100, 100),
+                new Rectangle(500, 0, 100, 100),
+                new Rectangle(600, 0, 100, 100),
+                new Rectangle(700, 0, 100, 100),
             });
 
             sprite.CreateAnimation(am[Animations.Walking], 0.1f);
             sprite.AddFrames(am[Animations.Walking], new List<Rectangle>()
             {
-                new Rectangle(32, 0, 32, 32),
+                new Rectangle(800, 0, 100, 100),
             });
 
             sprite.CreateAnimation(am[Animations.Jumping], 0.1f);
@@ -198,11 +215,14 @@ namespace MonoGameJam1.Components.Player
 
             #region Fist Animations
             
-            sprite.CreateAnimation(am[Animations.Fist1], 0.1f);
+            sprite.CreateAnimation(am[Animations.Fist1], 0.09f, false);
             sprite.AddFrames(am[Animations.Fist1], new List<Rectangle>()
             {
-                new Rectangle(0, 32, 32, 32),
-                new Rectangle(0, 32, 32, 32),
+                new Rectangle(100, 100, 100, 100),
+                new Rectangle(200, 100, 100, 100),
+                new Rectangle(300, 100, 100, 100),
+                new Rectangle(400, 100, 100, 100),
+                new Rectangle(500, 100, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Fist1], new List<List<Rectangle>>
             {
@@ -210,12 +230,16 @@ namespace MonoGameJam1.Components.Player
                 new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
             });
             sprite.AddFramesToAttack(am[Animations.Fist1], 1);
+            LinkableFrames[Animations.Fist1] = new[] {2, 3};
 
-            sprite.CreateAnimation(am[Animations.Fist2], 0.1f);
+            sprite.CreateAnimation(am[Animations.Fist2], 0.09f, false);
             sprite.AddFrames(am[Animations.Fist2], new List<Rectangle>()
             {
-                new Rectangle(32, 32, 32, 32),
-                new Rectangle(32, 32, 32, 32),
+                new Rectangle(700, 100, 100, 100),
+                new Rectangle(0, 200, 100, 100),
+                new Rectangle(100, 200, 100, 100),
+                new Rectangle(200, 200, 100, 100),
+                new Rectangle(300, 200, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Fist2], new List<List<Rectangle>>
             {
@@ -223,12 +247,17 @@ namespace MonoGameJam1.Components.Player
                 new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
             });
             sprite.AddFramesToAttack(am[Animations.Fist2], 1);
+            LinkableFrames[Animations.Fist2] = new[] {2, 3};
 
-            sprite.CreateAnimation(am[Animations.Fist3], 0.1f);
+            sprite.CreateAnimation(am[Animations.Fist3], 0.09f, false);
             sprite.AddFrames(am[Animations.Fist3], new List<Rectangle>()
             {
-                new Rectangle(64, 32, 32, 32),
-                new Rectangle(64, 32, 32, 32),
+                new Rectangle(500, 200, 100, 100),
+                new Rectangle(600, 200, 100, 100),
+                new Rectangle(700, 200, 100, 100),
+                new Rectangle(0, 300, 100, 100),
+                new Rectangle(100, 300, 100, 100),
+                new Rectangle(200, 300, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Fist3], new List<List<Rectangle>>
             {
@@ -237,26 +266,13 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Fist3], 1);
 
-            sprite.CreateAnimation(am[Animations.Fist4], 0.1f);
-            sprite.AddFrames(am[Animations.Fist4], new List<Rectangle>()
-            {
-                new Rectangle(96, 32, 32, 32),
-                new Rectangle(96, 32, 32, 32),
-            });
-            sprite.AddAttackCollider(am[Animations.Fist4], new List<List<Rectangle>>
-            {
-                new List<Rectangle>(),
-                new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
-            });
-            sprite.AddFramesToAttack(am[Animations.Fist4], 1);
-
             #endregion
 
             // == SWORD ATTACKS ==
 
             #region Sword Animations
 
-            sprite.CreateAnimation(am[Animations.Sword1], 0.1f);
+            sprite.CreateAnimation(am[Animations.Sword1], 0.1f, false);
             sprite.AddFrames(am[Animations.Sword1], new List<Rectangle>()
             {
                 new Rectangle(0, 64, 32, 32),
@@ -269,7 +285,7 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Sword1], 1);
 
-            sprite.CreateAnimation(am[Animations.Sword2], 0.1f);
+            sprite.CreateAnimation(am[Animations.Sword2], 0.1f, false);
             sprite.AddFrames(am[Animations.Sword2], new List<Rectangle>()
             {
                 new Rectangle(32, 64, 32, 32),
@@ -282,7 +298,7 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Sword2], 1);
 
-            sprite.CreateAnimation(am[Animations.Sword3], 0.1f);
+            sprite.CreateAnimation(am[Animations.Sword3], 0.1f, false);
             sprite.AddFrames(am[Animations.Sword3], new List<Rectangle>()
             {
                 new Rectangle(64, 64, 32, 32),
@@ -301,7 +317,7 @@ namespace MonoGameJam1.Components.Player
 
             #region Quarterstaff Animations
 
-            sprite.CreateAnimation(am[Animations.Quarterstaff1], 0.1f);
+            sprite.CreateAnimation(am[Animations.Quarterstaff1], 0.1f, false);
             sprite.AddFrames(am[Animations.Quarterstaff1], new List<Rectangle>()
             {
                 new Rectangle(0, 96, 32, 32),
@@ -314,7 +330,7 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Quarterstaff1], 1);
 
-            sprite.CreateAnimation(am[Animations.Quarterstaff2], 0.1f);
+            sprite.CreateAnimation(am[Animations.Quarterstaff2], 0.1f, false);
             sprite.AddFrames(am[Animations.Quarterstaff2], new List<Rectangle>()
             {
                 new Rectangle(32, 96, 32, 32),
@@ -327,7 +343,7 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Quarterstaff2], 1);
 
-            sprite.CreateAnimation(am[Animations.Quarterstaff3], 0.1f);
+            sprite.CreateAnimation(am[Animations.Quarterstaff3], 0.1f, false);
             sprite.AddFrames(am[Animations.Quarterstaff3], new List<Rectangle>()
             {
                 new Rectangle(64, 96, 32, 32),
@@ -340,7 +356,7 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Quarterstaff3], 1);
 
-            sprite.CreateAnimation(am[Animations.Quarterstaff4], 0.1f);
+            sprite.CreateAnimation(am[Animations.Quarterstaff4], 0.1f, false);
             sprite.AddFrames(am[Animations.Quarterstaff4], new List<Rectangle>()
             {
                 new Rectangle(96, 96, 32, 32),
@@ -359,7 +375,7 @@ namespace MonoGameJam1.Components.Player
 
             #region Pistol Animations
 
-            sprite.CreateAnimation(am[Animations.Pistol1], 0.1f);
+            sprite.CreateAnimation(am[Animations.Pistol1], 0.1f, false);
             sprite.AddFrames(am[Animations.Pistol1], new List<Rectangle>()
             {
                 new Rectangle(0, 128, 32, 32),
@@ -372,7 +388,7 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Pistol1], 1);
 
-            sprite.CreateAnimation(am[Animations.Pistol2], 0.1f);
+            sprite.CreateAnimation(am[Animations.Pistol2], 0.1f, false);
             sprite.AddFrames(am[Animations.Pistol2], new List<Rectangle>()
             {
                 new Rectangle(32, 128, 32, 32),
@@ -385,7 +401,7 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Pistol2], 1);
 
-            sprite.CreateAnimation(am[Animations.Pistol3], 0.1f);
+            sprite.CreateAnimation(am[Animations.Pistol3], 0.1f, false);
             sprite.AddFrames(am[Animations.Pistol3], new List<Rectangle>()
             {
                 new Rectangle(64, 128, 32, 32),
@@ -398,7 +414,7 @@ namespace MonoGameJam1.Components.Player
             });
             sprite.AddFramesToAttack(am[Animations.Pistol3], 1);
 
-            sprite.CreateAnimation(am[Animations.Pistol4], 0.1f);
+            sprite.CreateAnimation(am[Animations.Pistol4], 0.1f, false);
             sprite.AddFrames(am[Animations.Pistol4], new List<Rectangle>()
             {
                 new Rectangle(96, 128, 32, 32),
@@ -432,8 +448,9 @@ namespace MonoGameJam1.Components.Player
             // init fsm
             _fsm = new FiniteStateMachine<PlayerState, PlayerComponent>(this, new StandState());
             
-            // init damage scaling
+            // misc
             _damageScalingStreak = 10;
+            velocityMultiplier = 1;
         }
 
         public override void onAddedToEntity()
@@ -518,7 +535,7 @@ namespace MonoGameJam1.Components.Player
                 {
                     po.velocity.X = 0;
                 }
-                po.velocity.X = (int)MathHelper.Clamp(po.velocity.X + moveSpeed * velocity * Time.unscaledDeltaTime, -mms, mms);
+                po.velocity.X = (int)MathHelper.Clamp(po.velocity.X + moveSpeed * velocity * Time.unscaledDeltaTime, -mms, mms) * velocityMultiplier;
 
                 if (platformerObject.grabbingWall)
                 {
@@ -573,6 +590,7 @@ namespace MonoGameJam1.Components.Player
             var animationStr = _animationMap[animation];
             if (sprite.CurrentAnimation != animationStr)
             {
+                Console.WriteLine($"change anim to {animation}");
                 sprite.play(animationStr);
             }
         }
@@ -603,9 +621,9 @@ namespace MonoGameJam1.Components.Player
 
         #region Helpers
 
-        public Entity createEntityOnMap()
+        public bool CanLinkCombo(Animations anim)
         {
-            return entity.scene.createEntity();
+            return LinkableFrames.ContainsKey(anim) && LinkableFrames[anim].contains(sprite.CurrentFrame);
         }
 
         public float CurrentDamageScale()

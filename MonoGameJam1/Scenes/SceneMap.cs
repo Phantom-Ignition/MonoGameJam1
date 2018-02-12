@@ -146,7 +146,7 @@ namespace MonoGameJam1.Scenes
             var player = createEntity("player");
             player.transform.position = playerSpawn.Value;
             player.addComponent(new TiledMapMover(_tiledMap.getLayer<TiledTileLayer>(collisionLayer)));
-            var collider = player.addComponent(new BoxCollider(-7f, -9f, 15f, 25f));
+            var collider = player.addComponent(new BoxCollider(-8f, -19f, 16f, 42f));
             Flags.setFlagExclusive(ref collider.physicsLayer, PLAYER_LAYER);
 
             player.addComponent(new InteractionCollider(-20f, -6, 40, 22));
