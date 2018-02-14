@@ -73,17 +73,8 @@ namespace MonoGameJam1.Scenes
 
         //--------------------------------------------------
         // Battle Areas
-
-        private struct BattleArea
-        {
-            public bool IsActive { get; set; }
-            public string Name { get; set; }
-            public Vector2 Position { get; set; }
-            public bool Activated { get; set; }
-        }
-
-        private BattleArea[] _battleAreas;
-        private BattleArea _currentBattleArea;
+        
+        private Entity _currentBattleArea;
 
         //--------------------------------------------------
         // Player
@@ -149,15 +140,13 @@ namespace MonoGameJam1.Scenes
 
             var battleAreas = battleAreasGroup.objects;
 
-            _battleAreas = new BattleArea[battleAreas.Length];
-            for (var i = 0; i < battleAreas.Length; i++)
+            foreach (var battleArea in battleAreas)
             {
-                var battleArea = new BattleArea
-                {
-                    Name = battleAreas[i].name,
-                    Position = battleAreas[i].position
-                };
-                _battleAreas[i] = battleArea;
+                var entity = createEntity();
+                entity
+                    .addComponent(new BoxCollider(0, 0, battleArea.width, battleArea.height))
+                    .addComponent(new BattleAreaComponent());
+                entity.setPosition(battleArea.position);
             }
         }
 
@@ -280,6 +269,7 @@ namespace MonoGameJam1.Scenes
 
             addEntityProcessor(new BattleSystem());
             addEntityProcessor(new ProjectilesSystem(player));
+            addEntityProcessor(new BattleAreasSystem(player));
 
             addEntityProcessor(new TransferSystem(new Matcher().all(typeof(TransferComponent)), player));
             addEntityProcessor(new NpcInteractionSystem(playerComponent));

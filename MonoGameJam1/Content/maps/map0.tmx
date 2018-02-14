@@ -55,11 +55,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="battleAreas">
-  <object id="9" x="0" y="96" width="432" height="160"/>
+ <objectgroup color="#00557f" name="battleAreas">
+  <object id="9" name="First" x="48" y="96" width="96" height="160"/>
  </objectgroup>
  <objectgroup name="objects">
-  <object id="1" name="playerSpawn" x="208" y="240"/>
+  <object id="1" name="playerSpawn" x="9" y="223" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="transfers">
   <object id="5" name="Transfer" type="onTouch" x="464" y="0" width="4" height="96">
