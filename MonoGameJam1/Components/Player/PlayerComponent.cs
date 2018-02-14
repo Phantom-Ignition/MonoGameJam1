@@ -602,7 +602,6 @@ namespace MonoGameJam1.Components.Player
             var animationStr = _animationMap[animation];
             if (sprite.CurrentAnimation != animationStr)
             {
-                Console.WriteLine($"change anim to {animation}");
                 sprite.play(animationStr);
             }
         }

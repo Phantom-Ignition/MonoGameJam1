@@ -142,10 +142,22 @@ namespace MonoGameJam1.Scenes
 
             foreach (var battleArea in battleAreas)
             {
+                var battleAreaComponent = new BattleAreaComponent();
+                if (battleArea.properties.ContainsKey("enemies"))
+                {
+                    var enemies = battleArea.properties["enemies"].Split(',');
+                    battleAreaComponent.Enemies = enemies;
+                }
+                if (battleArea.properties.ContainsKey("waves"))
+                {
+                    var waves = battleArea.properties["waves"].Split(',').Select(int.Parse).ToArray();
+                    battleAreaComponent.Waves = waves;
+                }
+
                 var entity = createEntity();
                 entity
                     .addComponent(new BoxCollider(0, 0, battleArea.width, battleArea.height))
-                    .addComponent(new BattleAreaComponent());
+                    .addComponent(battleAreaComponent);
                 entity.setPosition(battleArea.position);
             }
         }
@@ -214,6 +226,7 @@ namespace MonoGameJam1.Scenes
             if (enemiesGroup == null) return;
             foreach (var enemy in enemiesGroup.objects)
             {
+                /*
                 var entity = createEntity("enemy");
                 entity.addComponent(new TiledMapMover(_tiledMap.getLayer<TiledTileLayer>(collisionLayer)));
                 entity.addComponent(new PlatformerObject(_tiledMap));
@@ -238,10 +251,45 @@ namespace MonoGameJam1.Scenes
                 }
 
                 entity.transform.position = enemy.position + new Vector2(enemy.width, enemy.height) / 2;
+                */
+
+                var patrolStartRight = bool.Parse(enemy.properties.ContainsKey("patrolStartRight")
+                    ? enemy.properties["patrolStartRight"]
+                    : "false");
+
+
+                var entity = createEnemy(enemy.type, patrolStartRight);
+                var enemyComponent = entity.getComponent<EnemyComponent>();
+                if (enemy.properties.ContainsKey("path"))
+                {
+                    var pathName = enemy.properties["path"];
+                    var path = _paths.First(x => x.Name == pathName);
+                    enemyComponent.path = path;
+                }
+                entity.transform.position = enemy.position + new Vector2(enemy.width, enemy.height) / 2;
             }
         }
 
-        private EnemyComponent createEnemyInstance(string enemyName, bool patrolStartRight)
+        public Entity createEnemy(string enemyName, bool patrolStartRight)
+        {
+            var collisionLayer = _tiledMap.properties["collisionLayer"];
+
+            var entity = createEntity("enemy");
+            entity.addComponent(new TiledMapMover(_tiledMap.getLayer<TiledTileLayer>(collisionLayer)));
+            entity.addComponent(new PlatformerObject(_tiledMap));
+            entity.addComponent<BattleComponent>();
+            var collider = entity.addComponent(new BoxCollider(-16f, -16f, 32f, 32f));
+            Flags.setFlagExclusive(ref collider.physicsLayer, ENEMY_LAYER);
+
+            var instance = createEnemyInstance(enemyName, patrolStartRight);
+            var enemyComponent = entity.addComponent(instance);
+            enemyComponent.sprite.renderLayer = ENEMIES_RENDER_LAYER;
+            enemyComponent.playerCollider = findEntity("player").getComponent<BoxCollider>();
+            
+            return entity;
+        }
+
+        public EnemyComponent createEnemyInstance(string enemyName, bool patrolStartRight)
         {
             var enemiesNamespace = typeof(BattleComponent).Namespace + ".Enemies";
             var type = Type.GetType(enemiesNamespace + "." + enemyName + "Component");

@@ -7,6 +7,9 @@ namespace MonoGameJam1.Components.Map
         public BoxCollider collider;
         public bool Activated { get; private set; }
 
+        public string[] Enemies { get; set; }
+        public int[] Waves { get; set; }
+
         public override void onAddedToEntity()
         {
             collider = entity.getComponent<BoxCollider>();

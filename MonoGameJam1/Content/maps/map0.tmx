@@ -56,7 +56,12 @@
 </data>
  </layer>
  <objectgroup color="#00557f" name="battleAreas">
-  <object id="9" name="First" x="48" y="96" width="96" height="160"/>
+  <object id="9" name="First" x="48" y="96" width="304" height="160">
+   <properties>
+    <property name="enemies" value="EnemyTargetDummy"/>
+    <property name="waves" value="2, 3, 5"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="objects">
   <object id="1" name="playerSpawn" x="9" y="223" width="32" height="32"/>

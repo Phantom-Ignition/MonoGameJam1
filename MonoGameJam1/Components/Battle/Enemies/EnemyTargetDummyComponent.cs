@@ -25,6 +25,11 @@ namespace MonoGameJam1.Components.Battle.Enemies
             {
                 new Rectangle(0, 0, 32, 32),
             });
+            sprite.CreateAnimation("dying", 0.25f);
+            sprite.AddFrames("dying", new List<Rectangle>
+            {
+                new Rectangle(0, 0, 32, 32),
+            });
 
             // View range
             areaOfSight = entity.addComponent(new AreaOfSightCollider(-24, -12, 92, 32));
@@ -35,7 +40,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
             base.onAddedToEntity();
 
             // Change HP
-            entity.getComponent<BattleComponent>().setHp(99999);
+            entity.getComponent<BattleComponent>().setHp(2);
         }
 
     }
