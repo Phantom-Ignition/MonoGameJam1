@@ -125,7 +125,7 @@ namespace MonoGameJam1.Components.Battle
             knockback.X = diff;
 
             _knockbackTick = new Vector2(0.05f, yKnockback);
-            _knockbackVelocity = new Vector2(diff * 2, -1000);
+            _knockbackVelocity = new Vector2(knockback.X * 2, -1000);
 
             if (Math.Abs(xKnockback) > 0.01)
             {

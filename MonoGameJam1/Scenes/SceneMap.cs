@@ -72,6 +72,20 @@ namespace MonoGameJam1.Scenes
         private MapPath[] _paths;
 
         //--------------------------------------------------
+        // Battle Areas
+
+        private struct BattleArea
+        {
+            public bool IsActive { get; set; }
+            public string Name { get; set; }
+            public Vector2 Position { get; set; }
+            public bool Activated { get; set; }
+        }
+
+        private BattleArea[] _battleAreas;
+        private BattleArea _currentBattleArea;
+
+        //--------------------------------------------------
         // Player
 
         private PlayerComponent _playerComponent;
@@ -88,6 +102,7 @@ namespace MonoGameJam1.Scenes
             addRenderer(new DefaultRenderer());
             clearColor = new Color(54, 72, 130);
             setupMap();
+            setupBattleAreas();
             setupPlayer();
             setupPaths();
             setupEnemies();
@@ -124,6 +139,25 @@ namespace MonoGameJam1.Scenes
                 var aboveWaterLayer = _tiledMap.properties["aboveWaterLayer"];
                 var tiledAboveWater = tiledEntity.addComponent(new TiledMapComponent(_tiledMap) { renderLayer = WATER_RENDER_LAYER });
                 tiledAboveWater.setLayerToRender(aboveWaterLayer);
+            }
+        }
+
+        private void setupBattleAreas()
+        {
+            var battleAreasGroup = _tiledMap.getObjectGroup("battleAreas");
+            if (battleAreasGroup == null) return;
+
+            var battleAreas = battleAreasGroup.objects;
+
+            _battleAreas = new BattleArea[battleAreas.Length];
+            for (var i = 0; i < battleAreas.Length; i++)
+            {
+                var battleArea = new BattleArea
+                {
+                    Name = battleAreas[i].name,
+                    Position = battleAreas[i].position
+                };
+                _battleAreas[i] = battleArea;
             }
         }
 
