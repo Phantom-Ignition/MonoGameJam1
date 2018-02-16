@@ -93,6 +93,7 @@ namespace MonoGameJam1.Components.Player
         private bool _forceMovement;
         private Vector2 _forceMovementVelocity;
         private bool _walljumpForcedMovement;
+        private Direction? _lockDirection;
 
         //--------------------------------------------------
         // Velocity multiplier
@@ -199,16 +200,23 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(700, 0, 100, 100),
             });
 
-            sprite.CreateAnimation(am[Animations.Walking], 0.1f);
+            sprite.CreateAnimation(am[Animations.Walking], 0.09f);
             sprite.AddFrames(am[Animations.Walking], new List<Rectangle>()
             {
-                new Rectangle(800, 0, 100, 100),
+                new Rectangle(0, 900, 100, 100),
+                new Rectangle(100, 900, 100, 100),
+                new Rectangle(200, 900, 100, 100),
+                new Rectangle(300, 900, 100, 100),
+                new Rectangle(400, 900, 100, 100),
+                new Rectangle(500, 900, 100, 100),
+                new Rectangle(600, 900, 100, 100),
+                new Rectangle(700, 900, 100, 100),
             });
 
             sprite.CreateAnimation(am[Animations.Jumping], 0.1f);
             sprite.AddFrames(am[Animations.Jumping], new List<Rectangle>()
             {
-                new Rectangle(32, 0, 32, 32),
+                new Rectangle(400, 700, 100, 100),
             });
 
             // == FIRST ATTACKS ==
@@ -249,7 +257,7 @@ namespace MonoGameJam1.Components.Player
                 new List<Rectangle> { new Rectangle(0, -10, 34, 29) },
             });
             sprite.AddFramesToAttack(am[Animations.Fist2], 1);
-            LinkableFrames[Animations.Fist2] = new[] {2, 3};
+            LinkableFrames[Animations.Fist2] = new[] {3, 4};
 
             sprite.CreateAnimation(am[Animations.Fist3], 0.09f, false);
             sprite.AddFrames(am[Animations.Fist3], new List<Rectangle>()
@@ -310,11 +318,16 @@ namespace MonoGameJam1.Components.Player
             sprite.AddFramesToAttack(am[Animations.Sword2], 1);
             LinkableFrames[Animations.Sword2] = new[] { 2, 3 };
 
-            sprite.CreateAnimation(am[Animations.Sword3], 0.1f, false);
+            sprite.CreateAnimation(am[Animations.Sword3], 0.09f, false);
             sprite.AddFrames(am[Animations.Sword3], new List<Rectangle>()
             {
-                new Rectangle(64, 64, 32, 32),
-                new Rectangle(64, 64, 32, 32),
+                new Rectangle(400, 500, 100, 100),
+                new Rectangle(500, 500, 100, 100),
+                new Rectangle(600, 500, 100, 100),
+                new Rectangle(700, 500, 100, 100),
+                new Rectangle(0, 600, 100, 100),
+                new Rectangle(100, 600, 100, 100),
+                new Rectangle(200, 600, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Sword3], new List<List<Rectangle>>
             {
@@ -387,11 +400,15 @@ namespace MonoGameJam1.Components.Player
 
             #region Pistol Animations
 
-            sprite.CreateAnimation(am[Animations.Pistol1], 0.1f, false);
+            sprite.CreateAnimation(am[Animations.Pistol1], 0.07f, false);
             sprite.AddFrames(am[Animations.Pistol1], new List<Rectangle>()
             {
-                new Rectangle(0, 128, 32, 32),
-                new Rectangle(0, 128, 32, 32),
+                new Rectangle(500, 600, 100, 100),
+                new Rectangle(600, 600, 100, 100),
+                new Rectangle(700, 600, 100, 100),
+                new Rectangle(0, 700, 100, 100),
+                new Rectangle(100, 700, 100, 100),
+                new Rectangle(200, 700, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Pistol1], new List<List<Rectangle>>
             {
@@ -399,12 +416,17 @@ namespace MonoGameJam1.Components.Player
                 new List<Rectangle> { new Rectangle(0, -10, 128, 29) },
             });
             sprite.AddFramesToAttack(am[Animations.Pistol1], 1);
+            LinkableFrames[Animations.Pistol1] = new[] { 3, 4 };
 
-            sprite.CreateAnimation(am[Animations.Pistol2], 0.1f, false);
+            sprite.CreateAnimation(am[Animations.Pistol2], 0.07f, false);
             sprite.AddFrames(am[Animations.Pistol2], new List<Rectangle>()
             {
-                new Rectangle(32, 128, 32, 32),
-                new Rectangle(32, 128, 32, 32),
+                new Rectangle(500, 600, 100, 100),
+                new Rectangle(600, 600, 100, 100),
+                new Rectangle(700, 600, 100, 100),
+                new Rectangle(0, 700, 100, 100),
+                new Rectangle(100, 700, 100, 100),
+                new Rectangle(200, 700, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Pistol2], new List<List<Rectangle>>
             {
@@ -412,12 +434,17 @@ namespace MonoGameJam1.Components.Player
                 new List<Rectangle> { new Rectangle(0, -10, 128, 29) },
             });
             sprite.AddFramesToAttack(am[Animations.Pistol2], 1);
+            LinkableFrames[Animations.Pistol2] = new[] { 3, 4 };
 
-            sprite.CreateAnimation(am[Animations.Pistol3], 0.1f, false);
+            sprite.CreateAnimation(am[Animations.Pistol3], 0.07f, false);
             sprite.AddFrames(am[Animations.Pistol3], new List<Rectangle>()
             {
-                new Rectangle(64, 128, 32, 32),
-                new Rectangle(64, 128, 32, 32),
+                new Rectangle(500, 600, 100, 100),
+                new Rectangle(600, 600, 100, 100),
+                new Rectangle(700, 600, 100, 100),
+                new Rectangle(0, 700, 100, 100),
+                new Rectangle(100, 700, 100, 100),
+                new Rectangle(200, 700, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Pistol3], new List<List<Rectangle>>
             {
@@ -425,6 +452,7 @@ namespace MonoGameJam1.Components.Player
                 new List<Rectangle> { new Rectangle(0, -10, 128, 29) },
             });
             sprite.AddFramesToAttack(am[Animations.Pistol3], 1);
+            LinkableFrames[Animations.Pistol3] = new[] { 3, 4 };
 
             sprite.CreateAnimation(am[Animations.Pistol4], 0.1f, false);
             sprite.AddFrames(am[Animations.Pistol4], new List<Rectangle>()
@@ -450,11 +478,17 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(32, 0, 32, 32),
             });
 
-            sprite.CreateAnimation(am[Animations.Dying], 0.1f);
+            sprite.CreateAnimation(am[Animations.Dying], 0.09f);
             sprite.AddFrames(am[Animations.Dying], new List<Rectangle>()
             {
-                new Rectangle(32, 32, 32, 32),
-                new Rectangle(32, 32, 32, 32),
+                new Rectangle(0, 800, 100, 100),
+                new Rectangle(100, 800, 100, 100),
+                new Rectangle(200, 800, 100, 100),
+                new Rectangle(300, 800, 100, 100),
+                new Rectangle(400, 800, 100, 100),
+                new Rectangle(500, 800, 100, 100),
+                new Rectangle(600, 800, 100, 100),
+                new Rectangle(700, 800, 100, 100),
             });
 
             // init fsm
@@ -495,16 +529,21 @@ namespace MonoGameJam1.Components.Player
             FSM.changeState(new DyingState());
         }
 
-        public void forceMovement(Vector2 velocity, bool walljumpForcedMovement = false)
+        public void forceMovement(Vector2 velocity, Direction? lockDirection = null, bool walljumpForcedMovement = false)
         {
             if (velocity == Vector2.Zero)
             {
                 _forceMovement = false;
+                _lockDirection = null;
             }
             else
             {
                 _forceMovement = true;
                 _forceMovementVelocity = velocity;
+            }
+            if (lockDirection.HasValue)
+            {
+                _lockDirection = lockDirection.Value;
             }
             _walljumpForcedMovement = walljumpForcedMovement;
         }
@@ -558,7 +597,16 @@ namespace MonoGameJam1.Components.Player
                 }
                 else
                 {
-                    sprite.spriteEffects = velocity < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+                    if (_lockDirection.HasValue)
+                    {
+                        sprite.spriteEffects = _lockDirection.Value == Direction.Left
+                            ? SpriteEffects.FlipHorizontally
+                            : SpriteEffects.None;
+                    }
+                    else
+                    {
+                        sprite.spriteEffects = velocity < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+                    }
                 }
             }
             else

@@ -154,6 +154,8 @@ namespace MonoGameJam1.Components.Player
         public float VerticalKnockback;
         public float HorizontalKnockback;
         public float AttackPushDuration = 0.05f;
+        public float AttackPushMultiplier = 1.0f;
+        public bool AttackPushLockDirection;
         public float VelocityMultiplier = 1.0f;
 
         public override void begin()
@@ -162,7 +164,10 @@ namespace MonoGameJam1.Components.Player
             entity.SetAnimation(Animation);
             entity.platformerObject.lockVerticalMovement = true;
 
-            entity.forceMovement(entity.GetIntDirection() * Vector2.UnitX);
+            var lockDirection = AttackPushLockDirection
+                ? (Direction?)(entity.GetIntDirection() == 1 ? Direction.Right : Direction.Left)
+                : null;
+            entity.forceMovement(entity.GetIntDirection() * AttackPushMultiplier * Vector2.UnitX, lockDirection);
             _timer = Core.schedule(AttackPushDuration, entity, t =>
             {
                 entity.forceMovement(Vector2.Zero);
@@ -311,6 +316,8 @@ namespace MonoGameJam1.Components.Player
         {
             Animation = PlayerComponent.Animations.Pistol1;
             NextComboState = new PistolAttack2();
+            AttackPushMultiplier = -1.0f;
+            AttackPushLockDirection = true;
         }
     }
 
@@ -320,6 +327,8 @@ namespace MonoGameJam1.Components.Player
         {
             Animation = PlayerComponent.Animations.Pistol2;
             NextComboState = new PistolAttack3();
+            AttackPushMultiplier = -1.0f;
+            AttackPushLockDirection = true;
         }
     }
 
@@ -329,6 +338,8 @@ namespace MonoGameJam1.Components.Player
         {
             Animation = PlayerComponent.Animations.Pistol3;
             NextComboState = new PistolAttack4();
+            AttackPushMultiplier = -1.0f;
+            AttackPushLockDirection = true;
         }
     }
 
@@ -337,6 +348,8 @@ namespace MonoGameJam1.Components.Player
         public PistolAttack4()
         {
             Animation = PlayerComponent.Animations.Pistol4;
+            AttackPushMultiplier = -1.0f;
+            AttackPushLockDirection = true;
             IsFinal = true;
         }
     }
