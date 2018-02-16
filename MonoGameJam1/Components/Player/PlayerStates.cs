@@ -356,6 +356,22 @@ namespace MonoGameJam1.Components.Player
 
     #endregion
 
+    public class HitState : PlayerState
+    {
+        public override void begin()
+        {
+            entity.SetAnimation(PlayerComponent.Animations.Hit);
+        }
+
+        public override void update()
+        {
+            if (entity.sprite.Looped)
+            {
+                fsm.resetStackTo(new StandState());
+            }
+        }
+    }
+
     public class DyingState : PlayerState
     {
         public override void begin()

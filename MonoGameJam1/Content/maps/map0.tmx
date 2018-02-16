@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" nextobjectid="10">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" nextobjectid="13">
  <properties>
   <property name="collisionLayer" value="collision"/>
   <property name="defaultLayers" value="collision, details"/>
@@ -56,7 +56,7 @@
 </data>
  </layer>
  <objectgroup color="#00557f" name="battleAreas">
-  <object id="9" name="First" x="32" y="96" width="304" height="160">
+  <object id="9" name="First" x="176" y="96" width="304" height="160">
    <properties>
     <property name="enemies" value="EnemyImp"/>
     <property name="waves" value="2, 3, 5"/>
@@ -64,7 +64,7 @@
   </object>
  </objectgroup>
  <objectgroup name="objects">
-  <object id="1" name="playerSpawn" x="9" y="223" width="32" height="32"/>
+  <object id="1" name="playerSpawn" x="48" y="224" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="transfers">
   <object id="5" name="Transfer" type="onTouch" x="464" y="0" width="4" height="96">
@@ -76,5 +76,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemies"/>
+ <objectgroup name="enemies">
+  <object id="10" type="EnemyImp" x="192" y="224" width="32" height="32"/>
+ </objectgroup>
 </map>

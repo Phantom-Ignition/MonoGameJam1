@@ -9,6 +9,12 @@ using MonoGameJam1.FSM;
 
 namespace MonoGameJam1.Components.Battle.Enemies
 {
+    public enum ImpVelocity
+    {
+        Normal,
+        Fast
+    }
+
     public class EnemyImpComponent : EnemyComponent, ISpawnableEnemy
     {
         //--------------------------------------------------
@@ -72,12 +78,44 @@ namespace MonoGameJam1.Components.Battle.Enemies
             sprite.CreateAnimation("punch", 0.09f);
             sprite.AddFrames("punch", new List<Rectangle>
             {
+                new Rectangle(400, 100, 100, 100),
+                new Rectangle(500, 100, 100, 100),
                 new Rectangle(0, 200, 100, 100),
                 new Rectangle(100, 200, 100, 100),
                 new Rectangle(200, 200, 100, 100),
                 new Rectangle(300, 200, 100, 100),
                 new Rectangle(400, 200, 100, 100),
                 new Rectangle(500, 200, 100, 100),
+            });
+
+            sprite.CreateAnimation("jumpAttack", 0.09f, false);
+            sprite.AddFrames("jumpAttack", new List<Rectangle>
+            {
+                new Rectangle(0, 400, 100, 100),
+                new Rectangle(100, 400, 100, 100),
+                new Rectangle(200, 400, 100, 100),
+                new Rectangle(300, 400, 100, 100),
+                new Rectangle(400, 400, 100, 100),
+                new Rectangle(0, 500, 100, 100),
+                new Rectangle(100, 500, 100, 100),
+            });
+            sprite.AddAttackCollider("jumpAttack", new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle>(),
+                new List<Rectangle>(),
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(-19, -9, 38, 32) },
+                new List<Rectangle> { new Rectangle(-19, -9, 38, 32) },
+                new List<Rectangle> { new Rectangle(-19, -9, 38, 32) },
+            });
+            sprite.AddFramesToAttack("jumpAttack", 4, 5, 6);
+
+            sprite.CreateAnimation("hit", 0.1f, false);
+            sprite.AddFrames("hit", new List<Rectangle>
+            {
+                new Rectangle(200, 100, 100, 100),
+                new Rectangle(300, 100, 100, 100),
             });
 
             sprite.CreateAnimation("dying", 0.1f, false);
@@ -101,11 +139,16 @@ namespace MonoGameJam1.Components.Battle.Enemies
         public override void onAddedToEntity()
         {
             base.onAddedToEntity();
-            _battleComponent.setHp(3);
+            _battleComponent.setHp(10);
 
             // Change move speed
-            platformerObject.maxMoveSpeed = 3000;
-            platformerObject.moveSpeed = 3000;
+            changeSpeed(ImpVelocity.Normal);
+        }
+
+        public override void onHit(Vector2 knockback)
+        {
+            base.onHit(knockback);
+            FSM.changeState(new EnemyImpHit());
         }
 
         public void GoToSpawnState()
@@ -120,7 +163,23 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
             var velocity = _forceMovement ? _forceMovementVelocity.X : 0.0f;
             if (Math.Abs(velocity) > 0.0001f)
-                sprite.spriteEffects = velocity < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+                sprite.spriteEffects = velocity < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+        }
+
+        public void changeSpeed(ImpVelocity velocity)
+        {
+            switch (velocity)
+            {
+                case ImpVelocity.Normal:
+                    platformerObject.maxMoveSpeed = 3000;
+                    platformerObject.moveSpeed = 3000;
+                    break;
+                case ImpVelocity.Fast:
+                    platformerObject.maxMoveSpeed = 14000;
+                    platformerObject.moveSpeed = 14000;
+                    break;
+                default: break;
+            }
         }
     }
 }

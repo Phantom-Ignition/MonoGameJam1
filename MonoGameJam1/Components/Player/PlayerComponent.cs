@@ -52,8 +52,8 @@ namespace MonoGameJam1.Components.Player
             Pistol2,
             Pistol3,
             Pistol4,
-
-            Shot,
+            
+            Hit,
             Dying
         }
 
@@ -178,7 +178,7 @@ namespace MonoGameJam1.Components.Player
                 {Animations.Pistol3, "pistol3"},
                 {Animations.Pistol4, "pistol4"},
 
-                {Animations.Shot, "shot"},
+                {Animations.Hit, "hit"},
                 {Animations.Dying, "dying"},
             };
 
@@ -471,14 +471,14 @@ namespace MonoGameJam1.Components.Player
 
             // == MISC ANIMATIONS ==
 
-            sprite.CreateAnimation(am[Animations.Shot], 0.1f);
-            sprite.AddFrames(am[Animations.Shot], new List<Rectangle>()
+            sprite.CreateAnimation(am[Animations.Hit], 0.09f, false);
+            sprite.AddFrames(am[Animations.Hit], new List<Rectangle>()
             {
-                new Rectangle(32, 0, 32, 32),
-                new Rectangle(32, 0, 32, 32),
+                new Rectangle(500, 700, 100, 100),
+                new Rectangle(600, 700, 100, 100),
             });
 
-            sprite.CreateAnimation(am[Animations.Dying], 0.09f);
+            sprite.CreateAnimation(am[Animations.Dying], 0.09f, false);
             sprite.AddFrames(am[Animations.Dying], new List<Rectangle>()
             {
                 new Rectangle(0, 800, 100, 100),
@@ -508,6 +508,7 @@ namespace MonoGameJam1.Components.Player
             _battleComponent.battleEntity = this;
             _battleComponent.ImmunityDuration = 0.5f;
             _battleComponent.destroyEntityAction = destroyEntity;
+            _battleComponent.setHp(10);
 
             _weaponSelectionComponent = entity.addComponent<WeaponSelectionComponent>();
         }
@@ -522,6 +523,7 @@ namespace MonoGameJam1.Components.Player
         {
             _knockbackTick = new Vector2(0.06f, 0.04f);
             _knockbackVelocity = new Vector2(knockback.X * 60, -5);
+            FSM.changeState(new HitState());
         }
 
         public void onDeath()

@@ -231,7 +231,7 @@ namespace MonoGameJam1.Components.Battle
             _sawThePlayer = true;
             var side = distanceToPlayer();
             _currentPatrolSide = Math.Sign(side);
-            sprite.spriteEffects = side > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            sprite.spriteEffects = side > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
         }
 
         public void unseeThePlayer()
@@ -242,6 +242,11 @@ namespace MonoGameJam1.Components.Battle
         private bool canMove()
         {
             return !_battleComponent.Dying;
+        }
+
+        public bool isOnGround()
+        {
+            return _platformerObject.collisionState.below;
         }
     }
 }

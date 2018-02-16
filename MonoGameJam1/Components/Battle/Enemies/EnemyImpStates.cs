@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using MonoGameJam1.Components.Player;
+﻿using Microsoft.Xna.Framework;
 using MonoGameJam1.FSM;
-using MonoGameJam1.Managers;
 using Nez;
+using System;
+using MonoGameJam1.Components.Player;
 using Random = Nez.Random;
 
 namespace MonoGameJam1.Components.Battle.Enemies
@@ -39,14 +34,19 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
     public class EnemyImpThinking : EnemyImpStates
     {
+        private readonly bool _lessTime;
         private float _thinkingTime;
+
+        public EnemyImpThinking(bool lessTime = false)
+        {
+            _lessTime = lessTime;
+        }
 
         public override void begin()
         {
             entity.sprite.play("stand");
-            _thinkingTime = 1 + Random.nextFloat(2);
+            _thinkingTime = 0;//_lessTime ? Random.nextFloat(1) : 1 + Random.nextFloat(2);
             Console.WriteLine($"Think: {_thinkingTime}");
-
         }
 
         public override void update()
@@ -102,7 +102,19 @@ namespace MonoGameJam1.Components.Battle.Enemies
             if (entity.canSeeThePlayer())
             {
                 entity.turnToPlayer();
-                fsm.resetStackTo(new EnemyImpAttackPlayer());
+                var distance = entity.distanceToPlayer();
+                if (distance < 55)
+                {
+                    var rand = Random.nextFloat(1);
+                    if (rand < 0.7)
+                    {
+                        fsm.resetStackTo(new EnemyImpAttackPlayer());
+                    }
+                    else
+                    {
+                        fsm.resetStackTo(new EnemyImpJumpAttack());
+                    }
+                }
             }
         }
 
@@ -130,16 +142,61 @@ namespace MonoGameJam1.Components.Battle.Enemies
         {
             if (entity.sprite.Looped)
             {
-                fsm.resetStackTo(new EnemyImpThinking());
+                fsm.resetStackTo(new EnemyImpThinking(true));
             }
         }
     }
 
     public class EnemyImpJumpAttack : EnemyImpStates
     {
+        private bool _jumped;
+
         public override void begin()
         {
-            
+            entity.sprite.play("jumpAttack");
+        }
+
+        private void jump()
+        {
+            var dir = Math.Sign(entity.distanceToPlayer());
+            entity.platformerObject.velocity = new Vector2(0, -300);
+            entity.changeSpeed(ImpVelocity.Fast);
+            entity.forceMovement(Vector2.UnitX * dir);
+        }
+
+        public override void update()
+        {
+            if (!_jumped && entity.sprite.CurrentAnimation == "jumpAttack" && entity.sprite.CurrentFrame >= 4)
+            {
+                _jumped = true;
+                jump();
+            }
+            if (_jumped && entity.sprite.Looped && entity.isOnGround())
+            {
+                fsm.resetStackTo(new EnemyImpThinking(true));
+            }
+        }
+
+        public override void end()
+        {
+            entity.changeSpeed(ImpVelocity.Normal);
+            entity.forceMovement(Vector2.Zero);
+        }
+    }
+
+    public class EnemyImpHit : EnemyImpStates
+    {
+        public override void begin()
+        {
+            entity.sprite.play("hit");
+        }
+
+        public override void update()
+        {
+            if (entity.sprite.Looped)
+            {
+                fsm.resetStackTo(new EnemyImpThinking(true));
+            }
         }
     }
 }
