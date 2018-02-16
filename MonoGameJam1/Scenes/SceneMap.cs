@@ -228,8 +228,8 @@ namespace MonoGameJam1.Scenes
                     ? enemy.properties["patrolStartRight"]
                     : "false");
 
-                var entity = createEnemy(enemy.type, patrolStartRight);
-                var enemyComponent = entity.getComponent<EnemyComponent>();
+                EnemyComponent enemyComponent;
+                var entity = createEnemy(enemy.type, patrolStartRight, out enemyComponent);
                 if (enemy.properties.ContainsKey("path"))
                 {
                     var pathName = enemy.properties["path"];
@@ -240,7 +240,7 @@ namespace MonoGameJam1.Scenes
             }
         }
 
-        public Entity createEnemy(string enemyName, bool patrolStartRight)
+        public Entity createEnemy(string enemyName, bool patrolStartRight, out EnemyComponent enemyComponent)
         {
             var collisionLayer = _tiledMap.properties["collisionLayer"];
 
@@ -248,11 +248,11 @@ namespace MonoGameJam1.Scenes
             entity.addComponent(new TiledMapMover(_tiledMap.getLayer<TiledTileLayer>(collisionLayer)));
             entity.addComponent(new PlatformerObject(_tiledMap));
             entity.addComponent<BattleComponent>();
-            var collider = entity.addComponent(new BoxCollider(-16f, -16f, 32f, 32f));
+            var collider = entity.addComponent(new BoxCollider(-22f, -9f, 44f, 32f));
             Flags.setFlagExclusive(ref collider.physicsLayer, ENEMY_LAYER);
 
             var instance = createEnemyInstance(enemyName, patrolStartRight);
-            var enemyComponent = entity.addComponent(instance);
+            enemyComponent = entity.addComponent(instance);
             enemyComponent.sprite.renderLayer = ENEMIES_RENDER_LAYER;
             enemyComponent.playerCollider = findEntity("player").getComponent<BoxCollider>();
             

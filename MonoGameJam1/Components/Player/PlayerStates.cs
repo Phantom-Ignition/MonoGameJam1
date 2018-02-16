@@ -17,7 +17,7 @@ namespace MonoGameJam1.Components.Player
         {
             if (isMovementAvailable())
             {
-                if (entity.isOnGround() && isMovementAvailable() && _input.JumpButton.isPressed)
+                if (entity.isOnGround() && _input.JumpButton.isPressed)
                 {
                     fsm.resetStackTo(new JumpingState(true));
                 }

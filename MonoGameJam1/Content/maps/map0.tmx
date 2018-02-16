@@ -56,9 +56,9 @@
 </data>
  </layer>
  <objectgroup color="#00557f" name="battleAreas">
-  <object id="9" name="First" x="48" y="96" width="304" height="160">
+  <object id="9" name="First" x="32" y="96" width="304" height="160">
    <properties>
-    <property name="enemies" value="EnemyTargetDummy"/>
+    <property name="enemies" value="EnemyImp"/>
     <property name="waves" value="2, 3, 5"/>
    </properties>
   </object>
@@ -76,7 +76,5 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemies">
-  <object id="6" name="dasdsa" type="EnemyTargetDummy" x="223" y="221" width="32" height="32"/>
- </objectgroup>
+ <objectgroup name="enemies"/>
 </map>

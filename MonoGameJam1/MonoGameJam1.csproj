@@ -46,8 +46,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\Battle\BattleComponent.cs" />
+    <Compile Include="Components\Battle\Enemies\EnemyImpComponent.cs" />
+    <Compile Include="Components\Battle\Enemies\EnemyImpStates.cs" />
     <Compile Include="Components\Battle\Enemies\EnemyPlaceholderComponent.cs" />
     <Compile Include="Components\Battle\Enemies\EnemyTargetDummyComponent.cs" />
+    <Compile Include="Components\Battle\Enemies\ISpawnableEnemy.cs" />
     <Compile Include="Components\Battle\EnemyComponent.cs" />
     <Compile Include="Components\Battle\ProjectileComponent.cs" />
     <Compile Include="Components\Colliders\AreaOfSightCollider.cs" />

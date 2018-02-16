@@ -25,8 +25,8 @@ namespace MonoGameJam1.Components.Battle
         //--------------------------------------------------
         // Forced Movement
 
-        private bool _forceMovement;
-        private Vector2 _forceMovementVelocity;
+        protected bool _forceMovement;
+        protected Vector2 _forceMovementVelocity;
 
         //--------------------------------------------------
         // Knockback
@@ -231,7 +231,7 @@ namespace MonoGameJam1.Components.Battle
             _sawThePlayer = true;
             var side = distanceToPlayer();
             _currentPatrolSide = Math.Sign(side);
-            sprite.spriteEffects = side > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            sprite.spriteEffects = side > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
         }
 
         public void unseeThePlayer()

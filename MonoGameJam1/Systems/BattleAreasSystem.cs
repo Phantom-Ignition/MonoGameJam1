@@ -5,6 +5,7 @@ using MonoGameJam1.Scenes;
 using Nez;
 using System.Collections.Generic;
 using MonoGameJam1.Components.Battle;
+using MonoGameJam1.Components.Battle.Enemies;
 using Random = Nez.Random;
 
 namespace MonoGameJam1.Systems
@@ -85,15 +86,23 @@ namespace MonoGameJam1.Systems
                 var playerScene = _playerEntity.scene as SceneMap;
                 var enemyName = _currentBattle.Enemies.randomItem();
                 var areaCollider = _currentBattle.collider;
+                var areaBounds = areaCollider.bounds;
 
                 // create enemy entity
                 if (playerScene != null)
                 {
-                    var enemy = playerScene.createEnemy(enemyName, false);
-                    var enemyCollider = enemy.getComponent<BoxCollider>();
-                    var widthOffset = areaCollider.bounds.width * 0.1f;
-                    var positionX = areaCollider.bounds.x + widthOffset + Random.nextFloat(areaCollider.bounds.width - widthOffset * 2);
-                    enemy.setPosition(positionX, areaCollider.localOffset.Y + areaCollider.height - enemyCollider.height);
+                    EnemyComponent enemyComponent;
+                    var enemy = playerScene.createEnemy(enemyName, false, out enemyComponent);
+                    var widthOffset = areaBounds.width * 0.1f;
+                    var positionX = areaBounds.x + widthOffset + Random.nextFloat(areaBounds.width - widthOffset * 2);
+                    enemy.setPosition(positionX, areaCollider.localOffset.Y + areaCollider.height);
+
+                    var spawnable = enemyComponent as ISpawnableEnemy;
+                    if (spawnable != null)
+                    {
+                        spawnable.GoToSpawnState();
+                        spawnable.MovableArea = areaBounds;
+                    }
 
                     _enemies.Add(enemy);
                 }
