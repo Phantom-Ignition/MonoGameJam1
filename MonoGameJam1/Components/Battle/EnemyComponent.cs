@@ -64,11 +64,6 @@ namespace MonoGameJam1.Components.Battle
         private bool _sawThePlayer;
 
         //--------------------------------------------------
-        // Dangerous Stage
-
-        public int dangerousStage;
-
-        //--------------------------------------------------
         // Can take damage
 
         public virtual bool canTakeDamage => true;
@@ -81,28 +76,18 @@ namespace MonoGameJam1.Components.Battle
             _currentPatrolSide = patrolStartRight ? 1 : -1;
         }
 
-        public override void initialize()
-        {
-            dangerousStage = 1;
-        }
-
         public override void onAddedToEntity()
         {
             _platformerObject = entity.getComponent<PlatformerObject>();
 
             _battleComponent = entity.getComponent<BattleComponent>();
-            _battleComponent.setHp(1);
+            _battleComponent.setMaxHp(1, true);
             _battleComponent.battleEntity = this;
 
             var player = Core.getGlobalManager<SystemManager>().playerEntity;
             _playerComponent = player.getComponent<PlayerComponent>();
         }
-
-        public void increaseDangerousStage()
-        {
-            dangerousStage++;
-        }
-
+        
         public void forceMovement(Vector2 velocity)
         {
             if (velocity == Vector2.Zero)

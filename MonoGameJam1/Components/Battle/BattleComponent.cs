@@ -24,8 +24,8 @@ namespace MonoGameJam1.Components.Battle
         //--------------------------------------------------
         // HP
 
-        private float _hp;
-        public float HP => _hp;
+        public float HP { get; private set; }
+        public float MaxHP { get; private set; }
 
         //--------------------------------------------------
         // Death animation
@@ -73,7 +73,13 @@ namespace MonoGameJam1.Components.Battle
 
         public void setHp(int hp)
         {
-            _hp = hp;
+            HP = hp;
+        }
+
+        public void setMaxHp(int maxHp, bool fillHp)
+        {
+            MaxHP = maxHp;
+            if (fillHp) HP = maxHp;
         }
 
         public bool onHit(CollisionResult collisionResult)
@@ -91,8 +97,8 @@ namespace MonoGameJam1.Components.Battle
             _hitAnimation = 0.25f;
             ImmunityTime = ImmunityDuration;
 
-            _hp--;
-            if (_hp <= 0)
+            HP--;
+            if (HP <= 0)
             {
                 _animatedSprite.play("dying");
                 _dying = true;

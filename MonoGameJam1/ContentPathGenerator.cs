@@ -23,11 +23,14 @@ namespace Nez
 		public static class Maps
 		{
 			public const string map0 = @"maps\map0";
+			public const string map1 = @"maps\map1";
 			public const string tileset = @"maps\tileset";
 		}
 
 		public static class Misc
 		{
+			public const string hpbar = @"misc\hpbar";
+			public const string hphud = @"misc\hphud";
 			public const string weaponCircle = @"misc\weaponCircle";
 		}
 
