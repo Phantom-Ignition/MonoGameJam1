@@ -337,17 +337,6 @@ namespace MonoGameJam1.Components.Player
         public PistolAttack3()
         {
             Animation = PlayerComponent.Animations.Pistol3;
-            NextComboState = new PistolAttack4();
-            AttackPushMultiplier = -1.0f;
-            AttackPushLockDirection = true;
-        }
-    }
-
-    public class PistolAttack4 : BaseAttackComboState
-    {
-        public PistolAttack4()
-        {
-            Animation = PlayerComponent.Animations.Pistol4;
             AttackPushMultiplier = -1.0f;
             AttackPushLockDirection = true;
             IsFinal = true;
