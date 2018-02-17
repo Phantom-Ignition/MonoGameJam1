@@ -285,7 +285,8 @@ namespace MonoGameJam1.Scenes
             };
             addEntityProcessor(_camera);
 
-            addEntityProcessor(new BattleSystem());
+            var battleSystem = (BattleSystem)addEntityProcessor(new BattleSystem(playerComponent));
+            battleSystem.BulletEffectTexture = content.Load<Texture2D>(Content.Effects.bullet_effects);
             addEntityProcessor(new ProjectilesSystem(player));
             addEntityProcessor(new BattleAreasSystem(player));
 

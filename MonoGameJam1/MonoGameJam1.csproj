@@ -50,6 +50,7 @@
     <Compile Include="Components\Battle\Enemies\EnemyImpStates.cs" />
     <Compile Include="Components\Battle\Enemies\EnemyPlaceholderComponent.cs" />
     <Compile Include="Components\Battle\Enemies\EnemyTargetDummyComponent.cs" />
+    <Compile Include="Components\Battle\Enemies\EnemyTargetDummyStates.cs" />
     <Compile Include="Components\Battle\Enemies\ISpawnableEnemy.cs" />
     <Compile Include="Components\Battle\EnemyComponent.cs" />
     <Compile Include="Components\Battle\ProjectileComponent.cs" />

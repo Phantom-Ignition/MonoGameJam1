@@ -726,6 +726,18 @@ namespace MonoGameJam1.Components.Player
             return Math.Max(Math.Max(0, Math.Min(10, _damageScalingStreak)), 3) / 10;
         }
 
+        public bool IsInPistolMode()
+        {
+            return _fsm.CurrentState is PistolAttack1 ||
+                   _fsm.CurrentState is PistolAttack2 ||
+                   _fsm.CurrentState is PistolAttack3;
+        }
+
+        public Rectangle HitRectangle()
+        {
+            return sprite.getCurrentFrame().AttackColliders[0].bounds;
+        }
+
         public float CurrentStateVerticalKnockback()
         {
             var comboState = _fsm.CurrentState as BaseAttackComboState;

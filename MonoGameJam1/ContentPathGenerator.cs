@@ -7,6 +7,7 @@ namespace Nez
     {
 		public static class Characters
 		{
+			public const string dummy = @"characters\dummy";
 			public const string imp = @"characters\imp";
 			public const string placeholder = @"characters\placeholder";
 			public const string player = @"characters\player";
