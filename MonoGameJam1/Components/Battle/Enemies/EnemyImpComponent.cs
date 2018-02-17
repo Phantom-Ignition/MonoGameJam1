@@ -142,7 +142,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
             FSM = new FiniteStateMachine<EnemyImpStates, EnemyImpComponent>(this, new EnemyImpThinking());
 
             // View range
-            areaOfSight = entity.addComponent(new AreaOfSightCollider(-91, -12, 164, 32));
+            areaOfSight = entity.addComponent(new AreaOfSightCollider(-96, -12, 192, 32));
         }
 
         public override void onAddedToEntity()

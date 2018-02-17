@@ -45,16 +45,15 @@ namespace MonoGameJam1.Components.Battle.Enemies
         public override void begin()
         {
             entity.sprite.play("stand");
-            _thinkingTime = 0;//_lessTime ? Random.nextFloat(1) : 1 + Random.nextFloat(2);
-            Console.WriteLine($"Think: {_thinkingTime}");
+            _thinkingTime = _lessTime ? Random.nextFloat(1) : 1 + Random.nextFloat(2);
         }
 
         public override void update()
         {
             _thinkingTime -= Time.deltaTime;
-            if (_thinkingTime <= 0)
+            if (_thinkingTime <= 0 || entity.canSeeThePlayer())
             {
-                fsm.changeState(new EnemyImpAttackPlayer());//EnemyImpRandomMove());
+                fsm.changeState(new EnemyImpRandomMove());
             }
         }
     }
@@ -103,7 +102,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
             {
                 entity.turnToPlayer();
                 var distance = entity.distanceToPlayer();
-                if (distance < 55)
+                if (Math.Abs(distance) < 60)
                 {
                     var rand = Random.nextFloat(1);
                     if (rand < 0.7)
@@ -114,6 +113,10 @@ namespace MonoGameJam1.Components.Battle.Enemies
                     {
                         fsm.resetStackTo(new EnemyImpJumpAttack());
                     }
+                }
+                else
+                {
+                    fsm.resetStackTo(new EnemyImpJumpAttack());
                 }
             }
         }

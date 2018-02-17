@@ -152,6 +152,6 @@
   </object>
  </objectgroup>
  <objectgroup color="#ff5500" name="enemies">
-  <object id="13" type="EnemyImp" x="593" y="499" width="38" height="38"/>
+  <object id="13" type="EnemyImp" x="848" y="544" width="38" height="38"/>
  </objectgroup>
 </map>

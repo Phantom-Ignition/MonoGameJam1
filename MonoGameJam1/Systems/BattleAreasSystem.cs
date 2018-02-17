@@ -95,7 +95,7 @@ namespace MonoGameJam1.Systems
                     var enemy = playerScene.createEnemy(enemyName, false, out enemyComponent);
                     var widthOffset = areaBounds.width * 0.1f;
                     var positionX = areaBounds.x + widthOffset + Random.nextFloat(areaBounds.width - widthOffset * 2);
-                    enemy.setPosition(positionX, areaCollider.localOffset.Y + areaCollider.height);
+                    enemy.setPosition(positionX, areaBounds.y + areaCollider.height);
 
                     var spawnable = enemyComponent as ISpawnableEnemy;
                     if (spawnable != null)
