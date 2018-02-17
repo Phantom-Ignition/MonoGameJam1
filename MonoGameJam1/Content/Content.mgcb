@@ -131,3 +131,8 @@
 /processorParam:TextureFormat=Color
 /build:characters/imp.png
 
+#begin maps/map1.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/map1.tmx
+

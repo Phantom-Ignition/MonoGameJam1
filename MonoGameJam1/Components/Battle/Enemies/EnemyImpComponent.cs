@@ -87,6 +87,15 @@ namespace MonoGameJam1.Components.Battle.Enemies
                 new Rectangle(400, 200, 100, 100),
                 new Rectangle(500, 200, 100, 100),
             });
+            sprite.AddAttackCollider("punch", new List<List<Rectangle>>
+            {
+                new List<Rectangle>(),
+                new List<Rectangle>(),
+                new List<Rectangle>(),
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(10, 2, 24, 16) },
+            });
+            sprite.AddFramesToAttack("punch", 4);
 
             sprite.CreateAnimation("jumpAttack", 0.09f, false);
             sprite.AddFrames("jumpAttack", new List<Rectangle>

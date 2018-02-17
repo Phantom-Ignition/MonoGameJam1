@@ -54,7 +54,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
             _thinkingTime -= Time.deltaTime;
             if (_thinkingTime <= 0)
             {
-                fsm.changeState(new EnemyImpRandomMove());
+                fsm.changeState(new EnemyImpAttackPlayer());//EnemyImpRandomMove());
             }
         }
     }

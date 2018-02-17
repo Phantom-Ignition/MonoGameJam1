@@ -48,7 +48,7 @@ namespace MonoGameJam1
             base.Update(new GameTime());
             base.Draw(new GameTime());
 
-            getGlobalManager<SystemManager>().setMapId(0);
+            getGlobalManager<SystemManager>().setMapId(1);
 
             // Set first scene
             scene = new SceneMap();
