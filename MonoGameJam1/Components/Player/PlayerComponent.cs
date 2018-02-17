@@ -10,6 +10,7 @@ using Nez.Sprites;
 using Nez.Tiled;
 using System;
 using System.Collections.Generic;
+using MonoGameJam1.Components.Map;
 
 namespace MonoGameJam1.Components.Player
 {
@@ -126,6 +127,11 @@ namespace MonoGameJam1.Components.Player
         // Footstep sound cooldown
 
         private float _footstepCooldown;
+
+        //--------------------------------------------------
+        // Effects
+        
+        private Texture2D _jumpEffectTexture;
 
         //--------------------------------------------------
         // Current Weapon
@@ -482,7 +488,10 @@ namespace MonoGameJam1.Components.Player
 
             // init fsm
             _fsm = new FiniteStateMachine<PlayerState, PlayerComponent>(this, new StandState());
-            
+
+            // init effects
+            _jumpEffectTexture = entity.scene.content.Load<Texture2D>(Content.Effects.jump_effect);
+
             // misc
             _damageScalingStreak = 10;
             velocityMultiplier = 1;
@@ -634,6 +643,40 @@ namespace MonoGameJam1.Components.Player
                 appliedKb = true;
             }
             return appliedKb;
+        }
+
+        public void createJumpEffect(string type)
+        {
+            var effect = entity.scene.createEntity();
+            var effectSprite = effect.addComponent(new AnimatedSprite(_jumpEffectTexture, "default"));
+            effectSprite.CreateAnimation("default", 0.08f, false);
+            setJumpEffectAnimations(effectSprite, type);
+            effectSprite.spriteEffects = sprite.spriteEffects;
+            var collider = entity.getComponent<BoxCollider>();
+            effect.position = new Vector2(collider.bounds.center.X, collider.bounds.bottom - effectSprite.height / 2);
+            effect.addComponent<SpriteEffectComponent>();
+        }
+
+        private void setJumpEffectAnimations(AnimatedSprite sprite, string type)
+        {
+            if (type == "jump")
+            {
+                sprite.AddFrames("default", new List<Rectangle>()
+                {
+                    new Rectangle(0, 0, 20, 20),
+                    new Rectangle(20, 0, 20, 20),
+                    new Rectangle(34, 0, 20, 20),
+                });
+            }
+            else if (type == "land")
+            {
+                sprite.AddFrames("default", new List<Rectangle>()
+                {
+                    new Rectangle(0, 0, 20, 20),
+                    new Rectangle(17, 0, 20, 20),
+                    new Rectangle(34, 0, 20, 20),
+                });
+            }
         }
 
         public void SetAnimation(Animations animation)

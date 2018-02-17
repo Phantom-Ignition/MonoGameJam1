@@ -104,6 +104,8 @@ namespace MonoGameJam1.Components.Player
             {
                 _needJump = false;
                 entity.Jump();
+                if (entity.isOnGround())
+                    entity.createJumpEffect("jump");
             }
         }
 
@@ -114,6 +116,7 @@ namespace MonoGameJam1.Components.Player
             if (entity.isOnGround())
             {
                 fsm.resetStackTo(new StandState());
+                entity.createJumpEffect("land");
             }
         }
     }

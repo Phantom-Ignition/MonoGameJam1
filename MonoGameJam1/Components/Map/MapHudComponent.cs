@@ -45,7 +45,7 @@ namespace MonoGameJam1.Components.Map
         private float hpFillWidth()
         {
             var battler = _playerComponent.getComponent<BattleComponent>();
-            return battler.HP / battler.MaxHP;
+            return battler?.HP / battler?.MaxHP ?? 0;
         }
     }
 }

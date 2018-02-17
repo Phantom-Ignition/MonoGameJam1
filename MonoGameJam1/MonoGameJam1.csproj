@@ -59,6 +59,7 @@
     <Compile Include="Components\InteractionCollider.cs" />
     <Compile Include="Components\Map\BattleAreaComponent.cs" />
     <Compile Include="Components\Map\MapHudComponent.cs" />
+    <Compile Include="Components\Map\SpriteEffectComponent.cs" />
     <Compile Include="Components\Map\TransferComponent.cs" />
     <Compile Include="Components\PlatformerObject.cs" />
     <Compile Include="Components\Player\PlayerComponent.cs" />

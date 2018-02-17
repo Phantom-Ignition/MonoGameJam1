@@ -12,6 +12,12 @@ namespace Nez
 			public const string player = @"characters\player";
 		}
 
+		public static class Effects
+		{
+			public const string bullet_effects = @"effects\bullet_effects";
+			public const string jump_effect = @"effects\jump_effect";
+		}
+
 		public static class Fonts
 		{
 			public const string smallFont = @"fonts\smallFont";
