@@ -40,7 +40,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
             base.onAddedToEntity();
 
             // Change HP
-            entity.getComponent<BattleComponent>().setHp(2);
+            entity.getComponent<BattleComponent>().setHp(5);
         }
 
     }

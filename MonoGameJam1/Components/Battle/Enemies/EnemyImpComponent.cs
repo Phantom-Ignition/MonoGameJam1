@@ -151,6 +151,11 @@ namespace MonoGameJam1.Components.Battle.Enemies
             FSM.changeState(new EnemyImpHit());
         }
 
+        public override void onDeath()
+        {
+            FSM.changeState(new EnemyImpDying());
+        }
+
         public void GoToSpawnState()
         {
             FSM.resetStackTo(new EnemyImpSpawning());
@@ -171,7 +176,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
             switch (velocity)
             {
                 case ImpVelocity.Normal:
-                    platformerObject.maxMoveSpeed = 3000;
+                    platformerObject.maxMoveSpeed = 150;
                     platformerObject.moveSpeed = 3000;
                     break;
                 case ImpVelocity.Fast:

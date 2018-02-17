@@ -193,10 +193,18 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
         public override void update()
         {
-            if (entity.sprite.Looped)
+            if (entity.isOnGround() && entity.sprite.Looped)
             {
                 fsm.resetStackTo(new EnemyImpThinking(true));
             }
+        }
+    }
+
+    public class EnemyImpDying : EnemyImpStates
+    {
+        public override void begin()
+        {
+            entity.sprite.play("dying");
         }
     }
 }
