@@ -288,6 +288,7 @@ namespace MonoGameJam1.Components.Player
                 new List<Rectangle> { new Rectangle(-2, -10, 24, 29) },
             });
             sprite.AddFramesToAttack(am[Animations.Fist3], 2);
+            LinkableFrames[Animations.Fist3] = new[] { 3, 4 };
 
             #endregion
 
@@ -350,6 +351,7 @@ namespace MonoGameJam1.Components.Player
                 new List<Rectangle> { new Rectangle(6, -46, 34, 68) },
             });
             sprite.AddFramesToAttack(am[Animations.Sword3], 3);
+            LinkableFrames[Animations.Sword3] = new[] { 4, 5 };
 
             #endregion
 

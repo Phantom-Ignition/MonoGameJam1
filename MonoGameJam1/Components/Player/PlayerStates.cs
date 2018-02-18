@@ -259,6 +259,11 @@ namespace MonoGameJam1.Components.Player
         public override void update()
         {
             base.update();
+            if (entity.CanLinkCombo(Animation) && _input.UpButton.isDown)
+            {
+                fsm.resetStackTo(new JumpingState(true));
+                return;
+            }
             if (!IsFinal && entity.CanLinkCombo(Animation) && _input.AttackButton.isPressed)
             {
                 _changeToAttack = true;

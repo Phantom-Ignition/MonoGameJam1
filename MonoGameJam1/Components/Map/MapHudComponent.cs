@@ -131,7 +131,6 @@ namespace MonoGameJam1.Components.Map
                 var drect = new Rectangle((int)pos.X, (int)pos.Y, _goTexture.Width, _goTexture.Height);
                 graphics.batcher.draw(_goTexture, drect.Location.ToVector2(), _goTexture.Bounds, Color.White * _goAlpha, 0.0f, Vector2.Zero, _goPulse, SpriteEffects.None, 1.0f);
             }
-                
         }
 
         private float hpFillWidth()
@@ -145,12 +144,10 @@ namespace MonoGameJam1.Components.Map
             this.tween("_goAlpha", 1.0f, 0.3f)
                 .setEaseType(EaseType.CubicIn)
                 .start();
-
         }
 
         private void startGoPulse()
         {
-
             _goPulseTween?.stop(true);
             _goPulseTween = this.tween("_goPulse", 1.1f, 0.5f)
                 .setEaseType(EaseType.Punch)
