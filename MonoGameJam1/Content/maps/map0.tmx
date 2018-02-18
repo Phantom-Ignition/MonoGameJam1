@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="61" height="40" tilewidth="16" tileheight="16" nextobjectid="18">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="61" height="40" tilewidth="16" tileheight="16" nextobjectid="19">
  <properties>
   <property name="collisionLayer" value="collision"/>
   <property name="defaultLayers" value="collision, details"/>
@@ -149,6 +149,7 @@
  <objectgroup name="npcs">
   <object id="16" name="Guide Two" type="GuideTwo" x="352" y="336" width="9" height="192"/>
   <object id="17" name="First guide" type="GuideOne" x="112" y="336" width="9" height="192"/>
+  <object id="18" name="Guide Two Close" type="GuideTwoClose" x="848" y="368" width="9" height="192"/>
  </objectgroup>
  <objectgroup name="hostages"/>
 </map>

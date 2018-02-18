@@ -131,7 +131,7 @@
 </data>
  </layer>
  <objectgroup color="#00557f" name="battleAreas">
-  <object id="9" name="First" x="208" y="432" width="352" height="160">
+  <object id="9" name="First" x="224" y="432" width="320" height="160">
    <properties>
     <property name="enemies" value="EnemyImp"/>
     <property name="waves" value="1"/>
@@ -151,7 +151,5 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#ff5500" name="enemies">
-  <object id="13" type="EnemyImp" x="176" y="512" width="38" height="38"/>
- </objectgroup>
+ <objectgroup color="#ff5500" name="enemies"/>
 </map>

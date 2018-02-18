@@ -209,6 +209,11 @@ namespace MonoGameJam1.Components.Battle
             return playerCollider.entity.position.X - entity.position.X;
         }
 
+        public bool sawThePlayer()
+        {
+            return _sawThePlayer;
+        }
+
         public int currentPatrolSide()
         {
             return _sawThePlayer ? Math.Sign(distanceToPlayer()) : _currentPatrolSide;

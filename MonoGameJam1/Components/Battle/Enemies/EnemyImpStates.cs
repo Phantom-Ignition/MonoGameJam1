@@ -84,7 +84,6 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
         public override void update()
         {
-            _moveTime -= Time.deltaTime;
             if (!entity.MovableArea.contains(entity.entity.position))
             {
                 var diffToCenter = diffToMovableAreaCenter();
@@ -93,6 +92,10 @@ namespace MonoGameJam1.Components.Battle.Enemies
                 if (_dir != dirToPoint)
                     _dir *= -1;
                 entity.forceMovement(Vector2.UnitX * _dir);
+            }
+            else
+            {
+                _moveTime -= Time.deltaTime;
             }
             if (_moveTime <= 0)
             {

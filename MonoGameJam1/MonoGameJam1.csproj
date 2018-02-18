@@ -88,7 +88,7 @@
     <Compile Include="Managers\SystemManager.cs" />
     <Compile Include="NPCs\Guides\GuideOne.cs" />
     <Compile Include="NPCs\Guides\GuideTwo.cs" />
-    <Compile Include="NPCs\Guides\TestScript.cs" />
+    <Compile Include="NPCs\Guides\GuideTwoClose.cs" />
     <Compile Include="NPCs\NpcBase.cs" />
     <Compile Include="NPCs\NpcCommands.cs" />
     <Compile Include="Program.cs" />
