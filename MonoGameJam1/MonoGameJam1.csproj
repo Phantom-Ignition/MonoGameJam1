@@ -91,7 +91,6 @@
     <Compile Include="NPCs\Guides\TestScript.cs" />
     <Compile Include="NPCs\NpcBase.cs" />
     <Compile Include="NPCs\NpcCommands.cs" />
-    <Compile Include="NPCs\NpcTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\SceneMap.cs" />

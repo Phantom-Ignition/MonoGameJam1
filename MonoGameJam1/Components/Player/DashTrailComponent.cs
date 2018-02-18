@@ -7,9 +7,10 @@ namespace MonoGameJam1.Components.Player
     {
         public DashTrailComponent()
         {
-            minDistanceBetweenInstances = 7.0f;
+            minDistanceBetweenInstances = 9.0f;
             initialColor = Color.Violet * 0.8f;
-            fadeDelay = 0.07f;
+            fadeDelay = 0f;
+            fadeDuration = 0.35f;
         }
 
         public void SetSpawnEnabled(bool isEnabled)
