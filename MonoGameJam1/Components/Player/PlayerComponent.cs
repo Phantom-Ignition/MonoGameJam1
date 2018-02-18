@@ -149,6 +149,11 @@ namespace MonoGameJam1.Components.Player
         private float _damageScalingStreak;
 
         //--------------------------------------------------
+        // Skip attack state
+
+        public bool SkipAttackState { get; set; }
+
+        //--------------------------------------------------
         // Linkable frames
 
         public Dictionary<Animations, int[]> LinkableFrames { get; private set; }
@@ -207,6 +212,7 @@ namespace MonoGameJam1.Components.Player
             sprite.CreateAnimation(am[Animations.Walking], 0.09f);
             sprite.AddFrames(am[Animations.Walking], new List<Rectangle>()
             {
+                new Rectangle(700, 800, 100, 100),
                 new Rectangle(0, 900, 100, 100),
                 new Rectangle(100, 900, 100, 100),
                 new Rectangle(200, 900, 100, 100),
@@ -214,13 +220,12 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(400, 900, 100, 100),
                 new Rectangle(500, 900, 100, 100),
                 new Rectangle(600, 900, 100, 100),
-                new Rectangle(700, 900, 100, 100),
             });
 
             sprite.CreateAnimation(am[Animations.Jumping], 0.1f);
             sprite.AddFrames(am[Animations.Jumping], new List<Rectangle>()
             {
-                new Rectangle(400, 700, 100, 100),
+                new Rectangle(300, 700, 100, 100),
             });
 
             // == FIRST ATTACKS ==
@@ -334,6 +339,7 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(0, 600, 100, 100),
                 new Rectangle(100, 600, 100, 100),
                 new Rectangle(200, 600, 100, 100),
+                new Rectangle(300, 600, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Sword3], new List<List<Rectangle>>
             {
@@ -350,31 +356,41 @@ namespace MonoGameJam1.Components.Player
 
             #region Quarterstaff Animations
 
-            sprite.CreateAnimation(am[Animations.Quarterstaff1], 0.1f, false);
+            sprite.CreateAnimation(am[Animations.Quarterstaff1], 0.09f, false);
             sprite.AddFrames(am[Animations.Quarterstaff1], new List<Rectangle>()
             {
-                new Rectangle(0, 96, 32, 32),
-                new Rectangle(0, 96, 32, 32),
+                new Rectangle(0, 1000, 100, 100),
+                new Rectangle(200, 1000, 100, 100),
+                new Rectangle(300, 1000, 100, 100),
+                new Rectangle(400, 1000, 100, 100),
+                new Rectangle(500, 1000, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Quarterstaff1], new List<List<Rectangle>>
             {
                 new List<Rectangle>(),
-                new List<Rectangle> { new Rectangle(0, -10, 60, 18) },
+                new List<Rectangle> { new Rectangle(1, -23, 46, 48) },
+                new List<Rectangle> { new Rectangle(1, -23, 46, 48) },
             });
-            sprite.AddFramesToAttack(am[Animations.Quarterstaff1], 1);
+            sprite.AddFramesToAttack(am[Animations.Quarterstaff1], 1, 2);
+            LinkableFrames[Animations.Quarterstaff1] = new[] { 2, 3 };
 
             sprite.CreateAnimation(am[Animations.Quarterstaff2], 0.1f, false);
             sprite.AddFrames(am[Animations.Quarterstaff2], new List<Rectangle>()
             {
-                new Rectangle(32, 96, 32, 32),
-                new Rectangle(32, 96, 32, 32),
+                new Rectangle(0, 1000, 100, 100),
+                new Rectangle(200, 1000, 100, 100),
+                new Rectangle(300, 1000, 100, 100),
+                new Rectangle(400, 1000, 100, 100),
+                new Rectangle(500, 1000, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Quarterstaff2], new List<List<Rectangle>>
             {
                 new List<Rectangle>(),
-                new List<Rectangle> { new Rectangle(0, -10, 60, 18) },
+                new List<Rectangle> { new Rectangle(1, -23, 46, 48) },
+                new List<Rectangle> { new Rectangle(1, -23, 46, 48) },
             });
-            sprite.AddFramesToAttack(am[Animations.Quarterstaff2], 1);
+            sprite.AddFramesToAttack(am[Animations.Quarterstaff2], 1, 2);
+            LinkableFrames[Animations.Quarterstaff2] = new[] { 2, 3 };
 
             sprite.CreateAnimation(am[Animations.Quarterstaff3], 0.1f, false);
             sprite.AddFrames(am[Animations.Quarterstaff3], new List<Rectangle>()
@@ -416,7 +432,6 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(700, 600, 100, 100),
                 new Rectangle(0, 700, 100, 100),
                 new Rectangle(100, 700, 100, 100),
-                new Rectangle(200, 700, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Pistol1], new List<List<Rectangle>>
             {
@@ -434,7 +449,6 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(700, 600, 100, 100),
                 new Rectangle(0, 700, 100, 100),
                 new Rectangle(100, 700, 100, 100),
-                new Rectangle(200, 700, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Pistol2], new List<List<Rectangle>>
             {
@@ -452,7 +466,6 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(700, 600, 100, 100),
                 new Rectangle(0, 700, 100, 100),
                 new Rectangle(100, 700, 100, 100),
-                new Rectangle(200, 700, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Pistol3], new List<List<Rectangle>>
             {
@@ -469,13 +482,14 @@ namespace MonoGameJam1.Components.Player
             sprite.CreateAnimation(am[Animations.Hit], 0.09f, false);
             sprite.AddFrames(am[Animations.Hit], new List<Rectangle>()
             {
+                new Rectangle(400, 700, 100, 100),
                 new Rectangle(500, 700, 100, 100),
-                new Rectangle(600, 700, 100, 100),
             });
 
             sprite.CreateAnimation(am[Animations.Dying], 0.09f, false);
             sprite.AddFrames(am[Animations.Dying], new List<Rectangle>()
             {
+                new Rectangle(700, 700, 100, 100),
                 new Rectangle(0, 800, 100, 100),
                 new Rectangle(100, 800, 100, 100),
                 new Rectangle(200, 800, 100, 100),
@@ -483,7 +497,6 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(400, 800, 100, 100),
                 new Rectangle(500, 800, 100, 100),
                 new Rectangle(600, 800, 100, 100),
-                new Rectangle(700, 800, 100, 100),
             });
 
             // init fsm
@@ -643,6 +656,13 @@ namespace MonoGameJam1.Components.Player
                 appliedKb = true;
             }
             return appliedKb;
+        }
+
+        public void rescueHostage()
+        {
+            _battleComponent.setHp((int)_battleComponent.MaxHP);
+            SkipAttackState = true;
+            _fsm.resetStackTo(new RescueHostageState());
         }
 
         public void createJumpEffect(string type)

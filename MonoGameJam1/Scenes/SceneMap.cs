@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 using MonoGameJam1.Components;
 using MonoGameJam1.Components.Battle;
 using MonoGameJam1.Components.Map;
@@ -16,12 +11,14 @@ using MonoGameJam1.Scenes.SceneMapExtensions;
 using MonoGameJam1.Structs;
 using MonoGameJam1.Systems;
 using Nez;
-using Nez.Sprites;
 using Nez.Tiled;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MonoGameJam1.Scenes
 {
-    class SceneMap : Scene
+    public class SceneMap : Scene
     {
         //--------------------------------------------------
         // Render Layers Constants
@@ -96,6 +93,7 @@ namespace MonoGameJam1.Scenes
             setupBattleAreas();
             setupPlayer();
             setupPaths();
+            setupHostages();
             setupEnemies();
             setupNpcs();
             setupHud();
@@ -184,7 +182,7 @@ namespace MonoGameJam1.Scenes
             var collider = player.addComponent(new BoxCollider(-8f, -19f, 16f, 42f));
             Flags.setFlagExclusive(ref collider.physicsLayer, PLAYER_LAYER);
 
-            player.addComponent(new InteractionCollider(-20f, -6, 40, 22));
+            player.addComponent(new InteractionCollider(-35f, -6, 70, 22));
             player.addComponent(new BattleComponent());
             player.addComponent(new PlatformerObject(_tiledMap));
             player.addComponent<TextWindowComponent>();
@@ -215,6 +213,21 @@ namespace MonoGameJam1.Scenes
                     Start = objects[i].position,
                     End = objects[i].position + new Vector2(objects[i].width, objects[i].height)
                 };
+            }
+        }
+
+        private void setupHostages()
+        {
+            var hostagesGroup = _tiledMap.getObjectGroup("hostages");
+            if (hostagesGroup == null) return;
+
+            var hostages = hostagesGroup.objects;
+            foreach (var hostage in hostages)
+            {
+                var entity = createEntity();
+                entity.addComponent<HostageComponent>()
+                    .sprite.renderLayer = MISC_RENDER_LAYER;
+                entity.position = hostage.position;
             }
         }
 
@@ -292,6 +305,7 @@ namespace MonoGameJam1.Scenes
 
             addEntityProcessor(new TransferSystem(new Matcher().all(typeof(TransferComponent)), player));
             addEntityProcessor(new NpcInteractionSystem(playerComponent));
+            addEntityProcessor(new HostagesSystem(playerComponent));
         }
 
         private void setupNpcs()
@@ -306,7 +320,7 @@ namespace MonoGameJam1.Scenes
                 names[npc.name] = names.ContainsKey(npc.name) ? ++names[npc.name] : 0;
 
                 var npcEntity = createEntity($"{npc.name}:{names[npc.name]}");
-                var npcComponent = (NpcBase)Activator.CreateInstance(Type.GetType("TimePrototype.NPCs." + npc.type), npc.name);
+                var npcComponent = (NpcBase)Activator.CreateInstance(Type.GetType("MonoGameJam1.NPCs." + npc.type), npc.name);
                 npcComponent.setRenderLayer(MISC_RENDER_LAYER);
                 npcComponent.ObjectRect = new Rectangle(0, 0, npc.width, npc.height);
                 npcEntity.addComponent(npcComponent);
@@ -347,7 +361,7 @@ namespace MonoGameJam1.Scenes
 
             foreach (var extension in extensions)
             {
-                var extensionInstance = (ISceneMapExtensionable)Activator.CreateInstance(Type.GetType("TimePrototype.Scenes.SceneMapExtensions." + extension));
+                var extensionInstance = (ISceneMapExtensionable)Activator.CreateInstance(Type.GetType("MonoGameJam1.Scenes.SceneMapExtensions." + extension));
                 extensionInstance.Scene = this;
                 extensionInstance.initialize();
                 _mapExtensions.Add(extensionInstance);

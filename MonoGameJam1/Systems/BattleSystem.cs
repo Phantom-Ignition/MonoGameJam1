@@ -97,7 +97,7 @@ namespace MonoGameJam1.Systems
             var effect = _playerComponent.entity.scene.createEntity();
             var effectSprite = effect.addComponent(new AnimatedSprite(BulletEffectTexture, "default"));
             effectSprite.CreateAnimation("default", 0.07f, false);
-            effectSprite.AddFrames("default", new List<Rectangle>()
+            effectSprite.AddFrames("default", new List<Rectangle>
             {
                 new Rectangle(randIndex == 0 ? 0 : 60, 0, 20, 20),
                 new Rectangle(randIndex == 0 ? 20 : 80, 0, 20, 20),

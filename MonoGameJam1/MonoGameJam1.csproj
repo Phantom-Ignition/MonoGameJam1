@@ -59,6 +59,7 @@
     <Compile Include="Components\Colliders\HurtCollider.cs" />
     <Compile Include="Components\InteractionCollider.cs" />
     <Compile Include="Components\Map\BattleAreaComponent.cs" />
+    <Compile Include="Components\Map\HostageComponent.cs" />
     <Compile Include="Components\Map\MapHudComponent.cs" />
     <Compile Include="Components\Map\SpriteEffectComponent.cs" />
     <Compile Include="Components\Map\TransferComponent.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Systems\BattleAreasSystem.cs" />
     <Compile Include="Systems\BattleSystem.cs" />
     <Compile Include="Systems\CameraSystem.cs" />
+    <Compile Include="Systems\HostagesSystem.cs" />
     <Compile Include="Systems\NpcInteractionSystem.cs" />
     <Compile Include="Systems\ProjectilesSystem.cs" />
     <Compile Include="Systems\TransferSystem.cs" />

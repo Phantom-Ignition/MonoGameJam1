@@ -11,13 +11,13 @@ namespace MonoGameJam1.Components.Map
         Right
     }
 
-    class TransferComponent : Component
+    public class TransferComponent : Component
     {
         public TransferDirection direction;
         public int destinyId;
         public Vector2 destinyPosition;
 
-        private TiledObject _tiledObject;
+        private readonly TiledObject _tiledObject;
 
         public TransferComponent(TiledObject tiledObject)
         {

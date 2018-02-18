@@ -21,7 +21,7 @@ namespace MonoGameJam1.Components.Player
                 {
                     fsm.resetStackTo(new JumpingState(true));
                 }
-                if (_input.AttackButton.isPressed)
+                if (_input.AttackButton.isPressed && !entity.SkipAttackState)
                 {
                     switch (entity.CurrentWeapon)
                     {
@@ -38,6 +38,10 @@ namespace MonoGameJam1.Components.Player
                             fsm.pushState(new PistolAttack1());
                             break;
                     }
+                }
+                else if (entity.SkipAttackState)
+                {
+                    entity.SkipAttackState = false;
                 }
             }
             if (_input.WeaponSelectionButton.isPressed)
@@ -117,6 +121,22 @@ namespace MonoGameJam1.Components.Player
             {
                 fsm.resetStackTo(new StandState());
                 entity.createJumpEffect("land");
+            }
+        }
+    }
+
+    public class RescueHostageState : PlayerState
+    {
+        public override void begin()
+        {
+            entity.SetAnimation(PlayerComponent.Animations.Sword1);
+        }
+
+        public override void update()
+        {
+            if (entity.sprite.Looped)
+            {
+                fsm.resetStackTo(new StandState());
             }
         }
     }

@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Managers;
 using Nez;
-using Nez.Textures;
 
 namespace MonoGameJam1.Components.Player
 {
-    class WeaponSelectionComponent : RenderableComponent, IUpdatable
+    public class WeaponSelectionComponent : RenderableComponent, IUpdatable
     {
         public override float width => _texture?.Width ?? 1;
         public override float height => _texture?.Height ?? 1;
 
         private Texture2D _texture;
         private bool _isOpen;
+        private float _closeTick;
+        private float _openInterval;
 
         private PlayerComponent _playerComponent;
         private BoxCollider _collider;
@@ -34,8 +30,12 @@ namespace MonoGameJam1.Components.Player
 
         public void Open()
         {
+            if (_openInterval > 0) return;
+
+            _openInterval = 0.1f;
             _isOpen = true;
             _inputManager.IsBusy = true;
+            _closeTick = 0;
             Time.timeScale = 0f;
         }
 
@@ -64,8 +64,15 @@ namespace MonoGameJam1.Components.Player
 
         public void update()
         {
+            if (_openInterval > 0)
+                _openInterval -= Time.deltaTime;
+
             if (_isOpen)
             {
+                _closeTick += Time.unscaledDeltaTime;
+                if (_closeTick >= 0.1 && 
+                    (_inputManager.WeaponSelectionButton.isPressed||_inputManager.AttackButton.isPressed))
+                    Close();
                 if (_inputManager.LeftButton.isPressed)
                     PickWeapon(Weapon.Fist);
                 if (_inputManager.UpButton.isPressed)
