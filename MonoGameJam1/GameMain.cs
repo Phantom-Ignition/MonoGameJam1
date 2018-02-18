@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGameJam1.Managers;
 using MonoGameJam1.Scenes;
@@ -53,6 +54,15 @@ namespace MonoGameJam1
 
             // Set first scene
             scene = new SceneMap();
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if (Input.isKeyPressed(Keys.F1))
+            {
+                debugRenderEnabled = !debugRenderEnabled;
+            }
         }
     }
 }

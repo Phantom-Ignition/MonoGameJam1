@@ -139,9 +139,10 @@ namespace MonoGameJam1.Components.Player
         public Weapon CurrentWeapon;
 
         //--------------------------------------------------
-        // Weapon selection
+        // Components
 
         private WeaponSelectionComponent _weaponSelectionComponent;
+        private DashTrailComponent _dashTrailComponent;
 
         //--------------------------------------------------
         // Damage scaling
@@ -522,6 +523,9 @@ namespace MonoGameJam1.Components.Player
             _battleComponent.setMaxHp(10, true);
 
             _weaponSelectionComponent = entity.addComponent<WeaponSelectionComponent>();
+
+            _dashTrailComponent = entity.addComponent<DashTrailComponent>();
+            _dashTrailComponent.SetSpawnEnabled(false);
         }
 
         public void destroyEntity()
@@ -713,6 +717,11 @@ namespace MonoGameJam1.Components.Player
         public void SetGravity(float gravity)
         {
             platformerObject.gravity = gravity;
+        }
+
+        public void SetDashTrail(bool enabled)
+        {
+            _dashTrailComponent.SetSpawnEnabled(enabled);
         }
 
         public void OpenWeaponSelection()

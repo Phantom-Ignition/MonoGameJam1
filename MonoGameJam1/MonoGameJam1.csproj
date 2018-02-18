@@ -64,6 +64,7 @@
     <Compile Include="Components\Map\SpriteEffectComponent.cs" />
     <Compile Include="Components\Map\TransferComponent.cs" />
     <Compile Include="Components\PlatformerObject.cs" />
+    <Compile Include="Components\Player\DashTrailComponent.cs" />
     <Compile Include="Components\Player\PlayerComponent.cs" />
     <Compile Include="Components\Player\PlayerStates.cs" />
     <Compile Include="Components\Player\WeaponSelectionComponent.cs" />

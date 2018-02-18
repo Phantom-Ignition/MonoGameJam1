@@ -154,6 +154,7 @@ namespace MonoGameJam1.Components.Player
         public override void begin()
         {
             entity.SetAnimation(PlayerComponent.Animations.Jumping);
+            entity.SetDashTrail(true);
 
             _input.IsLocked = true;
             entity.forceMovement(entity.GetIntDirection() * Vector2.UnitX);
@@ -167,6 +168,7 @@ namespace MonoGameJam1.Components.Player
         
         public override void end()
         {
+            entity.SetDashTrail(false);
             entity.velocityMultiplier = 1.0f;
             _timer?.stop();
             entity.forceMovement(Vector2.Zero);
