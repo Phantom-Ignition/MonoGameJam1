@@ -35,7 +35,9 @@ namespace MonoGameJam1.Components.Player
             Stand,
             Walking,
             Jumping,
-            
+            Hit,
+            Dying,
+
             Fist1,
             Fist2,
             Fist3,
@@ -47,14 +49,10 @@ namespace MonoGameJam1.Components.Player
             Quarterstaff1,
             Quarterstaff2,
             Quarterstaff3,
-            Quarterstaff4,
 
             Pistol1,
             Pistol2,
             Pistol3,
-            
-            Hit,
-            Dying
         }
 
         private Dictionary<Animations, string> _animationMap;
@@ -182,7 +180,6 @@ namespace MonoGameJam1.Components.Player
                 {Animations.Quarterstaff1, "quarterstaff1"},
                 {Animations.Quarterstaff2, "quarterstaff2"},
                 {Animations.Quarterstaff3, "quarterstaff3"},
-                {Animations.Quarterstaff4, "quarterstaff4"},
 
                 {Animations.Pistol1, "pistol1"},
                 {Animations.Pistol2, "pistol2"},
@@ -193,10 +190,13 @@ namespace MonoGameJam1.Components.Player
             };
 
             LinkableFrames = new Dictionary<Animations, int[]>();
-
             var am = _animationMap;
-
             sprite = entity.addComponent(new AnimatedSprite(texture, am[Animations.Stand]));
+
+            // == GENERAL ANIMATIONS ==
+
+            #region General Animations
+
             sprite.CreateAnimation(am[Animations.Stand], 0.1f);
             sprite.AddFrames(am[Animations.Stand], new List<Rectangle>()
             {
@@ -229,10 +229,32 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(300, 700, 100, 100),
             });
 
+            sprite.CreateAnimation(am[Animations.Hit], 0.09f, false);
+            sprite.AddFrames(am[Animations.Hit], new List<Rectangle>()
+            {
+                new Rectangle(400, 700, 100, 100),
+                new Rectangle(500, 700, 100, 100),
+            });
+
+            sprite.CreateAnimation(am[Animations.Dying], 0.09f, false);
+            sprite.AddFrames(am[Animations.Dying], new List<Rectangle>()
+            {
+                new Rectangle(700, 700, 100, 100),
+                new Rectangle(0, 800, 100, 100),
+                new Rectangle(100, 800, 100, 100),
+                new Rectangle(200, 800, 100, 100),
+                new Rectangle(300, 800, 100, 100),
+                new Rectangle(400, 800, 100, 100),
+                new Rectangle(500, 800, 100, 100),
+                new Rectangle(600, 800, 100, 100),
+            });
+
+            #endregion
+
             // == FIRST ATTACKS ==
 
             #region Fist Animations
-            
+
             sprite.CreateAnimation(am[Animations.Fist1], 0.09f, false);
             sprite.AddFrames(am[Animations.Fist1], new List<Rectangle>()
             {
@@ -398,31 +420,26 @@ namespace MonoGameJam1.Components.Player
             sprite.CreateAnimation(am[Animations.Quarterstaff3], 0.1f, false);
             sprite.AddFrames(am[Animations.Quarterstaff3], new List<Rectangle>()
             {
-                new Rectangle(64, 96, 32, 32),
-                new Rectangle(64, 96, 32, 32),
+                new Rectangle(700, 1000, 100, 100),
+                new Rectangle(0, 1100, 100, 100),
+                new Rectangle(100, 1100, 100, 100),
+                new Rectangle(200, 1100, 100, 100),
+                new Rectangle(300, 1100, 100, 100),
+                new Rectangle(400, 1100, 100, 100),
+                new Rectangle(500, 1100, 100, 100),
             });
             sprite.AddAttackCollider(am[Animations.Quarterstaff3], new List<List<Rectangle>>
             {
                 new List<Rectangle>(),
-                new List<Rectangle> { new Rectangle(0, -10, 60, 18) },
-            });
-            sprite.AddFramesToAttack(am[Animations.Quarterstaff3], 1);
-
-            sprite.CreateAnimation(am[Animations.Quarterstaff4], 0.1f, false);
-            sprite.AddFrames(am[Animations.Quarterstaff4], new List<Rectangle>()
-            {
-                new Rectangle(96, 96, 32, 32),
-                new Rectangle(96, 96, 32, 32),
-            });
-            sprite.AddAttackCollider(am[Animations.Quarterstaff4], new List<List<Rectangle>>
-            {
                 new List<Rectangle>(),
-                new List<Rectangle> { new Rectangle(0, -10, 60, 18) },
+                new List<Rectangle>(),
+                new List<Rectangle> { new Rectangle(0, -10, 54, 18) },
             });
-            sprite.AddFramesToAttack(am[Animations.Quarterstaff4], 1);
+            sprite.AddFramesToAttack(am[Animations.Quarterstaff3], 3);
+            LinkableFrames[Animations.Quarterstaff3] = new[] { 3, 4 };
 
             #endregion
-            
+
             // == PISTOL ATTACKS ==
 
             #region Pistol Animations
@@ -479,28 +496,6 @@ namespace MonoGameJam1.Components.Player
             LinkableFrames[Animations.Pistol3] = new[] { 3, 4 };
 
             #endregion
-
-            // == MISC ANIMATIONS ==
-
-            sprite.CreateAnimation(am[Animations.Hit], 0.09f, false);
-            sprite.AddFrames(am[Animations.Hit], new List<Rectangle>()
-            {
-                new Rectangle(400, 700, 100, 100),
-                new Rectangle(500, 700, 100, 100),
-            });
-
-            sprite.CreateAnimation(am[Animations.Dying], 0.09f, false);
-            sprite.AddFrames(am[Animations.Dying], new List<Rectangle>()
-            {
-                new Rectangle(700, 700, 100, 100),
-                new Rectangle(0, 800, 100, 100),
-                new Rectangle(100, 800, 100, 100),
-                new Rectangle(200, 800, 100, 100),
-                new Rectangle(300, 800, 100, 100),
-                new Rectangle(400, 800, 100, 100),
-                new Rectangle(500, 800, 100, 100),
-                new Rectangle(600, 800, 100, 100),
-            });
 
             // init fsm
             _fsm = new FiniteStateMachine<PlayerState, PlayerComponent>(this, new StandState());
@@ -730,6 +725,11 @@ namespace MonoGameJam1.Components.Player
         public void OpenWeaponSelection()
         {
             _weaponSelectionComponent.Open();
+        }
+
+        public bool IsChoosingWeapon()
+        {
+            return _weaponSelectionComponent.IsOpen;
         }
 
         public void ChangeWeapon(Weapon newWeapon)

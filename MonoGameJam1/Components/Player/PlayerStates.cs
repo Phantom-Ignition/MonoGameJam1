@@ -259,7 +259,9 @@ namespace MonoGameJam1.Components.Player
         public override void update()
         {
             base.update();
-            if (entity.CanLinkCombo(Animation) && _input.UpButton.isDown)
+            if (entity.IsChoosingWeapon()) return;
+
+            if (entity.CanLinkCombo(Animation) && _input.UpButton.isPressed)
             {
                 fsm.resetStackTo(new JumpingState(true));
                 return;
@@ -378,15 +380,6 @@ namespace MonoGameJam1.Components.Player
         public QuarterstaffAttack3()
         {
             Animation = PlayerComponent.Animations.Quarterstaff3;
-            NextComboState = new QuarterstaffAttack4();
-        }
-    }
-
-    public class QuarterstaffAttack4 : BaseAttackComboState
-    {
-        public QuarterstaffAttack4()
-        {
-            Animation = PlayerComponent.Animations.Quarterstaff4;
             HorizontalKnockback = 0.09f;
             IsFinal = true;
         }

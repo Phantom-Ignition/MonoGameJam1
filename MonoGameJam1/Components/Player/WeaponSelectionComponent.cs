@@ -11,7 +11,7 @@ namespace MonoGameJam1.Components.Player
         public override float height => _texture?.Height ?? 1;
 
         private Texture2D _texture;
-        private bool _isOpen;
+        public bool IsOpen { get; private set; }
         private float _closeTick;
         private float _openInterval;
 
@@ -33,7 +33,7 @@ namespace MonoGameJam1.Components.Player
             if (_openInterval > 0) return;
 
             _openInterval = 0.1f;
-            _isOpen = true;
+            IsOpen = true;
             _inputManager.IsBusy = true;
             _closeTick = 0;
             Time.timeScale = 0f;
@@ -41,7 +41,7 @@ namespace MonoGameJam1.Components.Player
 
         public void Close()
         {
-            _isOpen = false;
+            IsOpen = false;
             _inputManager.IsBusy = false;
             Time.timeScale = 1f;
         }
@@ -54,7 +54,7 @@ namespace MonoGameJam1.Components.Player
 
         public override void render(Graphics graphics, Camera camera)
         {
-            if (!_isOpen) return;
+            if (!IsOpen) return;
 
             var x = _collider.bounds.x - (width - _collider.width) / 2;
             var y = _collider.bounds.y - (height - _collider.height) / 2;
@@ -67,7 +67,7 @@ namespace MonoGameJam1.Components.Player
             if (_openInterval > 0)
                 _openInterval -= Time.deltaTime;
 
-            if (_isOpen)
+            if (IsOpen)
             {
                 _closeTick += Time.unscaledDeltaTime;
                 if (_closeTick >= 0.1 && 
@@ -76,7 +76,9 @@ namespace MonoGameJam1.Components.Player
                 if (_inputManager.LeftButton.isPressed)
                     PickWeapon(Weapon.Fist);
                 if (_inputManager.UpButton.isPressed)
+                {
                     PickWeapon(Weapon.Sword);
+                }
                 if (_inputManager.RightButton.isPressed)
                     PickWeapon(Weapon.Quarterstaff);
                 if (_inputManager.DownButton.isPressed)
