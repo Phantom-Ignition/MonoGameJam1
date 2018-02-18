@@ -196,7 +196,6 @@ namespace MonoGameJam1.Components.Player
                 entity.forceMovement(Vector2.Zero);
             });
             entity.velocityMultiplier = VelocityMultiplier;
-            entity.ReduceDamageScale();
         }
 
         public override void update()
@@ -221,6 +220,7 @@ namespace MonoGameJam1.Components.Player
             entity.forceMovement(Vector2.Zero);
             _input.IsLocked = false;
             entity.platformerObject.lockVerticalMovement = false;
+            entity.ReduceDamageScale();
         }
     }
 

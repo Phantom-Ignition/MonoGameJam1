@@ -83,6 +83,7 @@
     <Compile Include="GameMain.cs" />
     <Compile Include="Managers\AudioManager.cs" />
     <Compile Include="Managers\InputManager.cs" />
+    <Compile Include="Managers\ScoreManager.cs" />
     <Compile Include="Managers\SystemManager.cs" />
     <Compile Include="NPCs\NpcBase.cs" />
     <Compile Include="NPCs\NpcCommands.cs" />

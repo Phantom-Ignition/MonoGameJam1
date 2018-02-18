@@ -144,7 +144,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#ff5500" name="enemies">
-  <object id="13" name="Target Dummy" type="EnemyImp" x="560" y="560" width="32" height="32"/>
+  <object id="13" name="Target Dummy" type="EnemyImp" x="288" y="496" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="hostages">
   <object id="14" x="320" y="496" width="32" height="32"/>

@@ -75,7 +75,7 @@ namespace MonoGameJam1.Systems
 
         private void playHitEffects(RectangleF attackRect, RectangleF targetRect)
         {
-            if (BulletEffectTexture == null || !_playerComponent.IsInPistolMode()) return;
+            if (BulletEffectTexture == null || _playerComponent.CurrentWeapon != Weapon.Pistol) return;
 
             var intersection = RectangleF.intersect(attackRect, targetRect);
             var w = intersection.width * 0.6f;

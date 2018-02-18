@@ -660,6 +660,7 @@ namespace MonoGameJam1.Components.Player
 
         public void rescueHostage()
         {
+            Core.getGlobalManager<ScoreManager>().GetHostageRescuePoints();
             _battleComponent.setHp((int)_battleComponent.MaxHP);
             SkipAttackState = true;
             _fsm.resetStackTo(new RescueHostageState());
@@ -744,13 +745,6 @@ namespace MonoGameJam1.Components.Player
             // Max: 1   (100%)
             // Min: 0.3 (30%)
             return Math.Max(Math.Max(0, Math.Min(10, _damageScalingStreak)), 3) / 10;
-        }
-
-        public bool IsInPistolMode()
-        {
-            return _fsm.CurrentState is PistolAttack1 ||
-                   _fsm.CurrentState is PistolAttack2 ||
-                   _fsm.CurrentState is PistolAttack3;
         }
 
         public Rectangle HitRectangle()

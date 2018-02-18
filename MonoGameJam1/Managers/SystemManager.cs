@@ -22,6 +22,7 @@ namespace MonoGameJam1.Managers
         // Player
 
         public Entity playerEntity;
+        public int PlayerScore { get; set; }
 
         //--------------------------------------------------
         // Map

@@ -39,6 +39,8 @@ namespace Nez
 		{
 			public const string hpbar = @"misc\hpbar";
 			public const string hphud = @"misc\hphud";
+			public const string icons = @"misc\icons";
+			public const string numbers = @"misc\numbers";
 			public const string weaponCircle = @"misc\weaponCircle";
 		}
 

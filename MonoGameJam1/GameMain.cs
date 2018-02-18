@@ -25,6 +25,7 @@ namespace MonoGameJam1
             // Register Global Managers
             registerGlobalManager(new InputManager());
             registerGlobalManager(new SystemManager());
+            registerGlobalManager(new ScoreManager());
         }
 
         protected override void LoadContent()

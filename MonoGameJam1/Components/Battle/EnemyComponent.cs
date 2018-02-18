@@ -120,6 +120,8 @@ namespace MonoGameJam1.Components.Battle
 
             if (Math.Abs(yKnockback) < 0.001)
                 platformerObject.velocity.Y = platformerObject.collisionState.below ? -100 : - 130;
+
+            Core.getGlobalManager<ScoreManager>().GetComboPoints(_playerComponent.CurrentDamageScale());
         }
 
         public virtual void onDeath() { }
