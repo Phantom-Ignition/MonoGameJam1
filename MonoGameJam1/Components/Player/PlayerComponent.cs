@@ -526,6 +526,7 @@ namespace MonoGameJam1.Components.Player
 
         public void destroyEntity()
         {
+            Core.getGlobalManager<ScoreManager>().ResetToSaved();
             entity.setEnabled(false);
             Core.startSceneTransition(new WindTransition(() => new SceneMap()));
         }

@@ -171,7 +171,6 @@ namespace MonoGameJam1.Components.Player
             _timer?.stop();
             entity.forceMovement(Vector2.Zero);
             _input.IsLocked = false;
-            entity.platformerObject.lockVerticalMovement = false;
             entity.ReduceDamageScale();
         }
     }
@@ -180,6 +179,7 @@ namespace MonoGameJam1.Components.Player
     {
         public override void begin()
         {
+            _input.IsLocked = true;
             entity.SetAnimation(PlayerComponent.Animations.Sword1);
         }
 
@@ -189,6 +189,11 @@ namespace MonoGameJam1.Components.Player
             {
                 fsm.resetStackTo(new StandState());
             }
+        }
+
+        public override void end()
+        {
+            _input.IsLocked = false;
         }
     }
 

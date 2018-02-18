@@ -15,6 +15,7 @@ using Nez.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nez.Sprites;
 
 namespace MonoGameJam1.Scenes
 {
@@ -107,6 +108,7 @@ namespace MonoGameJam1.Scenes
             setupEntityProcessors();
             getEntityProcessor<NpcInteractionSystem>().mapStart();
             Core.getGlobalManager<InputManager>().IsLocked = false;
+            Core.getGlobalManager<ScoreManager>().SaveCurrentScore();
         }
 
         private void setupMap()
@@ -397,6 +399,7 @@ namespace MonoGameJam1.Scenes
 
         public void reserveTransfer(TransferComponent transferComponent)
         {
+            Core.getGlobalManager<ScoreManager>().SaveCurrentScore();
             Core.getGlobalManager<SystemManager>().setMapId(transferComponent.destinyId);
             Core.getGlobalManager<SystemManager>().setSpawnPosition(transferComponent.destinyPosition);
             Core.startSceneTransition(new FadeTransition(() => new SceneMap()));

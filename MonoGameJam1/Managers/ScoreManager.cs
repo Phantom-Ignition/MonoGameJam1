@@ -11,6 +11,8 @@ namespace MonoGameJam1.Managers
         public int Score { get; private set; }
         public float ScaleMultiplier { get; private set; }
 
+        private int _savedScore;
+
         private ITweenable _scaleTween;
 
         //----------------------//------------------------//
@@ -39,6 +41,22 @@ namespace MonoGameJam1.Managers
             ScaleMultiplier = 1.4f;
             _scaleTween = this.tween("ScaleMultiplier", 1f, 0.4f).setEaseType(EaseType.ExpoOut);
             _scaleTween.start();
+        }
+
+        public void SaveCurrentScore()
+        {
+            _savedScore = Score;
+        }
+
+        public void ResetToSaved()
+        {
+            Score = _savedScore;
+        }
+
+        public void ResetAll()
+        {
+            Score = 0;
+            _savedScore = 0;
         }
 
         public void update() { }
