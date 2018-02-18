@@ -15,6 +15,9 @@ namespace MonoGameJam1.Systems
         private readonly Entity _blockEntity;
         private readonly Entity _playerEntity;
 
+        // HUD
+        private MapHudComponent _mapHud;
+
         // Battle
         private bool _battleHappening;
         private BattleAreaComponent _currentBattle;
@@ -22,10 +25,12 @@ namespace MonoGameJam1.Systems
         private int _currentWave;
         private int _enemiesSpawned;
         private int _enemiesDefeated;
-        private List<Entity> _enemies;
-        private List<Entity> _enemiesToRemove;
+        private readonly List<Entity> _enemies;
+        private readonly List<Entity> _enemiesToRemove;
 
-        public BattleAreasSystem(Entity playerEntity) : base(new Matcher().one(typeof(BattleAreaComponent)))
+        public bool _waitingPlayerToCrossBarrier;
+
+        public BattleAreasSystem(Entity playerEntity, MapHudComponent hud) : base(new Matcher().one(typeof(BattleAreaComponent)))
         {
             _playerEntity = playerEntity;
 
@@ -35,6 +40,8 @@ namespace MonoGameJam1.Systems
 
             _enemies = new List<Entity>();
             _enemiesToRemove = new List<Entity>();
+
+            _mapHud = hud;
         }
 
         protected override void process(List<Entity> entities)
@@ -68,7 +75,8 @@ namespace MonoGameJam1.Systems
 
             if (_currentWave >= _currentBattle.Waves.Length)
             {
-                Console.WriteLine("finished!");
+                _waitingPlayerToCrossBarrier = true;
+                _mapHud.showGo();
                 resetBattle();
                 return;
             }
@@ -135,13 +143,21 @@ namespace MonoGameJam1.Systems
             base.lateProcess(entities);
 
             // Check if the player is colliding with the block entity
-            if (!_battleHappening) return;
+            if (!_battleHappening && !_waitingPlayerToCrossBarrier) return;
 
             CollisionResult collisionResult;
             if (_blockEntity.getComponent<BoxCollider>()
                 .collidesWith(_playerEntity.getComponent<BoxCollider>(), out collisionResult))
             {
-                _playerEntity.transform.position += collisionResult.minimumTranslationVector;
+                if (_waitingPlayerToCrossBarrier)
+                {
+                    _waitingPlayerToCrossBarrier = false;
+                    _mapHud.hideGo();
+                }
+                else
+                {
+                    _playerEntity.transform.position += collisionResult.minimumTranslationVector;
+                }
             }
         }
 

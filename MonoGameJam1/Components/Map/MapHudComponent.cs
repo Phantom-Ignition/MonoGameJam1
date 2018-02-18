@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Components.Battle;
 using MonoGameJam1.Components.Player;
 using MonoGameJam1.Managers;
 using Nez;
 using Nez.Textures;
+using System.Collections.Generic;
+using Nez.Tweens;
 
 namespace MonoGameJam1.Components.Map
 {
@@ -31,6 +31,13 @@ namespace MonoGameJam1.Components.Map
         // Managers
         private ScoreManager _scoreManager;
         private SystemManager _systemManager;
+
+        // GO!
+        private Vector2 _goPosition;
+        private Texture2D _goTexture;
+        private float _goPulse;
+        private float _goAlpha;
+        private ITweenable _goPulseTween;
 
         // Instruction
         private Texture2D _guide1Texture;
@@ -64,6 +71,12 @@ namespace MonoGameJam1.Components.Map
             // Damage Scale
             _damageScalePosition = new Vector2(50, 31);
             _numbersTexture = entity.scene.content.Load<Texture2D>(Content.Misc.numbers);
+
+            // Go!
+            _goPosition = new Vector2(320, 40);
+            _goTexture = entity.scene.content.Load<Texture2D>(Content.Misc.go);
+            _goAlpha = 0.0f;
+            _goPulse = 1.0f;
 
             // Instructions
             _guide1Texture = entity.scene.content.Load<Texture2D>(Content.Misc.guide1);
@@ -110,12 +123,46 @@ namespace MonoGameJam1.Components.Map
                 graphics.batcher.draw(_guide1Texture, entity.position, Color.White);
             if (_systemManager.getSwitch("guide2"))
                 graphics.batcher.draw(_guide2Texture, entity.position, Color.White);
+
+            // Go
+            if (_goAlpha > 0.0f)
+            {
+                var pos = entity.position + _goPosition;
+                var drect = new Rectangle((int)pos.X, (int)pos.Y, _goTexture.Width, _goTexture.Height);
+                graphics.batcher.draw(_goTexture, drect.Location.ToVector2(), _goTexture.Bounds, Color.White * _goAlpha, 0.0f, Vector2.Zero, _goPulse, SpriteEffects.None, 1.0f);
+            }
+                
         }
 
         private float hpFillWidth()
         {
             var battler = _playerComponent.getComponent<BattleComponent>();
             return battler?.HP / battler?.MaxHP ?? 0;
+        }
+
+        public void showGo()
+        {
+            this.tween("_goAlpha", 1.0f, 0.3f)
+                .setEaseType(EaseType.CubicIn)
+                .start();
+
+        }
+
+        private void startGoPulse()
+        {
+
+            _goPulseTween?.stop(true);
+            _goPulseTween = this.tween("_goPulse", 1.1f, 0.5f)
+                .setEaseType(EaseType.Punch)
+                .setLoops(LoopType.PingPong, 3);
+            _goPulseTween.start();
+        }
+
+        public void hideGo()
+        {
+            this.tween("_goAlpha", 0.0f, 0.5f)
+                .setEaseType(EaseType.CubicIn)
+                .start();
         }
     }
 }

@@ -525,7 +525,7 @@ namespace MonoGameJam1.Components.Player
             _weaponSelectionComponent = entity.addComponent<WeaponSelectionComponent>();
 
             _dashTrailComponent = entity.addComponent<DashTrailComponent>();
-            _dashTrailComponent.renderLayer = 5;
+            _dashTrailComponent.renderLayer = SceneMap.MISC_RENDER_LAYER;
             _dashTrailComponent.SetSpawnEnabled(false);
         }
 

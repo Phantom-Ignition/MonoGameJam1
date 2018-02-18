@@ -7,10 +7,10 @@ using Nez;
 
 namespace MonoGameJam1.Systems
 {
-    class NpcInteractionSystem : EntityProcessingSystem
+    public class NpcInteractionSystem : EntityProcessingSystem
     {
-        private PlayerComponent _player;
-        private InteractionCollider _interactionCollider;
+        private readonly PlayerComponent _player;
+        private readonly InteractionCollider _interactionCollider;
 
         public List<NpcBase> _autorunNpcs;
 
@@ -71,7 +71,7 @@ namespace MonoGameJam1.Systems
                 CollisionResult collisionResult;
                 var collider = entity.getComponent<Collider>();
                 if (collider == null) return;
-                if (collider.collidesWith(_player.getComponent<InteractionCollider>(), out collisionResult))
+                if (collider.collidesWith(_interactionCollider, out collisionResult))
                 {
                     executeActionList(entity.getComponent<NpcBase>(), true);
                 }
@@ -82,7 +82,7 @@ namespace MonoGameJam1.Systems
                 if (inputManager.InteractionButton.isPressed)
                 {
                     CollisionResult collisionResult;
-                    if (entity.getComponent<Collider>().collidesWith(_player.getComponent<InteractionCollider>(), out collisionResult))
+                    if (entity.getComponent<Collider>().collidesWith(_interactionCollider, out collisionResult))
                     {
                         executeActionList(entity.getComponent<NpcBase>(), true);
                     }

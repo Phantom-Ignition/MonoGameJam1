@@ -302,7 +302,7 @@ namespace MonoGameJam1.Scenes
             var battleSystem = (BattleSystem)addEntityProcessor(new BattleSystem(playerComponent));
             battleSystem.BulletEffectTexture = content.Load<Texture2D>(Content.Effects.bullet_effects);
             addEntityProcessor(new ProjectilesSystem(player));
-            addEntityProcessor(new BattleAreasSystem(player));
+            addEntityProcessor(new BattleAreasSystem(player, _hudEntity.getComponent<MapHudComponent>()));
 
             addEntityProcessor(new TransferSystem(new Matcher().all(typeof(TransferComponent)), player));
             addEntityProcessor(new NpcInteractionSystem(playerComponent));
