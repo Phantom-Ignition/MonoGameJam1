@@ -238,6 +238,9 @@ namespace MonoGameJam1.Components.Player
         public float AttackPushMultiplier = 1.0f;
         public bool AttackPushLockDirection;
         public float VelocityMultiplier = 1.0f;
+        public float ScreenShakeMagnitude;
+        public float FreezeScreenDuration = 0.01f;
+        public float FreezeScreenScale = 0.2f;
 
         public override void begin()
         {
@@ -317,6 +320,9 @@ namespace MonoGameJam1.Components.Player
             VelocityMultiplier = 2;
             HorizontalKnockback = 0.04f;
             AttackPushDuration = 0.1f;
+            ScreenShakeMagnitude = 1.5f;
+            FreezeScreenDuration = 0.008f;
+            FreezeScreenScale = 0.19f;
             IsFinal = true;
         }
     }
@@ -349,6 +355,9 @@ namespace MonoGameJam1.Components.Player
         {
             Animation = PlayerComponent.Animations.Sword3;
             VerticalKnockback = 0.03f;
+            ScreenShakeMagnitude = 1.5f;
+            FreezeScreenDuration = 0.008f;
+            FreezeScreenScale = 0.13f;
             IsFinal = true;
         }
     }
@@ -381,6 +390,9 @@ namespace MonoGameJam1.Components.Player
         {
             Animation = PlayerComponent.Animations.Quarterstaff3;
             HorizontalKnockback = 0.09f;
+            ScreenShakeMagnitude = 1.5f;
+            FreezeScreenDuration = 0.008f;
+            FreezeScreenScale = 0.13f;
             IsFinal = true;
         }
     }

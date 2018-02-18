@@ -777,6 +777,24 @@ namespace MonoGameJam1.Components.Player
             return comboState?.HorizontalKnockback ?? 0.0f;
         }
 
+        public float CurrentStateScreenShakeMagnitude()
+        {
+            var comboState = _fsm.CurrentState as BaseAttackComboState;
+            return comboState?.ScreenShakeMagnitude ?? 0.0f;
+        }
+
+        public float CurrentFreezeScreenDuration()
+        {
+            var comboState = _fsm.CurrentState as BaseAttackComboState;
+            return comboState?.FreezeScreenDuration ?? 0.0f;
+        }
+
+        public float CurrentFreezeScreenScale()
+        {
+            var comboState = _fsm.CurrentState as BaseAttackComboState;
+            return comboState?.FreezeScreenScale ?? 0.0f;
+        }
+
         public void Jump()
         {
             _platformerObject.jump();

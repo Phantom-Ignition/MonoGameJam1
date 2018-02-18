@@ -5,6 +5,7 @@ using MonoGameJam1.Components.Colliders;
 using MonoGameJam1.Components.Player;
 using MonoGameJam1.Components.Sprites;
 using MonoGameJam1.Managers;
+using MonoGameJam1.Scenes;
 using MonoGameJam1.Structs;
 using Nez;
 
@@ -105,6 +106,7 @@ namespace MonoGameJam1.Components.Battle
         {
             var xKnockback = _playerComponent.CurrentStateHorizontalKnockback();
             var yKnockback = _playerComponent.CurrentStateVerticalKnockback();
+            var screenShakeMagnitude = _playerComponent.CurrentStateScreenShakeMagnitude();
 
             var diff = Math.Sign((entity.position - _playerComponent.entity.position).X);
             knockback.X = diff;
@@ -120,6 +122,11 @@ namespace MonoGameJam1.Components.Battle
 
             if (Math.Abs(yKnockback) < 0.001)
                 platformerObject.velocity.Y = platformerObject.collisionState.below ? -100 : - 130;
+
+            if (screenShakeMagnitude > 0.0f)
+            {
+                (entity.scene as SceneMap)?.startScreenShake(screenShakeMagnitude, 100);
+            }
 
             Core.getGlobalManager<ScoreManager>().GetComboPoints(_playerComponent.CurrentDamageScale());
         }

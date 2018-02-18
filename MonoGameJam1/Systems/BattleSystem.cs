@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Components.Battle;
 using MonoGameJam1.Components.Colliders;
@@ -9,6 +6,8 @@ using MonoGameJam1.Components.Map;
 using MonoGameJam1.Components.Player;
 using MonoGameJam1.Components.Sprites;
 using Nez;
+using System;
+using System.Collections.Generic;
 using Random = Nez.Random;
 
 namespace MonoGameJam1.Systems
@@ -52,9 +51,21 @@ namespace MonoGameJam1.Systems
                         CollisionResult collisionResult;
                         if (attackCollider.collidesWith(collider, out collisionResult))
                         {
+                            var freezeTime = 0.01f;
+                            var freezeScale = 0.18f;
+                            var playerFreezeTime = _playerComponent.CurrentFreezeScreenDuration();
+                            var playerFreezeScale = _playerComponent.CurrentFreezeScreenScale();
+                            if (!fIsEnemy && playerFreezeTime > 0.0f)
+                            {
+                                freezeTime = playerFreezeTime;
+                            }
+                            if (!fIsEnemy && playerFreezeScale > 0.0f)
+                            {
+                                freezeScale = playerFreezeScale;
+                            }
                             // Freeze time
-                            Time.timeScale = 0.2f;
-                            Core.schedule(0.01f, t =>
+                            Time.timeScale = freezeScale;
+                            Core.schedule(freezeTime, t =>
                             {
                                 Time.timeScale = 1;
                             });

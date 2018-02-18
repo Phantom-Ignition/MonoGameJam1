@@ -434,6 +434,11 @@ namespace MonoGameJam1.Scenes
             }
         }
 
+        public void startScreenShake(float magnitude, float duration)
+        {
+            _camera.startCameraShake(magnitude, duration);
+        }
+
         public override void update()
         {
             base.update();
