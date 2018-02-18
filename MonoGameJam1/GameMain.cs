@@ -20,7 +20,7 @@ namespace MonoGameJam1
             Window.AllowUserResizing = true;
             IsMouseVisible = true;
             IsFixedTimeStep = true;
-            debugRenderEnabled = true;
+            debugRenderEnabled = false;
 
             // Register Global Managers
             registerGlobalManager(new InputManager());

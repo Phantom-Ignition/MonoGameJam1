@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Runtime.CompilerServices;
+using Microsoft.Xna.Framework;
 using MonoGameJam1.FSM;
 using MonoGameJam1.Managers;
 using Nez;
@@ -8,6 +10,8 @@ namespace MonoGameJam1.Components.Player
     public class PlayerState : State<PlayerState, PlayerComponent>
     {
         protected InputManager _input => Core.getGlobalManager<InputManager>();
+        private float _dashTick;
+        private int _dashSide;
 
         public override void begin() { }
 
@@ -21,7 +25,11 @@ namespace MonoGameJam1.Components.Player
                 {
                     fsm.resetStackTo(new JumpingState(true));
                 }
-                if (_input.AttackButton.isPressed && !entity.SkipAttackState)
+                else if (entity.isOnGround() && isDashRequested())
+                {
+                    fsm.pushState(new DashState());
+                }
+                else if (_input.AttackButton.isPressed && !entity.SkipAttackState)
                 {
                     switch (entity.CurrentWeapon)
                     {
@@ -48,6 +56,18 @@ namespace MonoGameJam1.Components.Player
             {
                 entity.OpenWeaponSelection();
             }
+            if (_dashTick > 0)
+                _dashTick -= Time.deltaTime;
+        }
+
+        private bool isDashRequested()
+        {
+            var dashSide = _input.LeftButton.isPressed ? -1 : _input.RightButton.isPressed ? 1 : 0;
+            if (dashSide == 0) return false;
+            if (_dashSide == dashSide && _dashTick > 0.0f) return true;
+            _dashSide = dashSide;
+            _dashTick = 5f;
+            return false;
         }
 
         protected bool isMovementAvailable()
@@ -122,6 +142,37 @@ namespace MonoGameJam1.Components.Player
                 fsm.resetStackTo(new StandState());
                 entity.createJumpEffect("land");
             }
+        }
+    }
+
+    public class DashState : PlayerState
+    {
+        private ITimer _timer;
+        public float AttackPushDuration = 0.15f;
+        public float VelocityMultiplier = 2.6f;
+
+        public override void begin()
+        {
+            entity.SetAnimation(PlayerComponent.Animations.Jumping);
+
+            _input.IsLocked = true;
+            entity.forceMovement(entity.GetIntDirection() * Vector2.UnitX);
+            _timer = Core.schedule(AttackPushDuration, entity, t =>
+            {
+                entity.forceMovement(Vector2.Zero);
+                fsm.resetStackTo(new StandState());
+            });
+            entity.velocityMultiplier = VelocityMultiplier;
+        }
+        
+        public override void end()
+        {
+            entity.velocityMultiplier = 1.0f;
+            _timer?.stop();
+            entity.forceMovement(Vector2.Zero);
+            _input.IsLocked = false;
+            entity.platformerObject.lockVerticalMovement = false;
+            entity.ReduceDamageScale();
         }
     }
 
