@@ -85,6 +85,9 @@
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\ScoreManager.cs" />
     <Compile Include="Managers\SystemManager.cs" />
+    <Compile Include="NPCs\Guides\GuideOne.cs" />
+    <Compile Include="NPCs\Guides\GuideTwo.cs" />
+    <Compile Include="NPCs\Guides\TestScript.cs" />
     <Compile Include="NPCs\NpcBase.cs" />
     <Compile Include="NPCs\NpcCommands.cs" />
     <Compile Include="NPCs\NpcTest.cs" />
@@ -166,9 +169,7 @@
       <Name>Nez</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NPCs\Map NPCs\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="ContentPathGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -86,6 +86,11 @@ namespace MonoGameJam1.NPCs
 
         public bool RunOnTouch { get; set; }
 
+        //--------------------------------------------------
+        // Interactable
+
+        public bool Interactable { get; set; }
+
         //----------------------//------------------------//
 
         protected NpcBase(string name)

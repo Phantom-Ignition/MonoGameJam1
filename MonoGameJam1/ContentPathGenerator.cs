@@ -37,6 +37,8 @@ namespace Nez
 
 		public static class Misc
 		{
+			public const string guide1 = @"misc\guide1";
+			public const string guide2 = @"misc\guide2";
 			public const string hpbar = @"misc\hpbar";
 			public const string hphud = @"misc\hphud";
 			public const string icons = @"misc\icons";

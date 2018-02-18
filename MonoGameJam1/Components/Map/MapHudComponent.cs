@@ -27,11 +27,19 @@ namespace MonoGameJam1.Components.Map
 
         private Vector2 _damageScalePosition;
         private Texture2D _numbersTexture;
+
+        // Managers
         private ScoreManager _scoreManager;
+        private SystemManager _systemManager;
+
+        // Instruction
+        private Texture2D _guide1Texture;
+        private Texture2D _guide2Texture;
 
         public override void onAddedToEntity()
         {
             _scoreManager = Core.getGlobalManager<ScoreManager>();
+            _systemManager = Core.getGlobalManager<SystemManager>();
 
             var playerEntity = entity.scene.findEntity("player");
             _playerComponent = playerEntity.getComponent<PlayerComponent>();
@@ -56,6 +64,10 @@ namespace MonoGameJam1.Components.Map
             // Damage Scale
             _damageScalePosition = new Vector2(50, 31);
             _numbersTexture = entity.scene.content.Load<Texture2D>(Content.Misc.numbers);
+
+            // Instructions
+            _guide1Texture = entity.scene.content.Load<Texture2D>(Content.Misc.guide1);
+            _guide2Texture = entity.scene.content.Load<Texture2D>(Content.Misc.guide2);
         }
 
         public override void render(Graphics graphics, Camera camera)
@@ -92,6 +104,12 @@ namespace MonoGameJam1.Components.Map
             graphics.batcher.drawString(GameMain.smallBitmapFont, score, scorePosition, Color.White, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 1.0f);
             var pScorePosition = scorePosition + GameMain.smallBitmapFont.measureString(score).X * Vector2.UnitX;
             graphics.batcher.drawString(GameMain.smallBitmapFont, scoreNum, pScorePosition, Color.White, 0.0f, Vector2.Zero, _scoreManager.ScaleMultiplier, SpriteEffects.None, 1.0f);
+
+            // Instructions
+            if (_systemManager.getSwitch("guide1"))
+                graphics.batcher.draw(_guide1Texture, entity.position, Color.White);
+            if (_systemManager.getSwitch("guide2"))
+                graphics.batcher.draw(_guide2Texture, entity.position, Color.White);
         }
 
         private float hpFillWidth()

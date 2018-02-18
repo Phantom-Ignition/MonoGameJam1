@@ -76,7 +76,7 @@ namespace MonoGameJam1.Systems
                     executeActionList(entity.getComponent<NpcBase>(), true);
                 }
             }
-            else
+            else if (npcComp.Interactable)
             {
                 var inputManager = Core.getGlobalManager<InputManager>();
                 if (inputManager.InteractionButton.isPressed)

@@ -31,8 +31,7 @@ namespace MonoGameJam1.Scenes
         public const int ENEMIES_RENDER_LAYER = 4;
         public const int PLAYER_RENDER_LAYER = 3;
         public const int PARTICLES_RENDER_LAYER = 2;
-        public const int HUD_BACK_RENDER_LAYER = 1;
-        public const int HUD_FILL_RENDER_LAYER = 0;
+        public const int HUD_RENDER_LAYER = -99;
 
         //--------------------------------------------------
         // Layer Masks
@@ -350,7 +349,7 @@ namespace MonoGameJam1.Scenes
         private void setupHud()
         {
             _hudEntity = createEntity("hud");
-            _hudEntity.addComponent<MapHudComponent>().renderLayer = HUD_BACK_RENDER_LAYER;
+            _hudEntity.addComponent<MapHudComponent>().renderLayer = HUD_RENDER_LAYER;
         }
 
         private void setupMapExtensions()
