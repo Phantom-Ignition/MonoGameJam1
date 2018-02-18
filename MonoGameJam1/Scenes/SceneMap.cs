@@ -15,6 +15,7 @@ using Nez.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MonoGameJam1.Components.Sprites;
 using Nez.Sprites;
 
 namespace MonoGameJam1.Scenes
@@ -82,6 +83,7 @@ namespace MonoGameJam1.Scenes
         // HUD
 
         private Entity _hudEntity;
+        private Entity _goEntity;
 
         //----------------------//------------------------//
 
@@ -350,6 +352,18 @@ namespace MonoGameJam1.Scenes
         {
             _hudEntity = createEntity("hud");
             _hudEntity.addComponent<MapHudComponent>().renderLayer = HUD_RENDER_LAYER;
+
+            var goTexture = content.Load<Texture2D>(Content.Characters.player);
+            _goEntity = createEntity();
+            var goSprite = _goEntity.addComponent(new AnimatedSprite(goTexture, "default"));
+            goSprite.CreateAnimation("default", 0.9f);
+            goSprite.AddFrames("default", new List<Rectangle>
+            {
+                new Rectangle(0, 0, 72, 20),
+                new Rectangle(72, 0, 72, 20),
+                new Rectangle(144, 0, 72, 20),
+                new Rectangle(216, 0, 72, 20),
+            });
         }
 
         private void setupMapExtensions()
@@ -434,6 +448,7 @@ namespace MonoGameJam1.Scenes
         {
             var camerapos = _camera.camera.position - virtualSize.ToVector2() / 2;
             _hudEntity.position = new Vector2((int)camerapos.X, (int)camerapos.Y);
+            _goEntity.position = new Vector2((int)camerapos.X, (int)camerapos.Y);
         }
     }
 }

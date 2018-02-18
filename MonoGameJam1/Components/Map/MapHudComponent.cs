@@ -10,7 +10,7 @@ using Nez.Tweens;
 
 namespace MonoGameJam1.Components.Map
 {
-    public class MapHudComponent : RenderableComponent
+    public class MapHudComponent : RenderableComponent, IUpdatable
     {
         public override float width => Scene.virtualSize.X;
         public override float height => Scene.virtualSize.Y; 
@@ -34,10 +34,11 @@ namespace MonoGameJam1.Components.Map
 
         // GO!
         private Vector2 _goPosition;
+        private float _goExtraPosition;
         private Texture2D _goTexture;
-        private float _goPulse;
+        private int _goIndex;
+        private float _goAnimationTick;
         private float _goAlpha;
-        private ITweenable _goPulseTween;
 
         // Instruction
         private Texture2D _guide1Texture;
@@ -73,10 +74,9 @@ namespace MonoGameJam1.Components.Map
             _numbersTexture = entity.scene.content.Load<Texture2D>(Content.Misc.numbers);
 
             // Go!
-            _goPosition = new Vector2(320, 40);
+            _goPosition = new Vector2(335, 40);
             _goTexture = entity.scene.content.Load<Texture2D>(Content.Misc.go);
             _goAlpha = 0.0f;
-            _goPulse = 1.0f;
 
             // Instructions
             _guide1Texture = entity.scene.content.Load<Texture2D>(Content.Misc.guide1);
@@ -128,8 +128,9 @@ namespace MonoGameJam1.Components.Map
             if (_goAlpha > 0.0f)
             {
                 var pos = entity.position + _goPosition;
-                var drect = new Rectangle((int)pos.X, (int)pos.Y, _goTexture.Width, _goTexture.Height);
-                graphics.batcher.draw(_goTexture, drect.Location.ToVector2(), _goTexture.Bounds, Color.White * _goAlpha, 0.0f, Vector2.Zero, _goPulse, SpriteEffects.None, 1.0f);
+                var drect = new Rectangle((int)(pos.X + _goExtraPosition), (int)pos.Y, 72, _goTexture.Height);
+                var srect = new Rectangle(72 * _goIndex, 0, 72, 20);
+                graphics.batcher.draw(_goTexture, drect, srect, Color.White * _goAlpha);
             }
         }
 
@@ -141,25 +142,37 @@ namespace MonoGameJam1.Components.Map
 
         public void showGo()
         {
+            _goAlpha = 0.0f;
+            _goExtraPosition = 0.0f;
             this.tween("_goAlpha", 1.0f, 0.3f)
                 .setEaseType(EaseType.CubicIn)
                 .start();
         }
 
-        private void startGoPulse()
-        {
-            _goPulseTween?.stop(true);
-            _goPulseTween = this.tween("_goPulse", 1.1f, 0.5f)
-                .setEaseType(EaseType.Punch)
-                .setLoops(LoopType.PingPong, 3);
-            _goPulseTween.start();
-        }
-
         public void hideGo()
         {
+            this.tween("_goExtraPosition", 100.0f, 0.5f)
+                .setEaseType(EaseType.CubicIn)
+                .setCompletionHandler((value) => { _goAlpha = 0f; })
+                .start();
             this.tween("_goAlpha", 0.0f, 0.5f)
                 .setEaseType(EaseType.CubicIn)
                 .start();
+        }
+
+        public void update()
+        {
+            if (_goAlpha > 0.0f)
+            {
+                _goAnimationTick -= Time.deltaTime;
+                if (_goAnimationTick <= 0.0f)
+                {
+                    _goAnimationTick = 0.1f;
+                    _goIndex++;
+                    if (_goIndex > 3)
+                        _goIndex = 0;
+                }
+            }
         }
     }
 }

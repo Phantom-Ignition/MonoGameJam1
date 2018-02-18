@@ -139,7 +139,7 @@
   </object>
  </objectgroup>
  <objectgroup name="objects">
-  <object id="1" name="playerSpawn" x="48" y="512" width="32" height="32"/>
+  <object id="1" name="playerSpawn" x="464" y="544" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="transfers">
   <object id="5" name="Transfer" type="onTouch" x="912" y="176" width="4" height="416">
