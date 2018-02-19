@@ -331,6 +331,7 @@ namespace MonoGameJam1.Components.Player
         public FistAttack3()
         {
             Animation = PlayerComponent.Animations.Fist3;
+            WeaponDamage = 25;
             FrameToPlaySe = 2;
             VelocityMultiplier = 2;
             HorizontalKnockback = 0.04f;
@@ -371,6 +372,7 @@ namespace MonoGameJam1.Components.Player
         public SwordAttack3()
         {
             Animation = PlayerComponent.Animations.Sword3;
+            WeaponDamage = 25;
             FrameToPlaySe = 3;
             VerticalKnockback = 0.03f;
             ScreenShakeMagnitude = 1.5f;
@@ -390,6 +392,7 @@ namespace MonoGameJam1.Components.Player
         {
             Animation = PlayerComponent.Animations.Quarterstaff1;
             FrameToPlaySe = 1;
+            WeaponDamage = 10;
             NextComboState = new QuarterstaffAttack2();
         }
     }
@@ -400,6 +403,7 @@ namespace MonoGameJam1.Components.Player
         {
             Animation = PlayerComponent.Animations.Quarterstaff2;
             FrameToPlaySe = 1;
+            WeaponDamage = 10;
             NextComboState = new QuarterstaffAttack3();
         }
     }
@@ -409,6 +413,7 @@ namespace MonoGameJam1.Components.Player
         public QuarterstaffAttack3()
         {
             Animation = PlayerComponent.Animations.Quarterstaff3;
+            WeaponDamage = 25;
             FrameToPlaySe = 3;
             HorizontalKnockback = 0.09f;
             ScreenShakeMagnitude = 1.5f;
@@ -432,6 +437,7 @@ namespace MonoGameJam1.Components.Player
             NextComboState = new PistolAttack2();
             AttackPushMultiplier = -1.0f;
             AttackPushLockDirection = true;
+            WeaponDamage = 10;
         }
 
         public override void update()
@@ -455,6 +461,7 @@ namespace MonoGameJam1.Components.Player
             NextComboState = new PistolAttack3();
             AttackPushMultiplier = -1.0f;
             AttackPushLockDirection = true;
+            WeaponDamage = 10;
         }
 
         public override void update()
@@ -477,6 +484,7 @@ namespace MonoGameJam1.Components.Player
             Animation = PlayerComponent.Animations.Pistol3;
             AttackPushMultiplier = -1.0f;
             AttackPushLockDirection = true;
+            WeaponDamage = 10;
             IsFinal = true;
         }
 

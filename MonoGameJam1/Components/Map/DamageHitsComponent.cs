@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Nez;
 using Nez.Tweens;
+using System.Collections.Generic;
 
 namespace MonoGameJam1.Components.Map
 {
-    class DamageHitsComponent : RenderableComponent, IUpdatable
+    public class DamageHitsComponent : RenderableComponent, IUpdatable
     {
         public override float width => 300;
         public override float height => 300;
@@ -20,7 +16,6 @@ namespace MonoGameJam1.Components.Map
             public Vector2 positionOffset;
             public Vector2 position;
             public bool done;
-
             public int damage;
             public float halfWidth;
 
