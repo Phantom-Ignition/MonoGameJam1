@@ -449,3 +449,8 @@
 /processorParam:TextureFormat=Color
 /build:misc/rock.png
 
+#begin maps/map7.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/map7.tmx
+

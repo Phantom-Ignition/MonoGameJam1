@@ -20,6 +20,13 @@
     <property name="nez:slopeTopRight" type="int" value="0"/>
    </properties>
   </tile>
+  <tile id="4">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="15"/>
+    <property name="nez:slopeTopRight" type="int" value="0"/>
+   </properties>
+  </tile>
   <tile id="5">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
@@ -48,7 +55,21 @@
     <property name="nez:slopeTopRight" type="int" value="15"/>
    </properties>
   </tile>
+  <tile id="19">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="0"/>
+    <property name="nez:slopeTopRight" type="int" value="15"/>
+   </properties>
+  </tile>
   <tile id="20">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="15"/>
+    <property name="nez:slopeTopRight" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="23">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
     <property name="nez:slopeTopLeft" type="int" value="15"/>
@@ -62,7 +83,21 @@
     <property name="nez:slopeTopRight" type="int" value="15"/>
    </properties>
   </tile>
+  <tile id="26">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="0"/>
+    <property name="nez:slopeTopRight" type="int" value="15"/>
+   </properties>
+  </tile>
   <tile id="27">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="15"/>
+    <property name="nez:slopeTopRight" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="30">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
     <property name="nez:slopeTopLeft" type="int" value="15"/>

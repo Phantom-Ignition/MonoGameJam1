@@ -20,6 +20,13 @@
     <property name="nez:slopeTopRight" type="int" value="0"/>
    </properties>
   </tile>
+  <tile id="4">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="15"/>
+    <property name="nez:slopeTopRight" type="int" value="0"/>
+   </properties>
+  </tile>
   <tile id="5">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
@@ -48,7 +55,21 @@
     <property name="nez:slopeTopRight" type="int" value="15"/>
    </properties>
   </tile>
+  <tile id="19">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="0"/>
+    <property name="nez:slopeTopRight" type="int" value="15"/>
+   </properties>
+  </tile>
   <tile id="20">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="15"/>
+    <property name="nez:slopeTopRight" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="23">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
     <property name="nez:slopeTopLeft" type="int" value="15"/>
@@ -62,7 +83,21 @@
     <property name="nez:slopeTopRight" type="int" value="15"/>
    </properties>
   </tile>
+  <tile id="26">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="0"/>
+    <property name="nez:slopeTopRight" type="int" value="15"/>
+   </properties>
+  </tile>
   <tile id="27">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="15"/>
+    <property name="nez:slopeTopRight" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="30">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
     <property name="nez:slopeTopLeft" type="int" value="15"/>
@@ -155,7 +190,7 @@
   </object>
  </objectgroup>
  <objectgroup name="objects">
-  <object id="1" name="playerSpawn" x="16" y="224" width="32" height="32"/>
+  <object id="1" name="playerSpawn" x="2064" y="256" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="transfers">
   <object id="5" name="Transfer" type="onTouch" x="2112" y="144" width="4" height="208">
