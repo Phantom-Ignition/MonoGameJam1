@@ -46,24 +46,28 @@ namespace MonoGameJam1.Components.Battle.Enemies
                 new Rectangle(0, 0, 16, 16),
             }, new[] {0}, new[] {15});
 
-            sprite.CreateAnimation("active", 0.1f);
+            sprite.CreateAnimation("active", 0.09f);
             sprite.AddFrames("active", new List<Rectangle>
             {
                 new Rectangle(0, 0, 16, 16),
                 new Rectangle(16, 0, 16, 16),
+                new Rectangle(16, 0, 16, 16),
+                new Rectangle(16, 0, 16, 16),
                 new Rectangle(32, 0, 16, 16),
                 new Rectangle(48, 0, 16, 16),
                 new Rectangle(64, 0, 16, 16),
-            }, new[] { 0, 0, 0, 0, 0 }, new[] { 15, 15, 15, 15, 15 });
+            }, new[] { 0, 0, 0, 0, 0, 0, 0 }, new[] { 15, 15, 15, 15, 15, 15, 15 });
             sprite.AddAttackCollider("active", new List<List<Rectangle>>
             {
                 new List<Rectangle>(),
                 new List<Rectangle>(),
                 new List<Rectangle>(),
                 new List<Rectangle>(),
+                new List<Rectangle>(),
+                new List<Rectangle>(),
                 new List<Rectangle> {new Rectangle(-7, 6, 14, 16)}
             });
-            sprite.AddFramesToAttack("active", 4);
+            sprite.AddFramesToAttack("active", 6);
 
             // FSM
             FSM = new FiniteStateMachine<EnemyTrapState, EnemyTrapComponent>(this, new EnemyTrapIdle());
