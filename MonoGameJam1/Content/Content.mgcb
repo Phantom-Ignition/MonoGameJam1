@@ -358,3 +358,20 @@
 /processorParam:Quality=Best
 /build:audios/se/Ambience.ogg
 
+#begin audios/se/Dash.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Dash.ogg
+
+#begin audios/se/Death.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Death.ogg
+
+#begin maps/map2.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/map2.tmx
+

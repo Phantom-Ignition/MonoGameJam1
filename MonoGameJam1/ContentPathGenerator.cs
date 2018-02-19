@@ -12,6 +12,8 @@ namespace Nez
 				public const string ambience = @"audios\se\Ambience";
 				public const string cancel = @"audios\se\Cancel";
 				public const string click = @"audios\se\Click";
+				public const string dash = @"audios\se\Dash";
+				public const string death = @"audios\se\Death";
 				public const string enemyDeath = @"audios\se\EnemyDeath";
 				public const string footstep = @"audios\se\Footstep";
 				public const string gun = @"audios\se\Gun";

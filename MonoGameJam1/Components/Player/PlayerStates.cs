@@ -164,6 +164,8 @@ namespace MonoGameJam1.Components.Player
                 fsm.resetStackTo(new StandState());
             });
             entity.velocityMultiplier = VelocityMultiplier;
+
+            AudioManager.dash.Play(0.7f);
         }
         
         public override void end()

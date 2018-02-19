@@ -543,6 +543,7 @@ namespace MonoGameJam1.Components.Player
 
         public void onDeath()
         {
+            AudioManager.death.Play(0.7f);
             FSM.changeState(new DyingState());
         }
 
