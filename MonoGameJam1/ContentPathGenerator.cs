@@ -36,8 +36,10 @@ namespace Nez
 			public const string hostage = @"characters\hostage";
 			public const string imp = @"characters\imp";
 			public const string impTank = @"characters\impTank";
+			public const string mine = @"characters\mine";
 			public const string placeholder = @"characters\placeholder";
 			public const string player = @"characters\player";
+			public const string trap = @"characters\trap";
 		}
 
 		public static class Effects

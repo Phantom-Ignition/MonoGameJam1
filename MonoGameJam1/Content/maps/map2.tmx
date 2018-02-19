@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="54" height="40" tilewidth="16" tileheight="16" nextobjectid="15">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="54" height="40" tilewidth="16" tileheight="16" nextobjectid="16">
  <properties>
   <property name="collisionLayer" value="collision"/>
   <property name="defaultLayers" value="collision, details"/>
@@ -131,9 +131,9 @@
 </data>
  </layer>
  <objectgroup color="#00557f" name="battleAreas">
-  <object id="9" name="First" x="0" y="432" width="336" height="160">
+  <object id="9" name="First" x="144" y="432" width="336" height="160">
    <properties>
-    <property name="enemies" value="EnemyImpTank"/>
+    <property name="enemies" value="EnemyImp"/>
     <property name="waves" value="1, 2"/>
    </properties>
   </object>
@@ -151,7 +151,9 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup color="#ff5500" name="enemies"/>
+ <objectgroup color="#ff5500" name="enemies">
+  <object id="15" type="EnemyTrap" x="80" y="576" width="21" height="13"/>
+ </objectgroup>
  <objectgroup name="hostages">
   <object id="14" name="Hostage" x="352" y="448" width="32" height="32"/>
  </objectgroup>
