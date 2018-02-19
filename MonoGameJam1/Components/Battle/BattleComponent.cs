@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reflection.Emit;
 using Microsoft.Xna.Framework;
+using MonoGameJam1.Components.Player;
 using MonoGameJam1.Components.Sprites;
 using Nez;
 using Nez.Sprites;
@@ -59,6 +61,7 @@ namespace MonoGameJam1.Components.Battle
         // Destroy entity
 
         public Action destroyEntityAction;
+        public Func<int> damageHitFunction;
 
         //----------------------//------------------------//
 
@@ -69,6 +72,7 @@ namespace MonoGameJam1.Components.Battle
             _animatedSprite = entity.getComponent<AnimatedSprite>();
 
             destroyEntityAction = destroyEntity;
+            damageHitFunction = DamageHitFunction;
         }
 
         public void setHp(int hp)
@@ -96,8 +100,8 @@ namespace MonoGameJam1.Components.Battle
             battleEntity?.onHit(knockback);
             _hitAnimation = 0.25f;
             ImmunityTime = ImmunityDuration;
-
-            HP--;
+            
+            HP -= damageHitFunction();
             if (HP <= 0)
             {
                 _animatedSprite.play("dying");
@@ -148,6 +152,11 @@ namespace MonoGameJam1.Components.Battle
         public virtual void destroyEntity()
         {
             entity.destroy();
+        }
+
+        protected virtual int DamageHitFunction()
+        {
+            return 1;
         }
 
         public bool isOnImmunity()

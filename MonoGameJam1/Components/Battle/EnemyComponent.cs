@@ -85,11 +85,12 @@ namespace MonoGameJam1.Components.Battle
             _battleComponent = entity.getComponent<BattleComponent>();
             _battleComponent.setMaxHp(1, true);
             _battleComponent.battleEntity = this;
+            _battleComponent.damageHitFunction = damageHitFunction;
 
             var player = Core.getGlobalManager<SystemManager>().playerEntity;
             _playerComponent = player.getComponent<PlayerComponent>();
         }
-        
+
         public void forceMovement(Vector2 velocity)
         {
             if (velocity == Vector2.Zero)
@@ -132,6 +133,11 @@ namespace MonoGameJam1.Components.Battle
             AudioManager.hit.Play(0.5f);
 
             Core.getGlobalManager<ScoreManager>().GetComboPoints(_playerComponent.CurrentDamageScale());
+        }
+
+        private int damageHitFunction()
+        {
+            return (int)Math.Floor(_playerComponent.CurrentWeaponDamage() * _playerComponent.CurrentDamageScale());
         }
 
         public virtual void onDeath() { }

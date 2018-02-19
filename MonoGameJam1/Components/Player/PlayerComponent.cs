@@ -765,6 +765,12 @@ namespace MonoGameJam1.Components.Player
         {
             return sprite.getCurrentFrame().AttackColliders[0].bounds;
         }
+        
+        public int CurrentWeaponDamage()
+        {
+            var comboState = _fsm.CurrentState as BaseAttackComboState;
+            return comboState?.WeaponDamage ?? 0;
+        }
 
         public float CurrentStateVerticalKnockback()
         {

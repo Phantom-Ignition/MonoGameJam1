@@ -237,6 +237,7 @@ namespace MonoGameJam1.Components.Player
         public PlayerComponent.Animations Animation;
         public PlayerState NextComboState;
         public bool IsFinal;
+        public int WeaponDamage = 20;
         public float VerticalKnockback;
         public float HorizontalKnockback;
         public float AttackPushDuration = 0.05f;

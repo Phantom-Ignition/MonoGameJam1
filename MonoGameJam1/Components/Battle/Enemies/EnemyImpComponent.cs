@@ -150,7 +150,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
         public override void onAddedToEntity()
         {
             base.onAddedToEntity();
-            _battleComponent.setHp(15);
+            _battleComponent.setHp(100);
 
             // Change move speed
             changeSpeed(ImpVelocity.Normal);
