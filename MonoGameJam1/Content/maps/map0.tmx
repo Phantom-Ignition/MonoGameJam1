@@ -144,10 +144,10 @@
   </object>
  </objectgroup>
  <objectgroup color="#ff5500" name="enemies">
-  <object id="13" name="Target Dummy" type="EnemyTargetDummy" x="256" y="496" width="32" height="32"/>
+  <object id="13" name="Target Dummy" type="EnemyTargetDummy" x="544" y="560" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="npcs">
-  <object id="16" name="Guide Two" type="GuideTwo" x="352" y="336" width="9" height="192"/>
+  <object id="16" name="Guide Two" type="GuideTwo" x="464" y="400" width="9" height="192"/>
   <object id="17" name="First guide" type="GuideOne" x="112" y="336" width="9" height="192"/>
   <object id="18" name="Guide Two Close" type="GuideTwoClose" x="848" y="368" width="9" height="192"/>
  </objectgroup>

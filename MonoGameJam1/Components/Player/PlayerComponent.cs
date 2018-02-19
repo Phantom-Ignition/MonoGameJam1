@@ -1,16 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Components.Battle;
+using MonoGameJam1.Components.Map;
 using MonoGameJam1.Components.Sprites;
+using MonoGameJam1.Extensions;
 using MonoGameJam1.FSM;
 using MonoGameJam1.Managers;
 using MonoGameJam1.Scenes;
 using Nez;
-using Nez.Sprites;
 using Nez.Tiled;
 using System;
 using System.Collections.Generic;
-using MonoGameJam1.Components.Map;
 
 namespace MonoGameJam1.Components.Player
 {
@@ -210,7 +210,7 @@ namespace MonoGameJam1.Components.Player
                 new Rectangle(700, 0, 100, 100),
             });
 
-            sprite.CreateAnimation(am[Animations.Walking], 0.09f);
+            sprite.CreateAnimation(am[Animations.Walking], 0.08f);
             sprite.AddFrames(am[Animations.Walking], new List<Rectangle>()
             {
                 new Rectangle(700, 800, 100, 100),
@@ -538,6 +538,7 @@ namespace MonoGameJam1.Components.Player
             _knockbackTick = new Vector2(0.06f, 0.04f);
             _knockbackVelocity = new Vector2(knockback.X * 60, -5);
             FSM.changeState(new HitState());
+            AudioManager.hitPlayer.Play(0.4f);
         }
 
         public void onDeath()
@@ -585,9 +586,8 @@ namespace MonoGameJam1.Components.Player
             {
                 if (isOnGround() && axis != 0 && _footstepCooldown <= 0.0f)
                 {
-                    _footstepCooldown = 0.25f;
-                    // footstep sound
-                    // AudioManager.footstep.Play(0.7f);
+                    _footstepCooldown = 0.3f;
+                    AudioManager.footstep.Play(0.7f);
                 }
                 else
                 {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameJam1.Extensions;
 using MonoGameJam1.Managers;
 using Nez;
 
@@ -41,6 +42,7 @@ namespace MonoGameJam1.Components.Player
 
         public void Close()
         {
+            AudioManager.click.Play(0.5f);
             IsOpen = false;
             _inputManager.IsBusy = false;
             Time.timeScale = 1f;

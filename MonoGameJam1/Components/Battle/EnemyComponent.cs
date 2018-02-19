@@ -1,13 +1,14 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Components.Colliders;
 using MonoGameJam1.Components.Player;
 using MonoGameJam1.Components.Sprites;
+using MonoGameJam1.Extensions;
 using MonoGameJam1.Managers;
 using MonoGameJam1.Scenes;
 using MonoGameJam1.Structs;
 using Nez;
+using System;
 
 namespace MonoGameJam1.Components.Battle
 {
@@ -127,6 +128,8 @@ namespace MonoGameJam1.Components.Battle
             {
                 (entity.scene as SceneMap)?.startScreenShake(screenShakeMagnitude, 100);
             }
+
+            AudioManager.hit.Play(0.5f);
 
             Core.getGlobalManager<ScoreManager>().GetComboPoints(_playerComponent.CurrentDamageScale());
         }

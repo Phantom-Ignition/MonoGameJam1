@@ -5,6 +5,29 @@ namespace Nez
 {
     class Content
     {
+		public static class Audios
+		{
+			public static class Se
+			{
+				public const string ambience = @"audios\se\Ambience";
+				public const string cancel = @"audios\se\Cancel";
+				public const string click = @"audios\se\Click";
+				public const string enemyDeath = @"audios\se\EnemyDeath";
+				public const string footstep = @"audios\se\Footstep";
+				public const string gun = @"audios\se\Gun";
+				public const string hit = @"audios\se\Hit";
+				public const string hitPlayer = @"audios\se\HitPlayer";
+				public const string jump = @"audios\se\Jump";
+				public const string select = @"audios\se\Select";
+				public const string wosh1 = @"audios\se\Wosh1";
+				public const string wosh2 = @"audios\se\Wosh2";
+				public const string wosh3 = @"audios\se\Wosh3";
+				public const string wosh4 = @"audios\se\Wosh4";
+				public const string wosh5 = @"audios\se\Wosh5";
+			}
+
+		}
+
 		public static class Characters
 		{
 			public const string dummy = @"characters\dummy";

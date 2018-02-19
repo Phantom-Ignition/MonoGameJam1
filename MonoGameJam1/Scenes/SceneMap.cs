@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Components;
 using MonoGameJam1.Components.Battle;
 using MonoGameJam1.Components.Map;
 using MonoGameJam1.Components.Player;
+using MonoGameJam1.Components.Sprites;
 using MonoGameJam1.Components.Windows;
 using MonoGameJam1.Managers;
 using MonoGameJam1.NPCs;
@@ -15,8 +17,6 @@ using Nez.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoGameJam1.Components.Sprites;
-using Nez.Sprites;
 
 namespace MonoGameJam1.Scenes
 {
@@ -80,6 +80,11 @@ namespace MonoGameJam1.Scenes
         private PlayerComponent _playerComponent;
 
         //--------------------------------------------------
+        // Ambience
+
+        private SoundEffectInstance _ambienceSe;
+
+        //--------------------------------------------------
         // HUD
 
         private Entity _hudEntity;
@@ -110,6 +115,11 @@ namespace MonoGameJam1.Scenes
             getEntityProcessor<NpcInteractionSystem>().mapStart();
             Core.getGlobalManager<InputManager>().IsLocked = false;
             Core.getGlobalManager<ScoreManager>().SaveCurrentScore();
+
+            _ambienceSe = AudioManager.ambience.CreateInstance();
+            _ambienceSe.IsLooped = true;
+            _ambienceSe.Volume = 0.7f;
+            _ambienceSe.Play();
         }
 
         private void setupMap()

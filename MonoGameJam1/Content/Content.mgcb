@@ -268,3 +268,93 @@
 /processorParam:TextureFormat=Color
 /build:misc/go.png
 
+#begin audios/se/Cancel.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Cancel.ogg
+
+#begin audios/se/Footstep.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Footstep.ogg
+
+#begin audios/se/Gun.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Gun.ogg
+
+#begin audios/se/Hit.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Hit.ogg
+
+#begin audios/se/Jump.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Jump.ogg
+
+#begin audios/se/Select.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Select.ogg
+
+#begin audios/se/Wosh1.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Wosh1.ogg
+
+#begin audios/se/Wosh2.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Wosh2.ogg
+
+#begin audios/se/Wosh3.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Wosh3.ogg
+
+#begin audios/se/Wosh4.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Wosh4.ogg
+
+#begin audios/se/Wosh5.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Wosh5.ogg
+
+#begin audios/se/HitPlayer.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/HitPlayer.ogg
+
+#begin audios/se/EnemyDeath.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/EnemyDeath.ogg
+
+#begin audios/se/Click.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Click.ogg
+
+#begin audios/se/Ambience.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Ambience.ogg
+

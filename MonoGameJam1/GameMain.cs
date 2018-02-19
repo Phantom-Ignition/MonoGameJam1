@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using MonoGameJam1.Managers;
 using MonoGameJam1.Scenes;
 using Nez;

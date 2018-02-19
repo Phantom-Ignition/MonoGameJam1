@@ -5,7 +5,9 @@ using MonoGameJam1.Components.Colliders;
 using MonoGameJam1.Components.Sprites;
 using Nez;
 using System.Collections.Generic;
+using MonoGameJam1.Extensions;
 using MonoGameJam1.FSM;
+using MonoGameJam1.Managers;
 
 namespace MonoGameJam1.Components.Battle.Enemies
 {
@@ -162,6 +164,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
         public override void onDeath()
         {
+            AudioManager.enemyDeath.Play(0.5f);
             FSM.changeState(new EnemyImpDying());
         }
 
