@@ -40,7 +40,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
             base.initialize();
 
             // Init sprite
-            var texture = entity.scene.content.Load<Texture2D>(Content.Characters.imp);
+            var texture = getImpTexture();
             sprite = entity.addComponent(new AnimatedSprite(texture, "stand"));
             sprite.CreateAnimation("stand", 0.1f);
             sprite.AddFrames("stand", new List<Rectangle>
@@ -197,6 +197,11 @@ namespace MonoGameJam1.Components.Battle.Enemies
                     break;
                 default: break;
             }
+        }
+
+        protected virtual Texture2D getImpTexture()
+        {
+            return entity.scene.content.Load<Texture2D>(Content.Characters.imp);
         }
     }
 }

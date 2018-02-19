@@ -35,6 +35,7 @@ namespace Nez
 			public const string dummy = @"characters\dummy";
 			public const string hostage = @"characters\hostage";
 			public const string imp = @"characters\imp";
+			public const string impTank = @"characters\impTank";
 			public const string placeholder = @"characters\placeholder";
 			public const string player = @"characters\player";
 		}
@@ -57,6 +58,7 @@ namespace Nez
 		{
 			public const string map0 = @"maps\map0";
 			public const string map1 = @"maps\map1";
+			public const string map2 = @"maps\map2";
 			public const string tileset = @"maps\tileset";
 		}
 

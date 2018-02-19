@@ -9,6 +9,8 @@ using MonoGameJam1.Scenes;
 using MonoGameJam1.Structs;
 using Nez;
 using System;
+using MonoGameJam1.Components.Map;
+using Random = Nez.Random;
 
 namespace MonoGameJam1.Components.Battle
 {
@@ -70,6 +72,8 @@ namespace MonoGameJam1.Components.Battle
 
         public virtual bool canTakeDamage => true;
 
+        private DamageHitsComponent _damageHitsComponent; 
+
         //----------------------//------------------------//
 
         public EnemyComponent(bool patrolStartRight)
@@ -89,6 +93,8 @@ namespace MonoGameJam1.Components.Battle
 
             var player = Core.getGlobalManager<SystemManager>().playerEntity;
             _playerComponent = player.getComponent<PlayerComponent>();
+
+            _damageHitsComponent = entity.addComponent<DamageHitsComponent>();
         }
 
         public void forceMovement(Vector2 velocity)
@@ -137,7 +143,10 @@ namespace MonoGameJam1.Components.Battle
 
         private int damageHitFunction()
         {
-            return (int)Math.Floor(_playerComponent.CurrentWeaponDamage() * _playerComponent.CurrentDamageScale());
+            var damage = (int)Math.Floor(_playerComponent.CurrentWeaponDamage() * _playerComponent.CurrentDamageScale());
+            var positionOffset = new Vector2(0, -18);
+            _damageHitsComponent.addNumber(damage, positionOffset);
+            return damage;
         }
 
         public virtual void onDeath() { }

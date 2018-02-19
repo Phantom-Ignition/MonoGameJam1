@@ -131,9 +131,9 @@
 </data>
  </layer>
  <objectgroup color="#00557f" name="battleAreas">
-  <object id="9" name="First" x="144" y="432" width="336" height="160">
+  <object id="9" name="First" x="0" y="432" width="336" height="160">
    <properties>
-    <property name="enemies" value="EnemyImp"/>
+    <property name="enemies" value="EnemyImpTank"/>
     <property name="waves" value="1, 2"/>
    </properties>
   </object>
