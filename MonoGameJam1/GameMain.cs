@@ -33,10 +33,6 @@ namespace MonoGameJam1
             bigBitmapFont = content.Load<BitmapFont>(Nez.Content.Fonts.titleFont);
             smallBitmapFont = content.Load<BitmapFont>(Nez.Content.Fonts.smallFont);
             AudioManager.loadAllSounds();
-
-            // MediaPlayer.Play(AudioManager.BGM);
-            // MediaPlayer.Volume = 0.8f;
-            // MediaPlayer.IsRepeating = true;
         }
 
         protected override void Initialize()

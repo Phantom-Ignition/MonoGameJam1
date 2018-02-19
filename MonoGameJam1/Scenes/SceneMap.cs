@@ -16,6 +16,7 @@ using Nez.Tiled;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework.Media;
 
 namespace MonoGameJam1.Scenes
 {
@@ -113,6 +114,25 @@ namespace MonoGameJam1.Scenes
             _ambienceSe.IsLooped = true;
             _ambienceSe.Volume = 0.7f;
             _ambienceSe.Play();
+
+            var sysManager = Core.getGlobalManager<SystemManager>();
+            var mapId = sysManager.MapId;
+            Song bgm = AudioManager.hotSwing;
+            if (mapId <= 2)
+            {
+                bgm = AudioManager.dispersionRelation;
+            }
+            if (mapId == 3 || mapId == 4)
+            {
+                bgm = AudioManager.witchHunt;
+            }
+            if (mapId == 5 || mapId == 6)
+            {
+                bgm = AudioManager.zombieChase;
+            }
+            MediaPlayer.Play(bgm);
+            MediaPlayer.Volume = 0.8f;
+            MediaPlayer.IsRepeating = true;
         }
 
         private void setupMap()

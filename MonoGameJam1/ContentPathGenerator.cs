@@ -7,6 +7,14 @@ namespace Nez
     {
 		public static class Audios
 		{
+			public static class Bgm
+			{
+				public const string dispersionRelation = @"audios\bgm\DispersionRelation";
+				public const string hotSwing = @"audios\bgm\HotSwing";
+				public const string witchHunt = @"audios\bgm\WitchHunt";
+				public const string zombieChase = @"audios\bgm\ZombieChase";
+			}
+
 			public static class Se
 			{
 				public const string ambience = @"audios\se\Ambience";
@@ -66,6 +74,7 @@ namespace Nez
 			public const string map4 = @"maps\map4";
 			public const string map5 = @"maps\map5";
 			public const string map6 = @"maps\map6";
+			public const string map7 = @"maps\map7";
 			public const string tileset = @"maps\tileset";
 		}
 

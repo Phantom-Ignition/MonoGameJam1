@@ -454,3 +454,27 @@
 /processor:TiledMapProcessor
 /build:maps/map7.tmx
 
+#begin audios/bgm/WitchHunt.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audios/bgm/WitchHunt.mp3
+
+#begin audios/bgm/DispersionRelation.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audios/bgm/DispersionRelation.mp3
+
+#begin audios/bgm/ZombieChase.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audios/bgm/ZombieChase.mp3
+
+#begin audios/bgm/HotSwing.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audios/bgm/HotSwing.mp3
+

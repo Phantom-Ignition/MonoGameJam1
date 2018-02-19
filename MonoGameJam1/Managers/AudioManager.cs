@@ -22,6 +22,11 @@ namespace MonoGameJam1.Managers
         public static SoundEffect dash;
         public static SoundEffect trap;
 
+        public static Song dispersionRelation;
+        public static Song witchHunt;
+        public static Song hotSwing;
+        public static Song zombieChase;
+
         public static void loadAllSounds()
         {
             attackSounds = new AudioSource();
@@ -44,6 +49,11 @@ namespace MonoGameJam1.Managers
             death = load(Content.Audios.Se.death);
             dash = load(Content.Audios.Se.dash);
             trap = load(Content.Audios.Se.trap);
+
+            dispersionRelation = loadBgm(Content.Audios.Bgm.dispersionRelation);
+            witchHunt = loadBgm(Content.Audios.Bgm.witchHunt);
+            hotSwing = loadBgm(Content.Audios.Bgm.hotSwing);
+            zombieChase = loadBgm(Content.Audios.Bgm.zombieChase);
         }
 
         private static SoundEffect load(string name)

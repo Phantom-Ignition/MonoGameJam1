@@ -103,6 +103,7 @@
     <Compile Include="Scenes\SceneMap.cs" />
     <Compile Include="Scenes\SceneMapExtensions\ISceneMapExtensionable.cs" />
     <Compile Include="Scenes\SceneMapExtensions\MoveToCredits.cs" />
+    <Compile Include="Scenes\SceneTitle.cs" />
     <Compile Include="Systems\BattleAreasSystem.cs" />
     <Compile Include="Systems\BattleSystem.cs" />
     <Compile Include="Systems\CameraSystem.cs" />
