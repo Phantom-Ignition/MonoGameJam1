@@ -18,10 +18,6 @@ namespace MonoGameJam1.Components.Battle.Enemies
         
         //----------------------//------------------------//
 
-        public EnemyTargetDummyComponent(bool patrolStartRight) : base(patrolStartRight)
-        {
-        }
-
         public override void initialize()
         {
             base.initialize();

@@ -10,7 +10,6 @@ using MonoGameJam1.Components.Windows;
 using MonoGameJam1.Managers;
 using MonoGameJam1.NPCs;
 using MonoGameJam1.Scenes.SceneMapExtensions;
-using MonoGameJam1.Structs;
 using MonoGameJam1.Systems;
 using Nez;
 using Nez.Tiled;
@@ -65,11 +64,6 @@ namespace MonoGameJam1.Scenes
         private List<ISceneMapExtensionable> _mapExtensions;
 
         //--------------------------------------------------
-        // Paths
-
-        private MapPath[] _paths;
-
-        //--------------------------------------------------
         // Battle Areas
         
         private Entity _currentBattleArea;
@@ -99,7 +93,6 @@ namespace MonoGameJam1.Scenes
             setupMap();
             setupBattleAreas();
             setupPlayer();
-            setupPaths();
             setupHostages();
             setupEnemies();
             setupNpcs();
@@ -209,25 +202,6 @@ namespace MonoGameJam1.Scenes
             _playerComponent = playerComponent;
             systemManager.setPlayer(player);
         }
-        
-        private void setupPaths()
-        {
-            var pathObjectGroup = _tiledMap.getObjectGroup("paths");
-            if (pathObjectGroup == null) return;
-
-            var objects = pathObjectGroup.objects;
-
-            _paths = new MapPath[objects.Length];
-            for (var i = 0; i < objects.Length; i++)
-            {
-                _paths[i] = new MapPath
-                {
-                    Name = objects[i].name,
-                    Start = objects[i].position,
-                    End = objects[i].position + new Vector2(objects[i].width, objects[i].height)
-                };
-            }
-        }
 
         private void setupHostages()
         {
@@ -256,12 +230,6 @@ namespace MonoGameJam1.Scenes
 
                 EnemyComponent enemyComponent;
                 var entity = createEnemy(enemy.type, patrolStartRight, out enemyComponent);
-                if (enemy.properties.ContainsKey("path"))
-                {
-                    var pathName = enemy.properties["path"];
-                    var path = _paths.First(x => x.Name == pathName);
-                    enemyComponent.path = path;
-                }
                 entity.transform.position = enemy.position + new Vector2(enemy.width, enemy.height) / 2;
             }
         }
@@ -277,7 +245,7 @@ namespace MonoGameJam1.Scenes
             var collider = entity.addComponent(new BoxCollider(-22f, -9f, 44f, 32f));
             Flags.setFlagExclusive(ref collider.physicsLayer, ENEMY_LAYER);
 
-            var instance = createEnemyInstance(enemyName, patrolStartRight);
+            var instance = createEnemyInstance(enemyName);
             enemyComponent = entity.addComponent(instance);
             enemyComponent.sprite.renderLayer = ENEMIES_RENDER_LAYER;
             enemyComponent.playerCollider = findEntity("player").getComponent<BoxCollider>();
@@ -285,13 +253,13 @@ namespace MonoGameJam1.Scenes
             return entity;
         }
 
-        private EnemyComponent createEnemyInstance(string enemyName, bool patrolStartRight)
+        private EnemyComponent createEnemyInstance(string enemyName)
         {
             var enemiesNamespace = typeof(BattleComponent).Namespace + ".Enemies";
-            var type = Type.GetType(enemiesNamespace + "." + enemyName + "Component");
+            var type = Type.GetType(enemiesNamespace + "." + enemyName.Trim() + "Component");
             if (type != null)
             {
-                return Activator.CreateInstance(type, new object[] { patrolStartRight }) as EnemyComponent;
+                return Activator.CreateInstance(type) as EnemyComponent;
             }
             return null;
         }
@@ -424,7 +392,7 @@ namespace MonoGameJam1.Scenes
         {
             Core.getGlobalManager<ScoreManager>().SaveCurrentScore();
             Core.getGlobalManager<SystemManager>().setMapId(transferComponent.destinyId);
-            Core.getGlobalManager<SystemManager>().setSpawnPosition(transferComponent.destinyPosition);
+            //Core.getGlobalManager<SystemManager>().setSpawnPosition(transferComponent.destinyPosition);
             Core.startSceneTransition(new FadeTransition(() => new SceneMap()));
         }
 
@@ -432,7 +400,7 @@ namespace MonoGameJam1.Scenes
         {
             var spawnPosition = new Vector2(mapX, mapY);
             Core.getGlobalManager<SystemManager>().setMapId(mapId);
-            Core.getGlobalManager<SystemManager>().setSpawnPosition(spawnPosition);
+            //Core.getGlobalManager<SystemManager>().setSpawnPosition(spawnPosition);
             Core.startSceneTransition(new FadeTransition(() => new SceneMap()));
         }
 

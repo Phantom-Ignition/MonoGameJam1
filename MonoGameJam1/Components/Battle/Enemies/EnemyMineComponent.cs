@@ -17,10 +17,6 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
         //----------------------//------------------------//
 
-        public EnemyMineComponent(bool patrolStartRight) : base(patrolStartRight)
-        {
-        }
-
         public override void onAddedToEntity()
         {
             base.onAddedToEntity();

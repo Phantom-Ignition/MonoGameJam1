@@ -15,7 +15,6 @@ namespace MonoGameJam1.Components.Map
     {
         public TransferDirection direction;
         public int destinyId;
-        public Vector2 destinyPosition;
 
         private readonly TiledObject _tiledObject;
 
@@ -29,10 +28,6 @@ namespace MonoGameJam1.Components.Map
             var tiledMap = Core.getGlobalManager<SystemManager>().TiledMap;
 
             destinyId = int.Parse(_tiledObject.properties["destinyId"]);
-
-            var destinyX = int.Parse(_tiledObject.properties["destinyX"]) * tiledMap.tileWidth;
-            var destinyY = int.Parse(_tiledObject.properties["destinyY"]) * tiledMap.tileHeight;
-            destinyPosition = new Vector2(destinyX, destinyY);
 
             direction = _tiledObject.properties["direction"] == "left" ? TransferDirection.Left : TransferDirection.Right;
             if (direction == TransferDirection.Left)

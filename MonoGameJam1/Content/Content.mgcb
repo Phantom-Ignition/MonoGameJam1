@@ -411,3 +411,29 @@
 /processorParam:TextureFormat=Color
 /build:characters/trap.png
 
+#begin audios/se/Trap.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audios/se/Trap.ogg
+
+#begin maps/map4.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/map4.tmx
+
+#begin maps/map3.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/map3.tmx
+
+#begin maps/map5.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/map5.tmx
+
+#begin maps/map6.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/map6.tmx
+

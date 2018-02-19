@@ -1,4 +1,4 @@
-﻿namespace MonoGameJam1.NPCs.Guides
+﻿namespace MonoGameJam1.NPCs
 {
     public class GuideTwoClose : NpcBase
     {

@@ -55,6 +55,12 @@ namespace MonoGameJam1.Components.Battle.Enemies
             {
                 fsm.changeState(new EnemyImpRandomMove());
             }
+            if (entity.sawThePlayer())
+            {
+                entity.turnToPlayer();
+                fsm.resetStackTo(new EnemyImpJumpAttack());
+                entity.unseeThePlayer();
+            }
         }
     }
 
@@ -100,6 +106,12 @@ namespace MonoGameJam1.Components.Battle.Enemies
             if (_moveTime <= 0)
             {
                 fsm.resetStackTo(new EnemyImpThinking());
+            }
+            if (entity.sawThePlayer())
+            {
+                entity.turnToPlayer();
+                fsm.resetStackTo(new EnemyImpJumpAttack());
+                entity.unseeThePlayer();
             }
             if (entity.canSeeThePlayer())
             {

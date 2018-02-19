@@ -16,15 +16,16 @@ namespace MonoGameJam1.Components.Battle.Enemies
         public FiniteStateMachine<EnemyTrapState, EnemyTrapComponent> FSM { get; private set; }
 
         //--------------------------------------------------
+        // Can take damage
+
+        public override bool canTakeDamage => false;
+
+        //--------------------------------------------------
         // Cooldown
 
         public float Cooldown { get; set; }
 
         //----------------------//------------------------//
-
-        public EnemyTrapComponent(bool patrolStartRight) : base(patrolStartRight)
-        {
-        }
 
         public override void onAddedToEntity()
         {
@@ -32,6 +33,8 @@ namespace MonoGameJam1.Components.Battle.Enemies
             platformerObject.maxMoveSpeed = 0;
             platformerObject.moveSpeed = 0;
         }
+
+        public override void onHit(Vector2 knockback) { }
 
         public override void initialize()
         {

@@ -21,6 +21,7 @@ namespace Nez
 				public const string hitPlayer = @"audios\se\HitPlayer";
 				public const string jump = @"audios\se\Jump";
 				public const string select = @"audios\se\Select";
+				public const string trap = @"audios\se\Trap";
 				public const string wosh1 = @"audios\se\Wosh1";
 				public const string wosh2 = @"audios\se\Wosh2";
 				public const string wosh3 = @"audios\se\Wosh3";

@@ -101,7 +101,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\SceneMap.cs" />
     <Compile Include="Scenes\SceneMapExtensions\ISceneMapExtensionable.cs" />
-    <Compile Include="Structs\MapPath.cs" />
     <Compile Include="Systems\BattleAreasSystem.cs" />
     <Compile Include="Systems\BattleSystem.cs" />
     <Compile Include="Systems\CameraSystem.cs" />

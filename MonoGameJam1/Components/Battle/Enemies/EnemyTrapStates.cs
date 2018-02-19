@@ -1,4 +1,6 @@
-﻿using MonoGameJam1.FSM;
+﻿using MonoGameJam1.Extensions;
+using MonoGameJam1.FSM;
+using MonoGameJam1.Managers;
 
 namespace MonoGameJam1.Components.Battle.Enemies
 {
@@ -30,6 +32,8 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
     public class EnemyTrapActive : EnemyTrapState
     {
+        private bool _playedSe;
+
         public override void begin()
         {
             entity.sprite.play("active");
@@ -37,6 +41,11 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
         public override void update()
         {
+            if (!_playedSe && entity.sprite.CurrentFrame == 5)
+            {
+                _playedSe = true;
+                AudioManager.trap.Play(0.5f);
+            }
             if (entity.sprite.Looped)
             {
                 fsm.resetStackTo(new EnemyTrapIdle());

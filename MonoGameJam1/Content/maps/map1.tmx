@@ -4,8 +4,8 @@
   <property name="collisionLayer" value="collision"/>
   <property name="defaultLayers" value="collision, details"/>
  </properties>
- <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="16" columns="4">
-  <image source="tileset.png" width="64" height="64"/>
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="35" columns="5">
+  <image source="tileset.png" width="80" height="112"/>
   <tile id="2">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
@@ -20,25 +20,53 @@
     <property name="nez:slopeTopRight" type="int" value="0"/>
    </properties>
   </tile>
-  <tile id="4">
+  <tile id="5">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
     <property name="nez:slopeTopLeft" type="int" value="0"/>
     <property name="nez:slopeTopRight" type="int" value="15"/>
    </properties>
   </tile>
-  <tile id="5">
+  <tile id="6">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
     <property name="nez:slopeTopLeft" type="int" value="15"/>
     <property name="nez:slopeTopRight" type="int" value="0"/>
    </properties>
   </tile>
-  <tile id="8">
+  <tile id="10">
    <properties>
     <property name="nez:isSlope" type="bool" value="true"/>
     <property name="nez:slopeTopLeft" type="int" value="0"/>
     <property name="nez:slopeTopRight" type="int" value="15"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="0"/>
+    <property name="nez:slopeTopRight" type="int" value="15"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="15"/>
+    <property name="nez:slopeTopRight" type="int" value="0"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="0"/>
+    <property name="nez:slopeTopRight" type="int" value="15"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="nez:isSlope" type="bool" value="true"/>
+    <property name="nez:slopeTopLeft" type="int" value="15"/>
+    <property name="nez:slopeTopRight" type="int" value="0"/>
    </properties>
   </tile>
  </tileset>
@@ -78,10 +106,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,5,0,0,0,0,0,0,0,0,0,
-2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,0,5,0,0,0,0,0,0,0,0,
-2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,6,0,0,0,0,0,0,0,0,0,
+2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,0,6,0,0,0,0,0,0,0,0,
+2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
 </data>
@@ -121,10 +149,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+35,35,35,35,35,35,35,35,35,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35,35,35,35,35,35,35,35,35,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,0,0,0,0,0,0,0,0,0,0,0,35,35,35,35,35,35,35,35,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -139,14 +167,12 @@
   </object>
  </objectgroup>
  <objectgroup name="objects">
-  <object id="1" name="playerSpawn" x="32" y="512" width="32" height="32"/>
+  <object id="1" name="playerSpawn" x="624" y="496" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="transfers">
   <object id="5" name="Transfer" type="onTouch" x="848" y="176" width="4" height="416">
    <properties>
-    <property name="destinyId" type="int" value="1"/>
-    <property name="destinyX" type="int" value="1"/>
-    <property name="destinyY" type="int" value="26"/>
+    <property name="destinyId" type="int" value="2"/>
     <property name="direction" value="right"/>
    </properties>
   </object>

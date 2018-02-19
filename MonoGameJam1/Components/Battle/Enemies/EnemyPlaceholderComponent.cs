@@ -10,10 +10,6 @@ namespace MonoGameJam1.Components.Battle.Enemies
 {
     class EnemyPlaceholderComponent : EnemyComponent
     {
-        public EnemyPlaceholderComponent(bool patrolStartRight) : base(patrolStartRight)
-        {
-        }
-
         public override void initialize()
         {
             base.initialize();

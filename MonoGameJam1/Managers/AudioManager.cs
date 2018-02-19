@@ -20,6 +20,7 @@ namespace MonoGameJam1.Managers
         public static SoundEffect ambience;
         public static SoundEffect death;
         public static SoundEffect dash;
+        public static SoundEffect trap;
 
         public static void loadAllSounds()
         {
@@ -42,6 +43,7 @@ namespace MonoGameJam1.Managers
             ambience = load(Content.Audios.Se.ambience);
             death = load(Content.Audios.Se.death);
             dash = load(Content.Audios.Se.dash);
+            trap = load(Content.Audios.Se.trap);
         }
 
         private static SoundEffect load(string name)

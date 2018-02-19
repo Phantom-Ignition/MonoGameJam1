@@ -1,16 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Components.Colliders;
+using MonoGameJam1.Components.Map;
 using MonoGameJam1.Components.Player;
 using MonoGameJam1.Components.Sprites;
 using MonoGameJam1.Extensions;
 using MonoGameJam1.Managers;
 using MonoGameJam1.Scenes;
-using MonoGameJam1.Structs;
 using Nez;
 using System;
-using MonoGameJam1.Components.Map;
-using Random = Nez.Random;
 
 namespace MonoGameJam1.Components.Battle
 {
@@ -60,12 +58,9 @@ namespace MonoGameJam1.Components.Battle
         public AreaOfSightCollider areaOfSight;
 
         //--------------------------------------------------
-        // Patrol
-
-        public MapPath path;
-        public bool patrolStartRight;
-        private int _currentPatrolSide;
-        private bool _sawThePlayer;
+        // Saw the player
+        
+        protected bool _sawThePlayer;
 
         //--------------------------------------------------
         // Can take damage
@@ -75,12 +70,6 @@ namespace MonoGameJam1.Components.Battle
         private DamageHitsComponent _damageHitsComponent; 
 
         //----------------------//------------------------//
-
-        public EnemyComponent(bool patrolStartRight)
-        {
-            this.patrolStartRight = patrolStartRight;
-            _currentPatrolSide = patrolStartRight ? 1 : -1;
-        }
 
         public override void onAddedToEntity()
         {
@@ -169,7 +158,6 @@ namespace MonoGameJam1.Components.Battle
             if (canMove() && (velocity > 0 || velocity < 0))
             {
                 var po = _platformerObject;
-                var mms = po.maxMoveSpeed;
                 var moveSpeed = po.moveSpeed;
 
                 if (velocity != Math.Sign(po.velocity.X))
@@ -232,21 +220,10 @@ namespace MonoGameJam1.Components.Battle
             return _sawThePlayer;
         }
 
-        public int currentPatrolSide()
-        {
-            return _sawThePlayer ? Math.Sign(distanceToPlayer()) : _currentPatrolSide;
-        }
-
-        public void switchPatrolSide()
-        {
-            _currentPatrolSide *= -1;
-        }
-
         public void turnToPlayer()
         {
             _sawThePlayer = true;
             var side = distanceToPlayer();
-            _currentPatrolSide = Math.Sign(side);
             sprite.spriteEffects = side > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
         }
 

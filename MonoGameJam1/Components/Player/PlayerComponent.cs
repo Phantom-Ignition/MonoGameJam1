@@ -517,7 +517,7 @@ namespace MonoGameJam1.Components.Player
             _battleComponent.battleEntity = this;
             _battleComponent.ImmunityDuration = 0.5f;
             _battleComponent.destroyEntityAction = destroyEntity;
-            _battleComponent.setMaxHp(10, true);
+            _battleComponent.setMaxHp(20, true);
 
             _weaponSelectionComponent = entity.addComponent<WeaponSelectionComponent>();
 

@@ -66,26 +66,30 @@ namespace MonoGameJam1.Managers
             _jumpButton = new VirtualButton();
             _jumpButton
                 .addKeyboardKey(Keys.Up)
-                .addGamePadButton(0, Buttons.A);    
+                .addGamePadButton(0, Buttons.A);
 
             _upButton = new VirtualButton();
             _upButton
                 .addKeyboardKey(Keys.Up)
+                .addGamePadButton(0, Buttons.LeftThumbstickUp)
                 .addGamePadButton(0, Buttons.DPadUp);
 
             _leftButton = new VirtualButton();
             _leftButton
                 .addKeyboardKey(Keys.Left)
+                .addGamePadButton(0, Buttons.LeftThumbstickLeft)
                 .addGamePadButton(0, Buttons.DPadLeft);
 
             _rightButton = new VirtualButton();
             _rightButton
                 .addKeyboardKey(Keys.Right)
+                .addGamePadButton(0, Buttons.LeftThumbstickRight)
                 .addGamePadButton(0, Buttons.DPadRight);
 
             _downButton = new VirtualButton();
             _downButton
                 .addKeyboardKey(Keys.Down)
+                .addGamePadButton(0, Buttons.LeftThumbstickDown)
                 .addGamePadButton(0, Buttons.DPadDown);
 
             _movementAxis = new VirtualIntegerAxis();

@@ -31,10 +31,6 @@ namespace MonoGameJam1.Components.Battle.Enemies
 
         //----------------------//------------------------//
 
-        public EnemyImpComponent(bool patrolStartRight) : base(patrolStartRight)
-        {
-        }
-
         public override void initialize()
         {
             base.initialize();
@@ -160,6 +156,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
         {
             base.onHit(knockback);
             FSM.changeState(new EnemyImpHit());
+            _sawThePlayer = true;
         }
 
         public override void onDeath()

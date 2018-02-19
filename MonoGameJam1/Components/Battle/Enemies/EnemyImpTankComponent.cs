@@ -5,10 +5,6 @@ namespace MonoGameJam1.Components.Battle.Enemies
 {
     public class EnemyImpTankComponent : EnemyImpComponent
     {
-        public EnemyImpTankComponent(bool patrolStartRight) : base(patrolStartRight)
-        {
-        }
-
         public override void onAddedToEntity()
         {
             base.onAddedToEntity();
