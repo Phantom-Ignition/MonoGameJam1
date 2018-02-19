@@ -478,3 +478,162 @@
 /processorParam:Quality=Best
 /build:audios/bgm/HotSwing.mp3
 
+#begin system/credits.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:system/credits.png
+
+#begin maps/background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/background.png
+
+#begin nez/effects/transitions/Squares.mgfxo
+/copy:nez/effects/transitions/Squares.mgfxo
+
+#begin nez/effects/transitions/TextureWipe.mgfxo
+/copy:nez/effects/transitions/TextureWipe.mgfxo
+
+#begin nez/effects/transitions/Wind.mgfxo
+/copy:nez/effects/transitions/Wind.mgfxo
+
+#begin nez/effects/Bevels.mgfxo
+/copy:nez/effects/Bevels.mgfxo
+
+#begin nez/effects/BloomCombine.mgfxo
+/copy:nez/effects/BloomCombine.mgfxo
+
+#begin nez/effects/BloomExtract.mgfxo
+/copy:nez/effects/BloomExtract.mgfxo
+
+#begin nez/effects/Crosshatch.mgfxo
+/copy:nez/effects/Crosshatch.mgfxo
+
+#begin nez/effects/DeferredLighting.mgfxo
+/copy:nez/effects/DeferredLighting.mgfxo
+
+#begin nez/effects/DeferredSprite.mgfxo
+/copy:nez/effects/DeferredSprite.mgfxo
+
+#begin nez/effects/Dissolve.mgfxo
+/copy:nez/effects/Dissolve.mgfxo
+
+#begin nez/effects/Dots.mgfxo
+/copy:nez/effects/Dots.mgfxo
+
+#begin nez/effects/ForwardLighting.mgfxo
+/copy:nez/effects/ForwardLighting.mgfxo
+
+#begin nez/effects/GaussianBlur.mgfxo
+/copy:nez/effects/GaussianBlur.mgfxo
+
+#begin nez/effects/Grayscale.mgfxo
+/copy:nez/effects/Grayscale.mgfxo
+
+#begin nez/effects/HeatDistortion.mgfxo
+/copy:nez/effects/HeatDistortion.mgfxo
+
+#begin nez/effects/Invert.mgfxo
+/copy:nez/effects/Invert.mgfxo
+
+#begin nez/effects/Letterbox.mgfxo
+/copy:nez/effects/Letterbox.mgfxo
+
+#begin nez/effects/MultiTexture.mgfxo
+/copy:nez/effects/MultiTexture.mgfxo
+
+#begin nez/effects/MultiTextureOverlay.mgfxo
+/copy:nez/effects/MultiTextureOverlay.mgfxo
+
+#begin nez/effects/Noise.mgfxo
+/copy:nez/effects/Noise.mgfxo
+
+#begin nez/effects/PaletteCycler.mgfxo
+/copy:nez/effects/PaletteCycler.mgfxo
+
+#begin nez/effects/PixelGlitch.mgfxo
+/copy:nez/effects/PixelGlitch.mgfxo
+
+#begin nez/effects/PolygonLight.mgfxo
+/copy:nez/effects/PolygonLight.mgfxo
+
+#begin nez/effects/Reflection.mgfxo
+/copy:nez/effects/Reflection.mgfxo
+
+#begin nez/effects/Scanlines.mgfxo
+/copy:nez/effects/Scanlines.mgfxo
+
+#begin nez/effects/Sepia.mgfxo
+/copy:nez/effects/Sepia.mgfxo
+
+#begin nez/effects/SpriteAlphaTest.mgfxo
+/copy:nez/effects/SpriteAlphaTest.mgfxo
+
+#begin nez/effects/SpriteBlinkEffect.mgfxo
+/copy:nez/effects/SpriteBlinkEffect.mgfxo
+
+#begin nez/effects/SpriteEffect.mgfxo
+/copy:nez/effects/SpriteEffect.mgfxo
+
+#begin nez/effects/SpriteLightMultiply.mgfxo
+/copy:nez/effects/SpriteLightMultiply.mgfxo
+
+#begin nez/effects/SpriteLines.mgfxo
+/copy:nez/effects/SpriteLines.mgfxo
+
+#begin nez/effects/Twist.mgfxo
+/copy:nez/effects/Twist.mgfxo
+
+#begin nez/effects/Vignette.mgfxo
+/copy:nez/effects/Vignette.mgfxo
+
+#begin nez/textures/textureWipeTransition/angular.xnb
+/copy:nez/textures/textureWipeTransition/angular.xnb
+
+#begin nez/textures/textureWipeTransition/crissCross.xnb
+/copy:nez/textures/textureWipeTransition/crissCross.xnb
+
+#begin nez/textures/textureWipeTransition/diagonalDistort.xnb
+/copy:nez/textures/textureWipeTransition/diagonalDistort.xnb
+
+#begin nez/textures/textureWipeTransition/horizontal.xnb
+/copy:nez/textures/textureWipeTransition/horizontal.xnb
+
+#begin nez/textures/textureWipeTransition/noise.xnb
+/copy:nez/textures/textureWipeTransition/noise.xnb
+
+#begin nez/textures/textureWipeTransition/pokemon.xnb
+/copy:nez/textures/textureWipeTransition/pokemon.xnb
+
+#begin nez/textures/textureWipeTransition/sawTooth.xnb
+/copy:nez/textures/textureWipeTransition/sawTooth.xnb
+
+#begin nez/textures/textureWipeTransition/spiral.xnb
+/copy:nez/textures/textureWipeTransition/spiral.xnb
+
+#begin nez/textures/textureWipeTransition/wink.xnb
+/copy:nez/textures/textureWipeTransition/wink.xnb
+
+#begin nez/textures/gooCursor.xnb
+/copy:nez/textures/gooCursor.xnb
+
+#begin nez/textures/heatDistortionNoise.xnb
+/copy:nez/textures/heatDistortionNoise.xnb
+
+#begin nez/NezDefaultBMFont.xnb
+/copy:nez/NezDefaultBMFont.xnb
+

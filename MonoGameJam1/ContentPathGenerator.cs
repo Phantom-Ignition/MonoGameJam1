@@ -67,6 +67,7 @@ namespace Nez
 
 		public static class Maps
 		{
+			public const string background = @"maps\background";
 			public const string map0 = @"maps\map0";
 			public const string map1 = @"maps\map1";
 			public const string map2 = @"maps\map2";
@@ -93,6 +94,7 @@ namespace Nez
 
 		public static class System
 		{
+			public const string credits = @"system\credits";
 			public const string windowskin = @"system\windowskin";
 		}
 

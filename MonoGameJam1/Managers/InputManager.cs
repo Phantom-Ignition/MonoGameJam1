@@ -47,11 +47,13 @@ namespace MonoGameJam1.Managers
             _interactionButton
                 .addKeyboardKey(Keys.X)
                 .addKeyboardKey(Keys.Z)
-                .addKeyboardKey(Keys.C)
                 .addKeyboardKey(Keys.Space)
                 .addKeyboardKey(Keys.Enter)
                 .addGamePadButton(0, Buttons.A)
-                .addGamePadButton(0, Buttons.X);
+                .addGamePadButton(0, Buttons.B)
+                .addGamePadButton(0, Buttons.Y)
+                .addGamePadButton(0, Buttons.X)
+                .addGamePadButton(0, Buttons.Start);
 
             _weaponSelectionButton = new VirtualButton();
             _weaponSelectionButton

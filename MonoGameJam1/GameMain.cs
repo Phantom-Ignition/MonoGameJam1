@@ -20,7 +20,8 @@ namespace MonoGameJam1
             Window.AllowUserResizing = true;
             IsMouseVisible = true;
             IsFixedTimeStep = true;
-            debugRenderEnabled = true;
+            debugRenderEnabled = false;
+            exitOnEscapeKeypress = false;
 
             // Register Global Managers
             registerGlobalManager(new InputManager());
@@ -45,7 +46,7 @@ namespace MonoGameJam1
             base.Update(new GameTime());
             base.Draw(new GameTime());
 
-            getGlobalManager<SystemManager>().setMapId(6);
+            getGlobalManager<SystemManager>().setMapId(0);
 
             // Set first scene
             scene = new SceneMap();

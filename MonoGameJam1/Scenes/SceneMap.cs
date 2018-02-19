@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework.Media;
+using Nez.Sprites;
 
 namespace MonoGameJam1.Scenes
 {
@@ -53,6 +54,7 @@ namespace MonoGameJam1.Scenes
 
         private TiledMapComponent _tiledMapComponent;
         private TiledMap _tiledMap;
+        private Sprite _backgroundSprite;
 
         //--------------------------------------------------
         // Camera
@@ -137,6 +139,7 @@ namespace MonoGameJam1.Scenes
 
         private void setupMap()
         {
+
             var sysManager = Core.getGlobalManager<SystemManager>();
             var mapId = sysManager.MapId;
             _tiledMap = content.Load<TiledMap>($"maps/map{mapId}");
