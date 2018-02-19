@@ -46,7 +46,7 @@ namespace MonoGameJam1.Components.Battle.Enemies
                 new Rectangle(0, 0, 16, 16),
             }, new[] {0}, new[] {15});
 
-            sprite.CreateAnimation("active", 0.09f);
+            sprite.CreateAnimation("active", 0.09f, false);
             sprite.AddFrames("active", new List<Rectangle>
             {
                 new Rectangle(0, 0, 16, 16),

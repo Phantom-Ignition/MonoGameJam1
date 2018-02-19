@@ -61,7 +61,7 @@ namespace MonoGameJam1.Managers
             _attackButton = new VirtualButton();
             _attackButton
                 .addKeyboardKey(Keys.Z)
-                .addGamePadButton(0, Buttons.B);
+                .addGamePadButton(0, Buttons.X);
 
             _jumpButton = new VirtualButton();
             _jumpButton
