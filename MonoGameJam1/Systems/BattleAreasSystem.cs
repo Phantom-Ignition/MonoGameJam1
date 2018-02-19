@@ -4,8 +4,11 @@ using MonoGameJam1.Components.Map;
 using MonoGameJam1.Scenes;
 using Nez;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGameJam1.Components.Battle;
 using MonoGameJam1.Components.Battle.Enemies;
+using MonoGameJam1.Components.Sprites;
+using MonoGameJam1.Managers;
 using Random = Nez.Random;
 
 namespace MonoGameJam1.Systems
@@ -30,6 +33,11 @@ namespace MonoGameJam1.Systems
 
         public bool _waitingPlayerToCrossBarrier;
 
+        private readonly SystemManager _systemManager;
+        private readonly List<Entity> _rocks;
+        private readonly List<Entity> _rocksToRemove;
+        private float _throwRockInterval;
+
         public BattleAreasSystem(Entity playerEntity, MapHudComponent hud) : base(new Matcher().one(typeof(BattleAreaComponent)))
         {
             _playerEntity = playerEntity;
@@ -42,6 +50,11 @@ namespace MonoGameJam1.Systems
             _enemiesToRemove = new List<Entity>();
 
             _mapHud = hud;
+
+            _rocks = new List<Entity>();
+            _rocksToRemove = new List<Entity>();
+
+            _systemManager = Core.getGlobalManager<SystemManager>();
         }
 
         protected override void process(List<Entity> entities)
@@ -56,6 +69,34 @@ namespace MonoGameJam1.Systems
 
         private void updateBattle()
         {
+            if (canThrowRocks())
+            {
+                _throwRockInterval -= Time.deltaTime;
+                if (_throwRockInterval <= 0.0f)
+                {
+                    _throwRockInterval = 1 + Random.nextFloat(5);
+                    throwRock();
+                }
+            }
+            foreach (var rock in _rocks)
+            {
+                rock.position += new Vector2(0, 500 * Time.deltaTime);
+                var col = rock.getComponent<BoxCollider>();
+                CollisionResult res;
+                if (col.collidesWith(_playerEntity.getComponent<BoxCollider>(), out res))
+                {
+                    _playerEntity.getComponent<BattleComponent>().onHit(res);
+                }
+                if (rock.position.Y > _systemManager.TiledMap.heightInPixels)
+                    _rocksToRemove.Add(rock);
+            }
+            foreach (var rockEntity in _rocksToRemove)
+            {
+                rockEntity.destroy();
+                _rocks.Remove(rockEntity);
+            }   
+            _rocksToRemove.Clear();
+
             if (_spawnInterval > 0.0f)
             {
                 _spawnInterval -= Time.deltaTime;
@@ -174,6 +215,36 @@ namespace MonoGameJam1.Systems
             _battleHappening = false;
             _currentWave = 0;
             _spawnInterval = 0;
+        }
+
+        private void throwRock()
+        {
+            var playerScene = _playerEntity.scene as SceneMap;
+            var areaBounds = _currentBattle.collider.bounds;
+
+            // create enemy entity
+            if (playerScene != null)
+            {
+                var rock = playerScene.createEntity();
+                var rockTexture = playerScene.content.Load<Texture2D>(Content.Misc.rock);
+                var rockSprite = rock.addComponent(new AnimatedSprite(rockTexture, "default"));
+                rockSprite.CreateAnimation("default", 1.0f);
+                rockSprite.AddFrames("default", new List<Rectangle>
+                {
+                    new Rectangle(0, 0, 16, 16)
+                });
+
+                var px = areaBounds.left + Random.nextInt((int)areaBounds.width);
+                rock.position = new Vector2(px, 0);
+                rock.addComponent(new BoxCollider(-7, -7, 14, 14));
+
+                _rocks.Add(rock);
+            }
+        }
+
+        private bool canThrowRocks()
+        {
+            return Core.getGlobalManager<SystemManager>().MapId >= 5;
         }
     }
 }

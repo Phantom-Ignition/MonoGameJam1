@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGameJam1.Managers;
 using Nez;
 using Nez.Tiled;
 
@@ -25,8 +24,6 @@ namespace MonoGameJam1.Components.Map
 
         public override void onAddedToEntity()
         {
-            var tiledMap = Core.getGlobalManager<SystemManager>().TiledMap;
-
             destinyId = int.Parse(_tiledObject.properties["destinyId"]);
 
             direction = _tiledObject.properties["direction"] == "left" ? TransferDirection.Left : TransferDirection.Right;

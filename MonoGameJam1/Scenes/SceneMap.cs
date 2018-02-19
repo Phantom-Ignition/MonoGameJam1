@@ -135,6 +135,8 @@ namespace MonoGameJam1.Scenes
                 var tiledAboveWater = tiledEntity.addComponent(new TiledMapComponent(_tiledMap) { renderLayer = WATER_RENDER_LAYER });
                 tiledAboveWater.setLayerToRender(aboveWaterLayer);
             }
+
+            Core.getGlobalManager<SystemManager>().setTiledMapComponent(_tiledMap);
         }
 
         private void setupBattleAreas()

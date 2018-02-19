@@ -62,6 +62,10 @@ namespace Nez
 			public const string map0 = @"maps\map0";
 			public const string map1 = @"maps\map1";
 			public const string map2 = @"maps\map2";
+			public const string map3 = @"maps\map3";
+			public const string map4 = @"maps\map4";
+			public const string map5 = @"maps\map5";
+			public const string map6 = @"maps\map6";
 			public const string tileset = @"maps\tileset";
 		}
 
@@ -74,6 +78,7 @@ namespace Nez
 			public const string hphud = @"misc\hphud";
 			public const string icons = @"misc\icons";
 			public const string numbers = @"misc\numbers";
+			public const string rock = @"misc\rock";
 			public const string weaponCircle = @"misc\weaponCircle";
 		}
 
